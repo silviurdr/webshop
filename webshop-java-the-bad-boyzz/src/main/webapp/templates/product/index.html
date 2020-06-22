@@ -36,7 +36,11 @@
 
 <div class="container">
     <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+        <ul class = "pCategory">
+        <th:block  th:each="category : ${category}">
+            <a th:href="@{/index?category=${category.name}}"> <li th:text="${category.name}">Category Title > </li></a>
+        </th:block>
+        </ul>
     </div>
 
     <div id="products" class="row">
