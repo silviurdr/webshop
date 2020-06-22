@@ -27,16 +27,27 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        String   categoryId = req.getParameter("category");
-        int categoryIdInt = Integer.parseInt(categoryId);
-        context.setVariable("category", productCategoryDataStore.getAll());
-        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt)));
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
-        engine.process("product/index.html", context, resp.getWriter());
-    }
+        String categoryId = req.getParameter("category");
+        if (categoryId != null) {
+            int categoryIdInt = Integer.parseInt(categoryId);
+            context.setVariable("category", productCategoryDataStore.getAll());
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt)));
+            // // Alternative setting of the template context
+            // Map<String, Object> params = new HashMap<>();
+            // params.put("category", productCategoryDataStore.find(1));
+            // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+            // context.setVariables(params);
+            engine.process("product/index.html", context, resp.getWriter());
+        } else {
+            context.setVariable("category", productCategoryDataStore.getAll());
+            context.setVariable("products", productDataStore.getAll());
+            // // Alternative setting of the template context
+            // Map<String, Object> params = new HashMap<>();
+            // params.put("category", productCategoryDataStore.find(1));
+            // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
+            // context.setVariables(params);
+            engine.process("product/index.html", context, resp.getWriter());
+        }
 
+    }
 }
