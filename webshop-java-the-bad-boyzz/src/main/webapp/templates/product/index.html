@@ -38,7 +38,7 @@
     <div class="card">
         <ul class = "pCategory">
         <th:block  th:each="category : ${category}">
-            <a th:href="@{/index?category=${category.name}}"> <li th:text="${category.name}">Category Title > </li></a>
+            <a th:href="@{/(category=${category.id})}"> <li th:text="${category.name}">Category Title > </li></a>
         </th:block>
         </ul>
     </div>
