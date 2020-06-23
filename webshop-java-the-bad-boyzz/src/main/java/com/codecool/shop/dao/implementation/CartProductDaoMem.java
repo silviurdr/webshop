@@ -29,7 +29,6 @@ public class CartProductDaoMem implements CartProductDao {
 
     @Override
     public void add(Product product) {
-        product.setId(data.size() + 1);
         data.add(product);
     }
 

@@ -33,8 +33,7 @@ public class CartController extends HttpServlet {
 
         if (toAddId != null){
             cartProductCategoryDataStore.add(productDataStore.find(Integer.parseInt(toAddId)));
-            toAddId = null;
-            resp.sendRedirect("/");
+
         }
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
@@ -52,7 +51,15 @@ public class CartController extends HttpServlet {
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
-        engine.process("product/cart.html", context, resp.getWriter());
+        if (toAddId != null){
+//            engine.process("product/index.html", context, resp.getWriter());
+            resp.sendRedirect("/");
+            toAddId = null;
+        }else{
+            engine.process("product/cart.html", context, resp.getWriter());
+
+        }
+
     }
 
 }
