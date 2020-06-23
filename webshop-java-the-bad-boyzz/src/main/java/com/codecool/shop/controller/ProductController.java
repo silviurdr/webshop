@@ -37,40 +37,26 @@ public class ProductController extends HttpServlet {
         WebContext context = new WebContext(req, resp, req.getServletContext());
         //products and supplier
         String categoryId = req.getParameter("category");
-        String supplier = req.getParameter("supplier");
+        String supplier = req.getParameter("suppliers");
 
-        if (categoryId != null && supplier != null) {
+        System.out.println(categoryId);
+        System.out.println(supplier);
+
+        if (!categoryId.equals("") && !supplier.equals("")) {
             int categoryIdInt = Integer.parseInt(categoryId);
+            int supplierId = Integer.parseInt(supplier);
             context.setVariable("category", productCategoryDataStore.getAll());
-            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt)));
-
-        } else {
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt), productSupplierDataStore.find(supplierId)));
+        }
+         else if (categoryId.equals("") && supplier.equals("")){
             context.setVariable("category", productCategoryDataStore.getAll());
             context.setVariable("products", productDataStore.getAll());
-
         }
 
-
-
-        if (supplier != null) {
-           int supplierId = Integer.parseInt(supplier);
-           context.setVariable("category", productCategoryDataStore.find(1));
-           context.setVariable("products", productDataStore.getBy(productSupplierDataStore.find(supplierId)));
-        } else {
-
-            context.setVariable("category", productCategoryDataStore.find(1));
-//        context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-            context.setVariable("products", productDataStore.getAll());
-            // // Alternative setting of the template context
-            // Map<String, Object> params = new HashMap<>();
-            // params.put("category", productCategoryDataStore.find(1));
-            // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-            // context.setVariables(params);
-        }
-        context.setVariable("suppliers", productSupplierDataStore.getAll());
         engine.process("product/index.html", context, resp.getWriter());
-
-        public List<Product> filterProduct
     }
 
 }
+
+
+

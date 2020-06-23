@@ -36,16 +36,24 @@
 
 <div class="container">
     <div class="card">
-        <ul class = "pCategory">
-        <th:block  th:each="category : ${category}">
-            <a th:href="@{/(category=${category.id})}"> <li th:text="${category.name}">Category Title > </li></a>
-        </th:block>
-        </ul>
-        <ul class="suppliers-link-container" >
-            <th:block th:each="supplier: ${suppliers}">
-           <a th:href="@{/(supplier=${supplier.id})}"><li class="nav-link supplier-link" th:text="${supplier.name}">Supplier Title </li> </a>
-            </th:block>
-        </ul>
+        <div class="filters-group">
+            <form action="/" method="get">
+            <select name="category">
+                <option selected value="">Product Category</option>
+                <div th:each="category, iterStat : ${category}" >
+                    <option th:value="${category.getId()}" th:text="${category.getName()} ">Value</option>
+                </div>
+            </select>
+
+            <select name="suppliers">
+                <option selected value="">Supplier</option>
+                <div th:each="supplier, iterStat : ${suppliers}" >
+                    <option th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>
+                </div>
+            </select>
+            <input class="btn-succes" type="submit" >Filter</input>
+            </form>
+        </div>
     </div>
 
     <div id="products" class="row">
