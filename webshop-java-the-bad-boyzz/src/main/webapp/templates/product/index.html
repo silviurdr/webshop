@@ -39,14 +39,14 @@
         <div class="filters-group">
             <form action="/" method="get">
             <select name="category">
-                <option selected="selected" th:value="${null}">Product Category</option>
+                <option selected value=0>Product Category</option>
                 <div th:each="category, iterStat : ${category}" >
                     <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>
                 </div>
             </select>
 
             <select name="suppliers">
-                <option selected="selected" th:value="${null}">Supplier</option>
+                <option selected value=0>Supplier</option>
                 <div th:each="supplier, iterStat : ${supplier}" >
                     <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>
                 </div>
