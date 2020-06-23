@@ -33,7 +33,7 @@ public class ProductController extends HttpServlet {
         int categoryId = req.getParameter("category") == null ? 0 : Integer.parseInt(req.getParameter("category"));
         int supplier = req.getParameter("suppliers") == null ? 0 : Integer.parseInt(req.getParameter("suppliers"));
 
-
+        System.out.println(productDataStore.getAll());
         context.setVariable("category", productCategoryDataStore.getAll());
         context.setVariable("supplier", productSupplierDataStore.getAll());
         context.setVariable("products", productDataStore.getAll());
