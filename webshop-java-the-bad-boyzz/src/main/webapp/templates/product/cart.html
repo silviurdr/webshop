@@ -46,11 +46,15 @@
                 <tbody>
                 <tr th:each="prod,iterStat : ${productsSet}">
                     <td th:text="${prod.name}"></td>
-                    <td th:text="${prod.countByName(products)}"></td>
+                    <td th:text="${prod.countByName(products1)}"></td>
                     <td th:text="${prod.getPrice()}"></td>
                 </tr>
                 </tbody>
             </table>
+        <div>
+        <p>Total Amount is: <span th:text="${sum}"></span></p>
+
+        </div>
 <!--            <table >-->
 <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
 <!--                <div class="card-header">-->

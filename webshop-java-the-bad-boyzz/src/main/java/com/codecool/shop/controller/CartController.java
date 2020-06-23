@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
@@ -38,12 +37,16 @@ public class CartController extends HttpServlet {
             resp.sendRedirect("/");
         }
 
-
-        System.out.println(prodForCart);
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+
+        float sum = 0;
+        for (Product p : cartProductCategoryDataStore.getAll()){
+            sum+=p.getDefaultPrice();
+        }
         WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("products", cartProductCategoryDataStore.getAll().toString());
-        context.setVariable("productsSet", prodForCart.toString());
+        context.setVariable("products1", cartProductCategoryDataStore.getAll());
+        context.setVariable("productsSet", prodForCart);
+        context.setVariable("sum", sum);
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
