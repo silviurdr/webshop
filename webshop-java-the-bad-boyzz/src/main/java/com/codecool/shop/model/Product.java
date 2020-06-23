@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import java.util.List;
 
 public class Product extends BaseModel {
 
@@ -58,6 +59,21 @@ public class Product extends BaseModel {
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
         this.supplier.addProduct(this);
+    }
+
+    public String idForClass(){
+        return "/cart?id="+this.id;
+    }
+
+    public int countByName(List<Product> products){
+        String name = this.name;
+        int count = 0;
+        for (Product p : products){
+            if (p.getName() ==name){
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override

@@ -34,6 +34,7 @@ public class ProductController extends HttpServlet {
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
 
+
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         //products and supplier
@@ -64,6 +65,7 @@ public class ProductController extends HttpServlet {
         }
 
         engine.process("product/index.html", context, resp.getWriter());
+
     }
 
 }
