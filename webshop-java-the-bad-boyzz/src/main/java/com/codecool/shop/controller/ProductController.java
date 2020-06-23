@@ -30,28 +30,22 @@ public class ProductController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
+        //products and supplier
         String categoryId = req.getParameter("category");
+        String supplier = req.getParameter("supplier");
 
-        if (categoryId != null) {
+        if (categoryId != null && supplier != null) {
             int categoryIdInt = Integer.parseInt(categoryId);
             context.setVariable("category", productCategoryDataStore.getAll());
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt)));
-            // // Alternative setting of the template context
-            // Map<String, Object> params = new HashMap<>();
-            // params.put("category", productCategoryDataStore.find(1));
-            // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-            // context.setVariables(params);
+
         } else {
             context.setVariable("category", productCategoryDataStore.getAll());
             context.setVariable("products", productDataStore.getAll());
-            // // Alternative setting of the template context
-            // Map<String, Object> params = new HashMap<>();
-            // params.put("category", productCategoryDataStore.find(1));
-            // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-            // context.setVariables(params);
+
         }
 
-        String supplier = req.getParameter("supplier");
+
 
         if (supplier != null) {
            int supplierId = Integer.parseInt(supplier);
