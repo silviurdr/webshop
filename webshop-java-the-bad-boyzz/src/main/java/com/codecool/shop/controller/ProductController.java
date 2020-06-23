@@ -12,6 +12,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
+import sun.tools.jconsole.JConsole;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,20 +37,29 @@ public class ProductController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
         //products and supplier
-        String categoryId = req.getParameter("category");
-        String supplier = req.getParameter("suppliers");
+        int categoryId = req.getParameter("category") == null ? 0 : Integer.parseInt(req.getParameter("category"));
+        int supplier = req.getParameter("suppliers") == null ? 0 : Integer.parseInt(req.getParameter("suppliers"));
 
-        System.out.println(categoryId);
-        System.out.println(supplier);
 
-        if (!categoryId.equals("") && !supplier.equals("")) {
-            int categoryIdInt = Integer.parseInt(categoryId);
-            int supplierId = Integer.parseInt(supplier);
+        context.setVariable("category", productCategoryDataStore.getAll());
+        context.setVariable("supplier", productSupplierDataStore.getAll());
+        context.setVariable("products", productDataStore.getAll());
+
+        if (categoryId != 0 && supplier != 0) {
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId), productSupplierDataStore.find(supplier)));
             context.setVariable("category", productCategoryDataStore.getAll());
-            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryIdInt), productSupplierDataStore.find(supplierId)));
-        }
-         else if (categoryId.equals("") && supplier.equals("")){
+            context.setVariable("supplier", productSupplierDataStore.getAll());
+        } else if (categoryId != 0  ) {
+            context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
             context.setVariable("category", productCategoryDataStore.getAll());
+            context.setVariable("supplier", productSupplierDataStore.getAll());
+            System.out.println(categoryId);
+
+        } else if (supplier != 0 ) {
+            context.setVariable("products", productDataStore.getBy(productSupplierDataStore.find(supplier)));
+            context.setVariable("category", productCategoryDataStore.getAll());
+            context.setVariable("supplier", productSupplierDataStore.getAll());
+        } else  {
             context.setVariable("products", productDataStore.getAll());
         }
 
