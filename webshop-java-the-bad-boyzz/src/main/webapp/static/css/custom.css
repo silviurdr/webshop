@@ -1,3 +1,9 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color:#EFEAE7 ;
 }
@@ -66,36 +72,6 @@ body {
     margin: 0 0 11px;
 }
 
-.pCategory li{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: inline;
-}
-.suppliers-filter {
-    border:0px;
-    background-color: #EFEAE7;
-}
-
-.suppliers-link-container {
-    display:inline-block;
-    margin-bottom: 1em;
-}
-
-a.supplier-link {
-    text-transform: uppercase;
-    color:black;
-    font-family: "Noto Sans CJK HK";
-    padding: 5px 10px;
-    font-weight: 900;
-    font-size: 14px;
-}pu
-
-a.supplier-link:hover  {
-    color:black;
-    text-decoration: none;
-}
-
 .card {
     border:none;
 }
@@ -111,17 +87,71 @@ a.supplier-link:hover  {
 
 .jumbotron {
     background-color: white;
-    height: 8em;
+    height: 2em;
+}
+
+.sidenav {
+    margin-top: 6em;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #EFEAE7;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+
+}
+.inner {
+    margin: 50px 50px 50px 50px;
+}
+
+.btn-succes {
+    margin-left: 50px;
 }
 
 
-.add-to-cart-button {
-    background-color: #67a0cE;
-    color:white;
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
     transition: 0.3s;
 }
 
-.add-to-cart-button:hover {
-    background-color: white;
-    color:black;
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+a.nav-item  {
+    color: white;
+}
+
+.productImg {
+    /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
+    filter: gray; /* IE5+ */
+    -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
+    -webkit-transition: all .8s ease-in-out;
+}
+
+.productImg:hover {
+    filter: none;
+    -webkit-filter: grayscale(0);
+    -webkit-transform: scale(1.01);
 }

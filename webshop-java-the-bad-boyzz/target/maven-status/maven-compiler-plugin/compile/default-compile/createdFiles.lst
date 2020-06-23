@@ -1,13 +1,13 @@
 com/codecool/shop/config/TemplateEngineUtil.class
-com/codecool/shop/controller/ProductController.class
-com/codecool/shop/dao/ProductCategoryDao.class
 com/codecool/shop/model/BaseModel.class
+com/codecool/shop/dao/ProductCategoryDao.class
+com/codecool/shop/controller/ProductController.class
 com/codecool/shop/dao/implementation/CartProductDaoMem.class
 com/codecool/shop/model/ProductCategory.class
 com/codecool/shop/dao/implementation/ProductDaoMem.class
 com/codecool/shop/dao/ProductDao.class
-com/codecool/shop/controller/CartController.class
 com/codecool/shop/dao/implementation/ProductCategoryDaoMem.class
+com/codecool/shop/controller/CartController.class
 com/codecool/shop/dao/CartProductDao.class
 com/codecool/shop/config/ThymeleafConfig.class
 com/codecool/shop/model/Supplier.class
