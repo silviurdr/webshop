@@ -35,16 +35,16 @@
 </div>
 
 <div class="container">
-    <nav class="nav suppliers-filter">
-        <div class="suppliers-link-container" th:each="supplier: ${suppliers}">
-            <a th:href="@{/(supplier=${supplier.id})}" class="nav-link supplier-link" th:text="${supplier.name}">Supplier Title</a>
-        </div>
-    </nav>
     <div class="card">
         <ul class = "pCategory">
         <th:block  th:each="category : ${category}">
             <a th:href="@{/(category=${category.id})}"> <li th:text="${category.name}">Category Title > </li></a>
         </th:block>
+        </ul>
+        <ul class="suppliers-link-container" >
+            <th:block th:each="supplier: ${suppliers}">
+           <a th:href="@{/(supplier=${supplier.id})}"><li class="nav-link supplier-link" th:text="${supplier.name}">Supplier Title </li> </a>
+            </th:block>
         </ul>
     </div>
 
