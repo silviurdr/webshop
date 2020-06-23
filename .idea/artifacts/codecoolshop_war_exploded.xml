@@ -1,0 +1,31 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="codecoolshop:war exploded">
+    <output-path>$PROJECT_DIR$/webshop-java-the-bad-boyzz/target/codecoolshop</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>codecoolshop</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="codecoolshop" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.thymeleaf:thymeleaf:3.0.9.RELEASE" />
+          <element id="library" level="project" name="Maven: ognl:ognl:3.1.12" />
+          <element id="library" level="project" name="Maven: org.javassist:javassist:3.20.0-GA" />
+          <element id="library" level="project" name="Maven: org.attoparser:attoparser:2.0.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.unbescape:unbescape:1.1.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.25" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/webshop-java-the-bad-boyzz/target/codecoolshop/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="codecoolshop/web/Web" />
+    </root>
+  </artifact>
+</component>
