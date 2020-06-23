@@ -155,3 +155,8 @@ a.nav-item  {
     -webkit-filter: grayscale(0);
     -webkit-transform: scale(1.01);
 }
+
+.checkout {
+    width: 80%;
+    margin: 0 100px 0 100px;
+}
