@@ -1,3 +1,8 @@
+body {
+    background-color:#EFEAE7 ;
+}
+
+
 .glyphicon {
     margin-right:5px;
 }
@@ -59,4 +64,58 @@
 .list-group-item-text
 {
     margin: 0 0 11px;
+}
+
+.suppliers-filter {
+    border:0px;
+    background-color: #EFEAE7;
+}
+
+.suppliers-link-container {
+    display:inline-block;
+    margin-bottom: 1em;
+}
+
+a.supplier-link {
+    text-transform: uppercase;
+    color:black;
+    font-family: "Noto Sans CJK HK";
+    padding: 5px 10px;
+    font-weight: 900;
+    font-size: 14px;
+}pu
+
+a.supplier-link:hover  {
+    color:black;
+    text-decoration: none;
+}
+
+.card {
+    border:none;
+}
+
+.card-header {
+    min-height: 10em;
+}
+
+.card-body {
+    background-color:#EFEAE7 ;
+    border:none;
+}
+
+.jumbotron {
+    background-color: white;
+    height: 8em;
+}
+
+
+.add-to-cart-button {
+    background-color: #67a0cE;
+    color:white;
+    transition: 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: white;
+    color:black;
 }
