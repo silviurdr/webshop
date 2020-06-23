@@ -30,10 +30,8 @@
 </head>
 
 <body>
+<div th:replace="nav.html :: copy"></div>
 
-<div class="jumbotron text-center">
-    <h1>Your Cart</h1>
-</div>
 
 <div class="container">
     <div class="card">
@@ -53,7 +51,7 @@
             </table>
         <div>
         <p>Total Amount is: <span th:text="${sum}"></span></p>
-
+            <a href="/checkout"  class="btn btn-primary btn-block">Go To Checkout</a>
         </div>
 <!--            <table >-->
 <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
