@@ -32,29 +32,33 @@
 <body>
 
 <div class="jumbotron text-center">
-    <h1>Your Cart</h1>
 </div>
 
-<div class="container">
-    <div class="card">
-
+<div class="row container cart-container">
+    <div class="col-8">
+    <h1 class="cart-header">Your Cart</h1>
+    <div class="cart-total-header">
+        <p th:text="|Total: (${products1.size()} items) ___ ${sum} USD|">Products in cart</p>
     </div>
 
-    <div id="products" class="row">
+    <div id="products">
 
-            <table class="table">
-                <tbody>
-                <tr th:each="prod,iterStat : ${productsSet}">
-                    <td th:text="${prod.name}"></td>
-                    <td th:text="${prod.countByName(products1)}"></td>
-                    <td th:text="${prod.getPrice()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        <div>
-        <p>Total Amount is: <span th:text="${sum}"></span></p>
 
-        </div>
+                <div class="cart-item" th:each="prod,iterStat : ${productsSet}">
+                    <div class="col-5 cart-product-container">
+                        <img class="cart-product-image" src="http://placehold.it/200x125/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="">
+                    </div>
+                    <div class="col-7 cart-item-description">
+                        <span class="cart-product-name" th:text="${prod.name}"></span>
+                        <span class="cart-product-price" th:text="${prod.getPriceNum()} * ${prod.countByName(products1)}"></span>
+                        <span class="cart-product-currency" th:text="${prod.getDefaultCurrency()}"></span>
+                        <p class="cart-product-count" th:text="${prod.countByName(products1)}"></p>
+                    </div>
+
+                </div>
+    </div>
+    <button class="checkout-button">Checkout <span class="checkout-arrow">&#8594;</span></button>
+
 <!--            <table >-->
 <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
 <!--                <div class="card-header">-->
@@ -73,6 +77,7 @@
             </div>
         </div>
     </div>
+</div>
 
 </div>
 
