@@ -1,17 +1,3 @@
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/SupplierDao.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoMem.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductDao.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductCategoryDao.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/Initializer.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/SupplierDaoMem.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/BaseModel.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/ProductController.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Supplier.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/TemplateEngineUtil.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/ThymeleafConfig.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/ProductCategory.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Product.java
-/home/alex/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductCategoryDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Product.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/CartProductDao.java
