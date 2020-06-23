@@ -35,6 +35,11 @@
 </div>
 
 <div class="container">
+    <nav class="nav suppliers-filter">
+        <div class="suppliers-link-container" th:each="supplier: ${suppliers}">
+            <a th:href="@{/(supplier=${supplier.id})}" class="nav-link supplier-link" th:text="${supplier.name}">Supplier Title</a>
+        </div>
+    </nav>
     <div class="card">
         <ul class = "pCategory">
         <th:block  th:each="category : ${category}">
@@ -56,7 +61,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn add-to-cart-button" href="#">Add to cart</a>
                     </div>
                 </div>
             </div>
