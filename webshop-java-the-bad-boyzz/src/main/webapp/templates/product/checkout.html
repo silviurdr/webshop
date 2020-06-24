@@ -41,12 +41,12 @@
         </h4>
         <div >
         <ul class="list-group mb-3" >
-            <li class="list-group-item d-flex justify-content-between lh-condensed" th:each="prod,iterStat : ${productsSet}">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:each="prod : ${productsSet}">
                 <div >
-                    <h6 class="my-0" th:text="${prod.name}" >Product name</h6>
-                    <small class="text-muted" th:text="${prod.getDescription()}" >Brief description</small>
+                    <h6 class="my-0" th:text="${prod.key.name}" >Product name</h6>
+                    <small class="text-muted" th:text="${prod.key.getDescription()}" >Brief description</small>
                 </div>
-                <span class="text-muted" th:text="${prod.getPrice()}"></span>
+                <span class="text-muted" th:text="${prod.key.getPrice()}"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">

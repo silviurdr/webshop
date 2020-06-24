@@ -6,13 +6,12 @@ import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class CartProductDaoMem implements CartProductDao {
 
-    private List<Product> data = new ArrayList<>();
+    private LinkedHashMap<Product, Integer> data = new LinkedHashMap<>();
     private static CartProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -27,25 +26,42 @@ public class CartProductDaoMem implements CartProductDao {
         return instance;
     }
 
-    @Override
-    public void add(Product product) {
-        data.add(product);
-    }
+
 
     @Override
-    public Product find(int id) {
-        return data.stream().filter(t -> t.getId() == id).findFirst().orElse(null);
+    public void add(Product product) {
+        data.put(product, 1);
     }
+
+
+    @Override
+    public Product find( int id) {
+
+        for (Product p: data.keySet()) {
+            if (id == p.getId()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public void remove(int id) {
-        data.remove(find(id));
+
+        for (Product p: data.keySet()) {
+            if (id == p.getId()) {
+                data.remove(p);
+            }
+        }
     }
 
     @Override
-    public List<Product> getAll() {
+    public LinkedHashMap<Product, Integer> getAll() {
         return data;
     }
+
+
 
 
 

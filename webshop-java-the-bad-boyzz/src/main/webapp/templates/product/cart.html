@@ -42,30 +42,30 @@
     <div class="col-7">
         <h1 class="cart-header">Your Cart</h1>
         <div class="cart-total-header">
-            <p th:text="|Total: (${products1.size()} items) ___ ${sum} USD|">Products in cart</p>
+            <p th:text="|Total: (${numOfProducts} items) ___ ${sum} USD|">Products in cart</p>
         </div>
 
         <div id="products">
-            <div class="cart-item" th:each="prod,iterStat : ${productsSet}">
+            <div class="cart-item" th:each="prod : ${productsSet}">
                 <div class="col-5 cart-product-container">
                     <img class="cart-product-image" src="http://placehold.it/200x125/000/fff"
-                         th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="">
+                         th:attr="src='/static/img/product_' + ${prod.key.id} + '.jpg'" alt="">
                 </div>
                 <div class="col-7 cart-item-description">
                     <p>
-                    <span class="cart-product-name" th:text="${prod.name}"></span>
+                    <span class="cart-product-name" th:text="${prod.key.name}"></span>
                     <span class="cart-product-price"
 
-                          th:text="${#numbers.formatDecimal(prod.getPriceNum() * prod.countByName(products1) , 0, 'COMMA', 2, 'POINT')}"></span>
-                    <span class="cart-product-currency" th:text="${prod.getDefaultCurrency()}"></span>
+                          th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></span>
+                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}"></span>
                     </p>
                     <form action="/cart" method="get">
-                    <select name="howMany" th:attr="prodName=${prod.getName()}" class="cart-product-count">
+                    <select name="howMany" th:attr="prodName=${prod.key.getName()}" class="cart-product-count">
                         <div th:each="itemsAmount: ${#numbers.sequence(0,10)}">
-                        <option th:selected="${prod.countByName(products1)} == ${itemsAmount}" th:value="${itemsAmount}" th:text="${itemsAmount}"></option>
+                        <option th:selected="${prod.value} == ${itemsAmount}" th:value="${itemsAmount}" th:text="${itemsAmount}"></option>
                         </div>
                     </select>
-                        <input type="hidden" th:name="prodId" th:value="${prod.getId()}">
+                        <input type="hidden" th:name="prodId" th:value="${prod.key.getId()}">
                         <input class="btn btn-success" type="submit" th:value="Save">
                     </form>
                 </div>
@@ -94,7 +94,7 @@
         <a href="/checkout"><button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
         <h1 class="order-summary-header">Order Summary</h1>
         <div class="order-summary-info">
-        <p><span th:text="|${products1.size()} ITEMS|"></span>
+        <p><span th:text="|${numOfProducts} ITEMS|"></span>
             <span class="order-info-right" th:text="|${sum} USD|"></span></p>
         <p><span>DELIVERY</span><span class="order-info-right">FREE</span></p>
         <p><span>Sales tax</span><span class="order-info-right">-</span></p>

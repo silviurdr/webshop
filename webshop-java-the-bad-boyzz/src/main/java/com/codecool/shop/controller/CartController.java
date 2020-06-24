@@ -8,6 +8,7 @@ import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.CartProductDaoMem;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.model.Product;
+import com.sun.org.apache.bcel.internal.generic.INEG;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -27,40 +28,58 @@ public class CartController extends HttpServlet {
         ProductDao productDataStore = ProductDaoMem.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
         CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
-        Set<Product> prodForCart = new HashSet<>(cartProductCategoryDataStore.getAll());
 
         String toAddId = req.getParameter("id");
         String howMany = req.getParameter("howMany");
         String prodId = req.getParameter("prodId");
+        int numOfProducts = 0;
 
+
+//        if (howMany != null) {
+//            int itemsRequest = Integer.parseInt(howMany);
+//
+//            System.out.println("Items requested " + itemsRequest);
+//            int prodIdInt = Integer.parseInt(prodId);
+//
+//            System.out.println("Prod id int :" + prodIdInt);
+//            Product prodSelected = productDataStore.find(prodIdInt);
+//            int alreadyPresent = 0;
+//
+//            for (int i = 0; i < cartProductCategoryDataStore.getAll().size(); i++) {
+//                System.out.println("How many are in the cart" + cartProductCategoryDataStore.getAll().get(i));
+//                if (cartProductCategoryDataStore.getAll().get(i).getId() == prodSelected.getId()) {
+//                    alreadyPresent++;
+//                }
+//            }
+//
+//            System.out.println("Already present " + alreadyPresent);
+//
+//            int itemsToAdd = itemsRequest - alreadyPresent;
+//
+//            System.out.println("Items to add " + itemsToAdd);
+//
+//            for (int j = 0; j < itemsToAdd; j++) {
+//                cartProductCategoryDataStore.add(productDataStore.find(prodIdInt));
+//                j++;
+//            }
+//        }
 
         if (howMany != null) {
-            int itemsRequest = Integer.parseInt(howMany);
-
-            System.out.println("Items requested " + itemsRequest);
+            int howManyInt = Integer.parseInt(howMany);
             int prodIdInt = Integer.parseInt(prodId);
-
-            System.out.println("Prod id int :" + prodIdInt);
-            Product prodSelected = productDataStore.find(prodIdInt);
-            int alreadyPresent = 0;
-
-            for (int i = 0; i < productDataStore.getAll().size(); i++) {
-                if (productDataStore.getAll().get(i).getId() == prodSelected.getId()) {
-                    alreadyPresent++;
+            for(Product p: cartProductCategoryDataStore.getAll().keySet()) {
+                if (p.getId() ==  prodIdInt) {
+                    if(howManyInt == 0) {
+                        cartProductCategoryDataStore.remove(prodIdInt);
+                    } else {
+                        cartProductCategoryDataStore.getAll().put(p, howManyInt);
+                    }
                 }
             }
-
-            System.out.println("Already present " + alreadyPresent);
-
-            int itemsToAdd = itemsRequest - alreadyPresent;
-
-            System.out.println("Items to add " + itemsToAdd);
-
-            for (int j = 0; j < itemsToAdd; j++) {
-                cartProductCategoryDataStore.add(productDataStore.find(prodIdInt));
-                j++;
-            }
         }
+
+
+
 
         if (toAddId != null) {
             cartProductCategoryDataStore.add(productDataStore.find(Integer.parseInt(toAddId)));
@@ -69,17 +88,23 @@ public class CartController extends HttpServlet {
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
+        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
+            numOfProducts += cartProductCategoryDataStore.getAll().get(p);
+        }
+
+
         float sum = 0;
-        for (Product p : cartProductCategoryDataStore.getAll()) {
-            sum += p.getDefaultPrice();
+        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
+            sum += p.getDefaultPrice() * cartProductCategoryDataStore.getAll().get(p);
         }
         String sum2  = String.format("%.1f", sum);
 
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("products1", cartProductCategoryDataStore.getAll());
-        context.setVariable("productsSet", prodForCart);
+        context.setVariable("productsSet", cartProductCategoryDataStore.getAll());
         context.setVariable("sum", sum2);
+        context.setVariable("numOfProducts", numOfProducts);
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));

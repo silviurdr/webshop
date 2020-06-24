@@ -4,6 +4,7 @@ import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public interface CartProductDao {
@@ -12,6 +13,6 @@ public interface CartProductDao {
     Product find(int id);
     void remove(int id);
 
-    List<Product> getAll();
+    LinkedHashMap<Product, Integer> getAll();
 
 }

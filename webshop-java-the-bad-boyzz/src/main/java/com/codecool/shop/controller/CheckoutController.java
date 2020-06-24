@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 
@@ -24,8 +25,7 @@ public class CheckoutController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //cart and details for checkout
         CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
-        Set<Product> prodForCart = new HashSet<>(cartProductCategoryDataStore.getAll());
-        int noOfProducts = cartProductCategoryDataStore.getAll().size();
+        int noOfProducts = 0;
         float sum = 0;
 
         // disscount code
@@ -43,16 +43,19 @@ public class CheckoutController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
 
-
-
-        for (Product p : cartProductCategoryDataStore.getAll()){
-            sum+=p.getDefaultPrice();
+        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
+            noOfProducts += cartProductCategoryDataStore.getAll().get(p);
         }
-        float totalSum = sum - redeemCodeValue;
+
+        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
+            sum += p.getDefaultPrice() * cartProductCategoryDataStore.getAll().get(p);
+        }
+        String sum2  = String.format("%.1f", sum);
+
 
         context.setVariable("products1", cartProductCategoryDataStore.getAll());
-        context.setVariable("productsSet", prodForCart);
-        context.setVariable("sum", totalSum);
+        context.setVariable("productsSet", cartProductCategoryDataStore.getAll());
+        context.setVariable("sum", sum2);
         context.setVariable("noOfProducts", noOfProducts);
         context.setVariable("redeemCode", redeemCode);
         context.setVariable("redeemCodeValue", redeemCodeValue);
