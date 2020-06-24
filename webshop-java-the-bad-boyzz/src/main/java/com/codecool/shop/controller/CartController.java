@@ -42,10 +42,13 @@ public class CartController extends HttpServlet {
         for (Product p : cartProductCategoryDataStore.getAll()){
             sum+=p.getDefaultPrice();
         }
+        String sum2  = String.format("%.1f", sum);
+
+
         WebContext context = new WebContext(req, resp, req.getServletContext());
         context.setVariable("products1", cartProductCategoryDataStore.getAll());
         context.setVariable("productsSet", prodForCart);
-        context.setVariable("sum", sum);
+        context.setVariable("sum", sum2);
         // // Alternative setting of the template context
         // Map<String, Object> params = new HashMap<>();
         // params.put("category", productCategoryDataStore.find(1));
