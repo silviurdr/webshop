@@ -35,9 +35,28 @@ public class CartController extends HttpServlet {
 
 
         if (howMany != null) {
-            int howManyItemsToAdd = Integer.parseInt(howMany);
+            int itemsRequest = Integer.parseInt(howMany);
+
+            System.out.println("Items requested " + itemsRequest);
             int prodIdInt = Integer.parseInt(prodId);
-            for (int j = 0; j < howManyItemsToAdd; j++) {
+
+            System.out.println("Prod id int :" + prodIdInt);
+            Product prodSelected = productDataStore.find(prodIdInt);
+            int alreadyPresent = 0;
+
+            for (int i = 0; i < productDataStore.getAll().size(); i++) {
+                if (productDataStore.getAll().get(i).getId() == prodSelected.getId()) {
+                    alreadyPresent++;
+                }
+            }
+
+            System.out.println("Already present " + alreadyPresent);
+
+            int itemsToAdd = itemsRequest - alreadyPresent;
+
+            System.out.println("Items to add " + itemsToAdd);
+
+            for (int j = 0; j < itemsToAdd; j++) {
                 cartProductCategoryDataStore.add(productDataStore.find(prodIdInt));
                 j++;
             }
