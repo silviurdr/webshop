@@ -33,7 +33,7 @@
 
 <body>
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center cart-nav">
 </div>
 
 <div class="row container cart-container">
@@ -50,11 +50,25 @@
                          th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="">
                 </div>
                 <div class="col-7 cart-item-description">
+                    <p>
                     <span class="cart-product-name" th:text="${prod.name}"></span>
                     <span class="cart-product-price"
                           th:text="${prod.getPriceNum()} * ${prod.countByName(products1)}"></span>
                     <span class="cart-product-currency" th:text="${prod.getDefaultCurrency()}"></span>
-                    <p class="cart-product-count" th:text="${prod.countByName(products1)}"></p>
+                    </p>
+                    <select class="cart-product-count">
+                        <option th:selected="${prod.countByName(products1)} == 0" th:value="0" th:text="0"></option>
+                        <option th:selected="${prod.countByName(products1)} == 1" th:value="0" th:text="1"></option>
+                        <option th:selected="${prod.countByName(products1)} == 2" th:value="0" th:text="2"></option>
+                        <option th:selected="${prod.countByName(products1)} == 3" th:value="0" th:text="3"></option>
+                        <option th:selected="${prod.countByName(products1)} == 4" th:value="0" th:text="4"></option>
+                        <option th:selected="${prod.countByName(products1)} == 5" th:value="0" th:text="5"></option>
+                        <option th:selected="${prod.countByName(products1)} == 6" th:value="0" th:text="6"></option>
+                        <option th:selected="${prod.countByName(products1)} == 7" th:value="0" th:text="7"></option>
+                        <option th:selected="${prod.countByName(products1)} == 8" th:value="0" th:text="8"></option>
+                        <option th:selected="${prod.countByName(products1)} == 9" th:value="0" th:text="9"></option>
+                        <option th:selected="${prod.countByName(products1)} == 10" th:value="0" th:text="10"></option>
+                    </select>
                 </div>
 
             </div>

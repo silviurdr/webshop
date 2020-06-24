@@ -151,6 +151,7 @@ a.supplier-link:hover  {
     margin-bottom: 2em;
     margin-top: 1em;
     color: white;
+    outline: none !important;
 }
 
 .checkout-button-right {
@@ -169,7 +170,7 @@ a.supplier-link:hover  {
 
 .cart-container {
     font-family: Helvetica;
-    min-height: 600px;
+    min-height: 700px;
     max-width: 1300px;
     margin: 0 auto;
 }
@@ -178,6 +179,7 @@ a.supplier-link:hover  {
     border: 1px solid #333;
     margin-bottom: 2em;
     display: flex;
+    font-size: 0.95em;
 }
 
 .cart-product-image {
@@ -209,6 +211,7 @@ a.supplier-link:hover  {
 
 .cart-product-count {
     margin-top: 4em;
+    padding: 4px 20px;
 }
 
 .order-summary-container {
@@ -219,6 +222,7 @@ a.supplier-link:hover  {
     text-transform: uppercase;
     font-size: 1.2em;
     font-weight: 900;
+    margin: 1em 0;
 }
 
 .order-summary-info {
@@ -231,4 +235,21 @@ a.supplier-link:hover  {
 
 .order-total {
     font-weight: 900;
+}
+
+.cart-nav {
+    border-bottom: 2px solid #ccc;
+}
+
+.order-summary-container  p  {
+    line-height: 2.2em;
+}
+
+.footer {
+    background-color: #333333;
+    color:whitesmoke;
+    height: 6em;
+    vertical-align: center;
+    line-height: 6em;
+    margin-top: 3em;
 }
