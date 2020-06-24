@@ -71,7 +71,7 @@
 
             </div>
         </div>
-        <button class="checkout-button"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button>
+        <a href="/checkout"><button class="checkout-button"><span class="float-left" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
 
         <!--            <table >-->
         <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
@@ -90,7 +90,7 @@
         <!--            </table>-->
     </div>
     <div class="col-4 order-summary-container">
-        <button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button>
+        <a href="/checkout"><button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
         <h1 class="order-summary-header">Order Summary</h1>
         <div class="order-summary-info">
         <p><span th:text="|${products1.size()} ITEMS|"></span>
