@@ -117,12 +117,12 @@ body {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
-    display: block;
     transition: 0.3s;
 }
 
 .sidenav a:hover {
+    color: #818181;
+    display: block;
     color: #f1f1f1;
 }
 
@@ -161,6 +161,133 @@ a.nav-item  {
     margin: 0 100px 0 100px;
 }
 
+.cart-header {
+    font-family: Helvetica;
+    font-weight: 900;
+    font-size: 2.5em;
+    text-transform: uppercase;
+}
+
+.cart-total-header {
+    margin-bottom: 2em;
+}
+
+.checkout-button, .checkout-button-right {
+    border-radius: 9999px;
+    text-transform: uppercase;
+    width: 300px;
+    padding: 5px 2em;
+    border: 2px solid #333;
+    transition: all 0.2s linear;
+    font-size: 0.9em;
+    font-family: Helvetica;
+    background-color: #000;
+    font-weight: bold;
+    margin-bottom: 2em;
+    margin-top: 1em;
+    color: white;
+    outline: none !important;
+}
+
+.checkout-button-right {
+    margin-top: 10em;
+}
+
+.checkout-button:hover, .checkout-button-right:hover {
+    cursor: pointer;
+    color:#727677;
+}
+
+.checkout-arrow {
+    font-size: 3em;
+    line-height: 0.1em;
+}
+
+.cart-container {
+    font-family: Helvetica;
+    min-height: 700px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.cart-item {
+    border: 1px solid #333;
+    margin-bottom: 2em;
+    display: flex;
+    font-size: 0.95em;
+}
+
+.cart-product-image {
+    width: 100%;
+}
+
+.cart-product-container {
+    padding: 0px;
+}
+
+.cart-item-description {
+    padding: 20px;
+    margin-left: 1.5em;
+}
+
+.cart-product-name {
+    text-transform: uppercase;
+}
+
+.cart-product-price {
+    float: right;
+    margin-right: 60px;
+}
+
+.cart-product-currency {
+    float: right;
+    margin-right: 5px;
+}
+
+.cart-product-count {
+    margin-top: 4em;
+    padding: 4px 20px;
+}
+
+.order-summary-container {
+    margin-left: 3em;
+}
+
+.order-summary-header {
+    text-transform: uppercase;
+    font-size: 1.2em;
+    font-weight: 900;
+    margin: 1em 0;
+}
+
+.order-summary-info {
+    font-size: 0.9em;
+}
+
+.order-info-right {
+    float:right;
+}
+
+.order-total {
+    font-weight: 900;
+}
+
+.cart-nav {
+    border-bottom: 2px solid #ccc;
+}
+
+.order-summary-container  p  {
+    line-height: 2.2em;
+}
+
+.footer {
+    background-color: #333333;
+    color:whitesmoke;
+    height: 6em;
+    vertical-align: center;
+    line-height: 6em;
+    margin-top: 3em;
+}
 #cardDisplay {
     display: none;
 }

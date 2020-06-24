@@ -30,8 +30,39 @@ public class CartController extends HttpServlet {
         Set<Product> prodForCart = new HashSet<>(cartProductCategoryDataStore.getAll());
 
         String toAddId = req.getParameter("id");
+        String howMany = req.getParameter("howMany");
+        String prodId = req.getParameter("prodId");
 
-        if (toAddId != null){
+
+        if (howMany != null) {
+            int itemsRequest = Integer.parseInt(howMany);
+
+            System.out.println("Items requested " + itemsRequest);
+            int prodIdInt = Integer.parseInt(prodId);
+
+            System.out.println("Prod id int :" + prodIdInt);
+            Product prodSelected = productDataStore.find(prodIdInt);
+            int alreadyPresent = 0;
+
+            for (int i = 0; i < productDataStore.getAll().size(); i++) {
+                if (productDataStore.getAll().get(i).getId() == prodSelected.getId()) {
+                    alreadyPresent++;
+                }
+            }
+
+            System.out.println("Already present " + alreadyPresent);
+
+            int itemsToAdd = itemsRequest - alreadyPresent;
+
+            System.out.println("Items to add " + itemsToAdd);
+
+            for (int j = 0; j < itemsToAdd; j++) {
+                cartProductCategoryDataStore.add(productDataStore.find(prodIdInt));
+                j++;
+            }
+        }
+
+        if (toAddId != null) {
             cartProductCategoryDataStore.add(productDataStore.find(Integer.parseInt(toAddId)));
 
         }
@@ -39,8 +70,8 @@ public class CartController extends HttpServlet {
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
         float sum = 0;
-        for (Product p : cartProductCategoryDataStore.getAll()){
-            sum+=p.getDefaultPrice();
+        for (Product p : cartProductCategoryDataStore.getAll()) {
+            sum += p.getDefaultPrice();
         }
         String sum2  = String.format("%.1f", sum);
 
@@ -54,11 +85,11 @@ public class CartController extends HttpServlet {
         // params.put("category", productCategoryDataStore.find(1));
         // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
         // context.setVariables(params);
-        if (toAddId != null){
+        if (toAddId != null) {
 //            engine.process("product/index.html", context, resp.getWriter());
             resp.sendRedirect("/");
             toAddId = null;
-        }else{
+        } else {
             engine.process("product/cart.html", context, resp.getWriter());
 
         }
