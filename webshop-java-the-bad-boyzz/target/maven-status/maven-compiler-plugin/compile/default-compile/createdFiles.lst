@@ -18,3 +18,4 @@ com/codecool/shop/config/Initializer.class
 com/codecool/shop/model/Product.class
 com/codecool/shop/dao/SupplierDao.class
 com/codecool/shop/dao/implementation/SupplierDaoMem.class
+com/codecool/shop/controller/PaymentController.class
