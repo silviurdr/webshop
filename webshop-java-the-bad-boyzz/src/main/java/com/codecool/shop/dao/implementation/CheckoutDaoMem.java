@@ -11,5 +11,4 @@ public class CheckoutDaoMem extends Order {
         return instance;
     }
 
-
 }

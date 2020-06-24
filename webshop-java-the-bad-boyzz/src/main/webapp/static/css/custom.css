@@ -160,3 +160,11 @@ a.nav-item  {
     width: 80%;
     margin: 0 100px 0 100px;
 }
+
+#cardDisplay {
+    display: none;
+}
+
+.paypalDisplay {
+    display: none;
+}

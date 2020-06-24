@@ -30,10 +30,11 @@
 </head>
 
 <body>
-
+<div th:replace="nav.html :: copy"></div>
+<br>
+<br>
 <div class="checkout">
-    <br>
-    <br>
+
     <h4 class="mb-3">Payment</h4>
 <form method="post">
 <div class="d-block my-3">
@@ -46,7 +47,8 @@
         <label class="custom-control-label" for="paypal">Paypal</label>
     </div>
 </div>
-<div class="row cardDisplay">
+    <div id="cardDisplay">
+<div class="row">
     <div class="col-md-6 mb-3">
         <label for="cc-name">Name on card</label>
         <input type="text" class="form-control" id="cc-name" placeholder="" required>
@@ -63,7 +65,7 @@
         </div>
     </div>
 </div>
-<div class="row cardDisplay">
+<div class="row">
     <div class="col-md-3 mb-3 ">
         <label for="cc-expiration">Expiration</label>
         <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
@@ -79,13 +81,16 @@
         </div>
     </div>
 </div>
-    <div class="row paypalDisplay">
+    </div>
+    <div class="paypalDisplay" id="paypalDisplay">
+    <div class="row" >
         <div class="col-md-3 mb-3">
             <label for="paypaluname">UserName</label>
             <input type="text" class="form-contro" id="paypaluname" placeholder="Username" required >
             <label for="paypalemail">UserName</label>
             <input type="text" class="form-contro" id="paypalemail" placeholder="Email" required >
         </div>
+    </div>
     </div>
 <hr class="mb-4">
 <button class="btn btn-primary btn-lg btn-block" type="submit">Pay</button>
@@ -96,5 +101,6 @@
 
 
 <div th:replace="footer.html :: copy"></div>
+<script src="/static/js/js.js"></script>
 </body>
 </html>

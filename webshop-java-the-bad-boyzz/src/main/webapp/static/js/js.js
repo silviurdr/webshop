@@ -6,7 +6,19 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
-// let redeembutton = document.querySelector(".redemcode");
-// redeembutton.addEventListener("click", function (e) {
-//     e.preventDefault();
-// })
+let creditCard  = document.querySelector("#credit");
+creditCard.addEventListener("click", function () {
+    let cardInputs = document.getElementById("cardDisplay");
+    let paypalInput = document.getElementById("paypalDisplay")
+    cardInputs.style.display = "inline";
+    paypalInput.style.display = "none";
+})
+
+
+let paypal = document.querySelector("#paypal");
+paypal.addEventListener("click", function(){
+    let cardInputs = document.getElementById("cardDisplay");
+    let paypalInput = document.getElementById("paypalDisplay")
+    cardInputs.style.display = "none";
+    paypalInput.style.display = "inline";
+})
