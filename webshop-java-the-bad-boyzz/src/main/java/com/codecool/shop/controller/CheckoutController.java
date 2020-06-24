@@ -50,7 +50,11 @@ public class CheckoutController extends HttpServlet {
         for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
             sum += p.getDefaultPrice() * cartProductCategoryDataStore.getAll().get(p);
         }
-        String sum2  = String.format("%.1f", sum);
+
+        float totalSum = sum - redeemCodeValue;
+
+        String sum2  = String.format("%.1f", totalSum);
+
 
 
         context.setVariable("products1", cartProductCategoryDataStore.getAll());
