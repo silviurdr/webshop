@@ -56,11 +56,15 @@
                           th:text="${prod.getPriceNum()} * ${prod.countByName(products1)}"></span>
                     <span class="cart-product-currency" th:text="${prod.getDefaultCurrency()}"></span>
                     </p>
-                    <select class="cart-product-count">
-                        <th:block th:each="i: ${#numbers.sequence(0,10)}">
-                        <option th:selected="${prod.countByName(products1)} == ${i}" th:value="${i}" th:text="${i}"></option>
-                        </th:block>
+                    <form action="/cart" method="get">
+                    <select name="howMany" th:attr="prodName=${prod.getName()}" class="cart-product-count">
+                        <div th:each="itemsAmount: ${#numbers.sequence(0,10)}">
+                        <option th:selected="${prod.countByName(products1)} == ${itemsAmount}" th:value="${itemsAmount}" th:text="${itemsAmount}"></option>
+                        </div>
                     </select>
+                        <input type="hidden" th:name="prodId" th:value="${prod.getId()}">
+                        <input class="btn btn-success" type="submit" th:value="Save">
+                    </form>
                 </div>
 
             </div>
