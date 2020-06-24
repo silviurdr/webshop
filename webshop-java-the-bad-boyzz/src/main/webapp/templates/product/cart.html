@@ -55,7 +55,8 @@
                     <p>
                     <span class="cart-product-name" th:text="${prod.name}"></span>
                     <span class="cart-product-price"
-                          th:text="${prod.getPriceNum()} * ${prod.countByName(products1)}"></span>
+
+                          th:text="${#numbers.formatDecimal(prod.getPriceNum() * prod.countByName(products1) , 0, 'COMMA', 2, 'POINT')}"></span>
                     <span class="cart-product-currency" th:text="${prod.getDefaultCurrency()}"></span>
                     </p>
                     <form action="/cart" method="get">
