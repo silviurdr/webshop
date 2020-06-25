@@ -7,11 +7,12 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class CartProductDaoMem implements CartProductDao {
 
-    private LinkedHashMap<Product, Integer> data = new LinkedHashMap<>();
+    private ConcurrentHashMap<Product, Integer> data = new ConcurrentHashMap<>();
     private static CartProductDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -57,7 +58,7 @@ public class CartProductDaoMem implements CartProductDao {
     }
 
     @Override
-    public LinkedHashMap<Product, Integer> getAll() {
+    public ConcurrentHashMap<Product, Integer> getAll() {
         return data;
     }
 
