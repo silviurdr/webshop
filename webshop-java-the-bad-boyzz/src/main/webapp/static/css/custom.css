@@ -411,3 +411,10 @@ a.nav-item  {
 .paypalDisplay {
     display: none;
 }
+
+#lblCartCount {
+    font-size: 14px;
+    color: #fff;
+    vertical-align: top;
+    margin-left: -10px;
+}
