@@ -34,7 +34,7 @@ public class Order {
         jsonObject.put("Zip", this.getCustomerZip());
 
         try {
-            FileWriter file = new FileWriter("/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/webapp/static/json/paymentDetails.json");
+            FileWriter file = new FileWriter("src/main/webapp/static/json/paymentDetails.json");
             file.write(jsonObject.toJSONString());
             file.close();
         } catch (IOException e) {
