@@ -2,10 +2,16 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.CheckoutDaoMem;
-import com.codecool.shop.model.SendMail;
+//import com.codecool.shop.model.SendMail;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Properties;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
@@ -55,18 +62,71 @@ public class PaymentController extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
+        String name="Misu";
         String to = "barbu.mihai1993@gmail.com";
         String subject = "Order Conf";
+        int orderID=12;
+        String total="1000";
         String message =  "message";
         String user = "codecool.shop.romania@gmail.com";
         String pass = "1234asd@";
-        SendMail.send(to,subject, message, user, pass);
+        send(to,name, orderID, total);
         out.println("Mail send successfully");
 
 
 
 
         resp.sendRedirect("/confirmation");
+    }
+    public static void send(String custEmail, String fullName, int orderId, String total)
+    {
+        String to = custEmail;
+        String host = "smtp.gmail.com";
+        String subject = "EDUCATIONAL PROJECT - shop order confirmation";
+        String body =  "EDUCATIONAL PROJECT - content with order details";
+        final String user = "codecool.shop.romania@gmail.com";
+        final String pass = "1234asd@";
+
+        Properties props = new Properties();
+        props.put("mail.smtp.host", host);
+        props.put("mail.smtp.port", "587");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+
+        Session session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+                        return new javax.mail.PasswordAuthentication(user,pass);
+                    }
+                });
+
+        //Compose the message
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(user));
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+            message.setSubject("EDUCATIONAL PROJECT - WEB SHOP ORDER CONFIRMATION");
+            message.setText("**** EDUCATIONAL PROJECT**** NOT AN ACTUAL ORDER\n" +
+                    "Hello " + fullName +",\n" +
+                    "\n" +
+                    "Thanks for purchasing from our shop.\n" +
+                    "Your order, ID: " + orderId + ", totalling " + total + " USD, was processed successfully" +
+                    " and we'll be shipping it shortly.\n" +
+                    "If you have any questions, you can always reach us at orders@webshop.com\n" +
+                    "\n" +
+                    "Thanks again for the business and have a wonderful day! \n" +
+                    "The Web Shop Team"
+
+            );
+
+            //send the message
+            Transport.send(message);
+
+            System.out.println("message sent successfully...");
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
  }
