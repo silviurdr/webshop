@@ -1,8 +1,14 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.BillingInformationDao;
+import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
+import com.codecool.shop.dao.implementation.CartProductDaoMem;
 import com.codecool.shop.dao.implementation.CheckoutDaoMem;
 //import com.codecool.shop.model.SendMail;
+import com.codecool.shop.model.Order;
+import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -12,6 +18,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.management.openmbean.CompositeData;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,6 +51,8 @@ public class PaymentController extends HttpServlet {
         checkoutDetails.setCustomerPhone(req.getParameter("phone"));
         checkoutDetails.setCustomerZip(req.getParameter("zip"));
 
+        BillingInformationDao bil = BillingInformationDaoMem.getInstance();
+
         String cardOwner = req.getParameter("cardOwner");
         String cardNumber=req.getParameter("cardNumber");
         String expirationDate=req.getParameter("expirationDate");
@@ -60,17 +69,21 @@ public class PaymentController extends HttpServlet {
             resp.sendRedirect("/payment-error");
         }
 
+        float sum = 0;
+        CartProductDao cartProducts = CartProductDaoMem.getInstance();
+        for (Product p : cartProducts.getAll()){
+            sum+=p.getDefaultPrice();
+        }
+        String sum2  = String.format("%.1f", sum);
+
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
-        String name="Misu";
-        String to = "barbu.mihai1993@gmail.com";
-        String subject = "Order Conf";
-        int orderID=12;
-        String total="1000";
-        String message =  "message";
-        String user = "codecool.shop.romania@gmail.com";
-        String pass = "1234asd@";
-        send(to,name, orderID, total);
+//        String name= bil.getFirst().getCustomerName();
+//        String to = bil.getFirst().getCustomerEmail();
+        String name = "alexandedru";
+        String to = "oanceaalexander@gmail.com";
+        String total=sum2;
+        send(to,name,total);
         out.println("Mail send successfully");
 
 
@@ -78,12 +91,10 @@ public class PaymentController extends HttpServlet {
 
         resp.sendRedirect("/confirmation");
     }
-    public static void send(String custEmail, String fullName, int orderId, String total)
+    public static void send(String custEmail, String fullName, String total)
     {
         String to = custEmail;
         String host = "smtp.gmail.com";
-        String subject = "EDUCATIONAL PROJECT - shop order confirmation";
-        String body =  "EDUCATIONAL PROJECT - content with order details";
         final String user = "codecool.shop.romania@gmail.com";
         final String pass = "1234asd@";
 
@@ -105,17 +116,16 @@ public class PaymentController extends HttpServlet {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-            message.setSubject("EDUCATIONAL PROJECT - WEB SHOP ORDER CONFIRMATION");
-            message.setText("**** EDUCATIONAL PROJECT**** NOT AN ACTUAL ORDER\n" +
-                    "Hello " + fullName +",\n" +
+            message.setSubject("SHOP ORDER CONFIRMATION");
+            message.setText("Hello " + fullName +",\n" +
                     "\n" +
                     "Thanks for purchasing from our shop.\n" +
-                    "Your order, ID: " + orderId + ", totalling " + total + " USD, was processed successfully" +
+                    "Your amount of:  " + total + " USD, was processed successfully" +
                     " and we'll be shipping it shortly.\n" +
-                    "If you have any questions, you can always reach us at orders@webshop.com\n" +
+                    "If you have any questions, you can always reach us at codecool.shop.romania.gmail.com\n" +
                     "\n" +
                     "Thanks again for the business and have a wonderful day! \n" +
-                    "The Web Shop Team"
+                    "Codecool Bazar Team"
 
             );
 
