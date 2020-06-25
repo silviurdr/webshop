@@ -62,7 +62,10 @@ public class CartProductDaoMem implements CartProductDao {
         return data;
     }
 
-
+    @Override
+    public void clearCart() {
+        data.clear();
+    }
 
 
 

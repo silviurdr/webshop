@@ -14,6 +14,8 @@ public interface CartProductDao {
     Product find(int id);
     void remove(int id);
 
+    void clearCart();
+
     ConcurrentHashMap<Product, Integer> getAll();
 
 }

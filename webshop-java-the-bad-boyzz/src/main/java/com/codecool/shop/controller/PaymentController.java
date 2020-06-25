@@ -79,7 +79,6 @@ public class PaymentController extends HttpServlet {
 
 
 
-
         resp.sendRedirect("/confirmation");
     }
     public static void send(String custEmail, String fullName, String total)

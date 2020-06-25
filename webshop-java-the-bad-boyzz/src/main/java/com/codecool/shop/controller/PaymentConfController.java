@@ -41,6 +41,7 @@ public class PaymentConfController extends HttpServlet {
         context.setVariable("products", cartProducts.getAll() );
         context.setVariable("productsSet",cartProducts.getAll());
         context.setVariable("billingInfo",orderInfo);
+        cartProducts.clearCart();
         engine.process("product/confirmation.html", context, resp.getWriter());
 
     }
