@@ -57,7 +57,7 @@
                     <span class="cart-product-price"
 
                           th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></span>
-                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}"></span>
+                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}" ></span>
                     </p>
                     <form action="/cart" class="edit-cart-form" method="get">
                     <select name="howMany" th:attr="prodName=${prod.key.getName()}" class="cart-product-count">
@@ -66,7 +66,7 @@
                         </div>
                     </select>
                         <input type="hidden" th:name="prodId" th:value="${prod.key.getId()}">
-                        <input class="btn btn-success edit-cart-button" type="submit" th:value="Save">
+                        <input class="btn btn-success edit-cart-button" type="submit" th:value="Change">
                     </form>
                 </div>
 
