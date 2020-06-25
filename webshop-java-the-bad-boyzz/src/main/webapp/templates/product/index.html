@@ -24,25 +24,64 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <!-- End of Bootstrap components -->
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
 
 <body>
 
-<div class="jumbotron text-center">
-    <h1>Codecool Shop</h1>
+<div >
+    <nav class="navbar navbar-expand-md navbar-light bg-dark">
+        <a href="#" class="navbar-brand">
+            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a href="/" class="nav-item nav-link active text-white">Home</a>
+                <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
+                <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
+                <a href="/cart" class="nav-item nav-link text-white"> <i class="fas fa-shopping-cart"></i> Cart</a>
+                <span class='badge' id='lblCartCount' th:text="${noOfProducts}" > 5 </span>
+            </div>
+            <!--            <div class="navbar-nav ml-auto">-->
+            <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
+            <!--            </div>-->
+        </div>
+    </nav>
 </div>
-
-<div class="container">
-    <div class="card">
-        <strong th:text="${category.name}">Category Title</strong>
+<br>
+<br>
+<div class="container all-content">
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <form action="/" method="get">
+        <div  class="inner">
+        <select class="filters-drop-down" name="category">
+            <option selected value=0>Product Category</option>
+            <div th:each="category, iterStat : ${category}" >
+                <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>
+            </div>
+        </select>
+        </div>
+        <div class="inner">
+        <select class="filters-drop-down" name="suppliers">
+            <option selected value=0>Supplier</option>
+            <div th:each="supplier, iterStat : ${supplier}" >
+                <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>
+            </div>
+        </select>
+        </div>
+        <input class="btn-succes filter-button" type="submit" value="Find my products!" >
+    </form>
+</div>
+    <div class="filter-show-hide">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>
     </div>
-
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">
-                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
+                <img class="productImg" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
                 <div class="card-header">
                     <h4 class="card-title" th:text="${prod.name}">Product name</h4>
                     <p class="card-text" th:text="${prod.description}">Product description... </p>
@@ -52,7 +91,7 @@
                         <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                     </div>
                     <div class="card-text">
-                        <a class="btn btn-success" href="#">Add to cart</a>
+                        <a class="btn btn-success addcart" th:href="${prod.idForClass()}">Add to cart</a>
                     </div>
                 </div>
             </div>
@@ -62,6 +101,9 @@
 </div>
 
 <div th:replace="footer.html :: copy"></div>
+
+
+<script src="/static/js/js.js"></script>
 
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.codecool.shop.model;
 
 import java.util.Currency;
+import java.util.List;
 
 public class Product extends BaseModel {
 
@@ -37,6 +38,10 @@ public class Product extends BaseModel {
         return String.valueOf(this.defaultPrice) + " " + this.defaultCurrency.toString();
     }
 
+    public Float getPriceNum() {
+        return this.defaultPrice;
+    }
+
     public void setPrice(float price, String currency) {
         this.defaultPrice = price;
         this.defaultCurrency = Currency.getInstance(currency);
@@ -60,6 +65,21 @@ public class Product extends BaseModel {
         this.supplier.addProduct(this);
     }
 
+    public String idForClass(){
+        return "/cart?id="+this.id;
+    }
+
+    public int countByName(List<Product> products){
+        String name = this.name;
+        int count = 0;
+        for (Product p : products){
+            if (p.getName() ==name){
+                count++;
+            }
+        }
+        return count;
+    }
+
     @Override
     public String toString() {
         return String.format("id: %1$d, " +
@@ -75,4 +95,6 @@ public class Product extends BaseModel {
                 this.productCategory.getName(),
                 this.supplier.getName());
     }
+
+
 }

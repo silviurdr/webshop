@@ -38,10 +38,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.version}</version>
                 <configuration>
-                    <!-- On some configs this causes shutdown of context on -->
-                    <!-- a page load so disabled. -->
-                    <!-- <reload>automatic</reload> -->
-                    <!-- <scanIntervalSeconds>1</scanIntervalSeconds> -->
+                    <httpConnector>
+                        <port>8888</port>
+                    </httpConnector>
                 </configuration>
             </plugin>
         </plugins>
@@ -65,5 +64,21 @@
             <artifactId>thymeleaf</artifactId>
             <version>3.0.9.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4.7</version>
+        </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-jdk14</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
     </dependencies>
+
 </project>

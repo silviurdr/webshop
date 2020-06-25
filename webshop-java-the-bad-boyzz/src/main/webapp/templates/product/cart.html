@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Cart</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+</head>
+
+<body>
+<div th:replace="nav.html :: copy"></div>
+
+<br>
+<br>
+<br>
+
+<div class="row container cart-container all-content">
+    <div class="col-7">
+        <h1 class="cart-header">Your Cart</h1>
+        <div class="cart-total-header">
+            <p th:text="|Total: (${numOfProducts} items) ___ ${sum} USD|">Products in cart</p>
+        </div>
+
+        <div id="products">
+            <div class="cart-item" th:each="prod : ${productsSet}">
+                <div class="col-5 cart-product-container">
+                    <img class="cart-product-image" src="http://placehold.it/200x125/000/fff"
+                         th:attr="src='/static/img/product_' + ${prod.key.id} + '.jpg'" alt="">
+                </div>
+                <div class="col-7 cart-item-description">
+                    <p>
+                    <span class="cart-product-name" th:text="${prod.key.name}"></span>
+                    <span class="cart-product-price"
+
+                          th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></span>
+                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}" ></span>
+                    </p>
+                    <form action="/cart" class="edit-cart-form" method="get">
+                    <select name="howMany" th:attr="prodName=${prod.key.getName()}" class="cart-product-count">
+                        <div th:each="itemsAmount: ${#numbers.sequence(0,10)}">
+                        <option th:selected="${prod.value} == ${itemsAmount}" th:value="${itemsAmount}" th:text="${itemsAmount}"></option>
+                        </div>
+                    </select>
+                        <input type="hidden" th:name="prodId" th:value="${prod.key.getId()}">
+                        <input class="btn btn-success edit-cart-button" type="submit" th:value="Change">
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <a href="/checkout"><button class="checkout-button"><span class="float-left" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
+
+        <!--            <table >-->
+        <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
+        <!--                <div class="card-header">-->
+        <!--                    <h4 class="card-title" ">Product name</h4>-->
+        <!--                    <p class="card-text" th:text="${prod.description}">Product description... </p>-->
+        <!--                </div>-->
+        <!--                <div class="card-body">-->
+        <!--                    <div class="card-text">-->
+        <!--                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>-->
+        <!--                    </div>-->
+        <!--                    <div class="card-text">-->
+        <!--                        <a class="btn btn-success" href="#">Add to cart</a>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </table>-->
+    </div>
+    <div class="col-4 order-summary-container">
+        <a href="/checkout"><button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
+        <div class="order-summary-content">
+        <h1 class="order-summary-header">Order Summary</h1>
+        <div class="order-summary-info">
+        <p><span th:text="|${numOfProducts} Items|"></span>
+            <span class="order-info-right" th:text="|${sum} USD|"></span></p>
+        <p><span>Delivery</span><span class="order-info-right free-delivery">FREE</span></p>
+        <p><span>Sales tax</span><span class="order-info-right">-</span></p>
+        <p class="order-total"><span>TOTAL</span><span class="order-info-right" th:text="|${sum} USD|"></span></p>
+        </div>
+        </div>
+
+
+    </div>
+</div>
+
+</div>
+
+</div>
+
+
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+</head>
+
+<body>
+<div th:replace="nav.html :: copy"></div>
+<br>
+<br>
+<div class="checkout">
+
+    <h4 class="mb-3">Payment</h4>
+<form method="post">
+<div class="d-block my-3">
+    <div class="custom-control custom-radio">
+        <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required>
+        <label class="custom-control-label" for="credit">Credit card</label>
+    </div>
+    <div class="custom-control custom-radio">
+        <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+        <label class="custom-control-label" for="paypal">Paypal</label>
+    </div>
+</div>
+    <div id="cardDisplay">
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label for="cc-name">Name on card</label>
+        <input type="text" class="form-control" id="cc-name" placeholder="" required name="cardOwner">
+        <small class="text-muted">Full name as displayed on card</small>
+        <div class="invalid-feedback">
+            Name on card is required
+        </div>
+    </div>
+    <div class="col-md-6 mb-3 " >
+        <label for="cc-number">Credit card number</label>
+        <input type="text" class="form-control" id="cc-number" placeholder="" name="cardNumber" >
+        <div class="invalid-feedback">
+            Credit card number is required
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 mb-3 ">
+        <label for="cc-expiration">Expiration</label>
+        <input type="text" class="form-control" id="cc-expiration" placeholder="" name="expirationDate" >
+        <div class="invalid-feedback">
+            Expiration date required
+        </div>
+    </div>
+    <div class="col-md-3 mb-3">
+        <label for="cc-expiration">CVV</label>
+        <input type="text" class="form-control" id="cc-cvv" placeholder="" name="CVV" >
+        <div class="invalid-feedback">
+            Security code required
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="paypalDisplay" id="paypalDisplay">
+    <div class="row" >
+        <div class="col-md-3 mb-3">
+            <label for="paypaluname">UserName</label>
+            <input type="text" class="form-contro" id="paypaluname" placeholder="Username" name="paypalUsername" >
+            <label for="paypalemail">UserName</label>
+            <input type="text" class="form-contro" id="paypalemail" placeholder="Email" name="paypalEmail">
+        </div>
+    </div>
+    </div>
+<hr class="mb-4">
+<button class="btn btn-primary btn-lg btn-block payment-button" type="submit">Pay</button>
+</form>
+</div>
+
+
+
+
+<div th:replace="footer.html :: copy"></div>
+<script src="/static/js/jsforpayment.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Codecool" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <title>Codecool Shop</title>
+
+    <!-- Bootstrap components -->
+    <!-- Latest compiled and minified Jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!--Latest compiled and minified Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- End of Bootstrap components -->
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+</head>
+<body>
+<div th:replace="nav.html :: copy"></div>
+<br>
+<br>
+<div class="checkout">
+    <div>Thank you for your order,you will receive a confirmation email. <br> Here is your order summary:</div>
+    <p>Products:</p>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>Name of Item</th>
+            <th>No. of Products</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="prod : ${productsSet}">
+            <td th:text="${prod.key.name }"></td>
+            <td th:text="${prod.value}"></td>
+            <td th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p >TOTAL: <span th:text="${total}"></span></p>
+    <p>Billing and shipment informations:</p>
+    <table class="table">
+        <tbody>
+        <tr>
+            <td>Customer Name</td>
+            <td th:text="${billingInfo.getCustomerName()}"></td>
+        </tr>
+        <tr>
+            <td>Customer Phone</td>
+            <td th:text="${billingInfo.getCustomerPhone()}"></td>
+        </tr>
+        <tr>
+            <td>Customer Adress</td>
+            <td th:text="${billingInfo.getCustomerAddress()}"></td>
+        </tr>
+        <tr>
+            <td>Customer City</td>
+            <td th:text="${billingInfo.getCustomerCity()}"></td>
+        </tr>
+        <tr>
+            <td>Customer Country</td>
+            <td th:text="${billingInfo.getCustomerCountry()}"></td>
+        </tr>
+        <tr>
+            <td>Customer Email</td>
+            <td th:text="${billingInfo.getCustomerEmail()}"></td>
+        </tr>
+        <tr>
+            <td>Customer Zip</td>
+            <td th:text="${billingInfo.getCustomerZip()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:replace="footer.html :: copy"></div>
+<script src="/static/js/js.js"></script>
+</body>
+</html>
