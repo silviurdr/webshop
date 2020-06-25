@@ -31,7 +31,7 @@ public class CartProductDaoMem implements CartProductDao {
 
     @Override
     public void add(Product product) {
-        data.put(product, 1);
+        data.merge(product, 1, Integer::sum);
     }
 
 
