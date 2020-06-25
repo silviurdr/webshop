@@ -42,16 +42,9 @@ public class PaymentController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CheckoutDaoMem checkoutDetails = CheckoutDaoMem.getInstance();
-        checkoutDetails.setCustomerName(req.getParameter("name"));
-        checkoutDetails.setCustomerEmail(req.getParameter("email"));
-        checkoutDetails.setCustomerAddress(req.getParameter("address"));
-        checkoutDetails.setCustomerCountry(req.getParameter("country"));
-        checkoutDetails.setCustomerCity(req.getParameter("city"));
-        checkoutDetails.setCustomerPhone(req.getParameter("phone"));
-        checkoutDetails.setCustomerZip(req.getParameter("zip"));
 
         BillingInformationDao bil = BillingInformationDaoMem.getInstance();
+        System.out.println(bil.getFirst().getCustomerEmail());
 
         String cardOwner = req.getParameter("cardOwner");
         String cardNumber=req.getParameter("cardNumber");
@@ -78,10 +71,8 @@ public class PaymentController extends HttpServlet {
 
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
-//        String name= bil.getFirst().getCustomerName();
-//        String to = bil.getFirst().getCustomerEmail();
-        String name = "alexandedru";
-        String to = "oanceaalexander@gmail.com";
+        String name= bil.getFirst().getCustomerName();
+        String to = bil.getFirst().getCustomerEmail();
         String total=sum2;
         send(to,name,total);
         out.println("Mail send successfully");
