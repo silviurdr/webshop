@@ -1,9 +1,12 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.BillingInformationDao;
 import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
 import com.codecool.shop.dao.implementation.CartProductDaoMem;
 import com.codecool.shop.dao.implementation.CheckoutDaoMem;
+import com.codecool.shop.model.Order;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -14,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -63,6 +67,16 @@ public class CheckoutController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Order order= new Order();
+        order.setCustomerName(req.getParameter("name"));
+        order.setCustomerEmail(req.getParameter("email"));
+        order.setCustomerAddress(req.getParameter("address"));
+        order.setCustomerCountry(req.getParameter("country"));
+        order.setCustomerCity(req.getParameter("city"));
+        order.setCustomerPhone(req.getParameter("phone"));
+        order.setCustomerZip(req.getParameter("zip"));
+        BillingInformationDao billingInfo=BillingInformationDaoMem.getInstance();
+        billingInfo.add(order);
         CheckoutDaoMem checkoutDetails = CheckoutDaoMem.getInstance();
         checkoutDetails.setCustomerName(req.getParameter("name"));
         checkoutDetails.setCustomerEmail(req.getParameter("email"));

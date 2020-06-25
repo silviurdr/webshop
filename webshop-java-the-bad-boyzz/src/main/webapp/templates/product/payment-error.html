@@ -5,7 +5,7 @@
     <meta name="author" content="Codecool" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <title>Cart</title>
+    <title>Codecool Shop</title>
 
     <!-- Bootstrap components -->
     <!-- Latest compiled and minified Jquery -->
@@ -28,55 +28,13 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
 </head>
-
 <body>
-
-<div class="jumbotron text-center">
-    <h1>Your Cart</h1>
-</div>
-
-<div class="container">
-    <div class="card">
-
-    </div>
-
-    <div id="products" class="row">
-
-            <table class="table">
-                <tbody>
-                <tr th:each="prod,iterStat : ${productsSet}">
-                    <td th:text="${prod.name}"></td>
-                    <td th:text="${prod.countByName(products1)}"></td>
-                    <td th:text="${prod.getPrice()}"></td>
-                </tr>
-                </tbody>
-            </table>
-        <div>
-        <p>Total Amount is: <span th:text="${sum}"></span></p>
-
-        </div>
-<!--            <table >-->
-<!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
-<!--                <div class="card-header">-->
-<!--                    <h4 class="card-title" ">Product name</h4>-->
-<!--                    <p class="card-text" th:text="${prod.description}">Product description... </p>-->
-<!--                </div>-->
-<!--                <div class="card-body">-->
-<!--                    <div class="card-text">-->
-<!--                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>-->
-<!--                    </div>-->
-<!--                    <div class="card-text">-->
-<!--                        <a class="btn btn-success" href="#">Add to cart</a>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </table>-->
-            </div>
-        </div>
-    </div>
-
-</div>
-
+<div th:replace="nav.html :: copy"></div>
+<br>
+<br>
+<p>Invalid payment information!</p>
+<a href="/payment"> Try again!</a>
 <div th:replace="footer.html :: copy"></div>
-
+<script src="/static/js/js.js"></script>
 </body>
 </html>

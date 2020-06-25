@@ -36,7 +36,7 @@
 <div class="checkout">
 
     <h4 class="mb-3">Payment</h4>
-<form method="get" action="index.html">
+<form method="post">
 <div class="d-block my-3">
     <div class="custom-control custom-radio">
         <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
@@ -51,7 +51,7 @@
 <div class="row">
     <div class="col-md-6 mb-3">
         <label for="cc-name">Name on card</label>
-        <input type="text" class="form-control" id="cc-name" placeholder="" required>
+        <input type="text" class="form-control" id="cc-name" placeholder="" required name="cardOwner">
         <small class="text-muted">Full name as displayed on card</small>
         <div class="invalid-feedback">
             Name on card is required
@@ -59,7 +59,7 @@
     </div>
     <div class="col-md-6 mb-3 " >
         <label for="cc-number">Credit card number</label>
-        <input type="text" class="form-control" id="cc-number" placeholder="" >
+        <input type="text" class="form-control" id="cc-number" placeholder="" name="cardNumber" >
         <div class="invalid-feedback">
             Credit card number is required
         </div>
@@ -68,14 +68,14 @@
 <div class="row">
     <div class="col-md-3 mb-3 ">
         <label for="cc-expiration">Expiration</label>
-        <input type="text" class="form-control" id="cc-expiration" placeholder="" >
+        <input type="text" class="form-control" id="cc-expiration" placeholder="" name="expirationDate" >
         <div class="invalid-feedback">
             Expiration date required
         </div>
     </div>
     <div class="col-md-3 mb-3">
         <label for="cc-expiration">CVV</label>
-        <input type="text" class="form-control" id="cc-cvv" placeholder="" >
+        <input type="text" class="form-control" id="cc-cvv" placeholder="" name="CVV" >
         <div class="invalid-feedback">
             Security code required
         </div>
@@ -86,9 +86,9 @@
     <div class="row" >
         <div class="col-md-3 mb-3">
             <label for="paypaluname">UserName</label>
-            <input type="text" class="form-contro" id="paypaluname" placeholder="Username" >
+            <input type="text" class="form-contro" id="paypaluname" placeholder="Username" name="paypalUsername" >
             <label for="paypalemail">UserName</label>
-            <input type="text" class="form-contro" id="paypalemail" placeholder="Email">
+            <input type="text" class="form-contro" id="paypalemail" placeholder="Email" name="paypalEmail">
         </div>
     </div>
     </div>

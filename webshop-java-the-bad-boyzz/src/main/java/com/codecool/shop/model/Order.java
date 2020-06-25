@@ -13,6 +13,8 @@ public class Order {
     public String getCustomerName() {
         return customerName;
     }
+    public Order(){
+    }
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
