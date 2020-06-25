@@ -64,7 +64,7 @@ public class PaymentController extends HttpServlet {
 
         float sum = 0;
         CartProductDao cartProducts = CartProductDaoMem.getInstance();
-        for (Product p : cartProducts.getAll()){
+        for (Product p : cartProducts.getAll().keySet()){
             sum+=p.getDefaultPrice();
         }
         String sum2  = String.format("%.1f", sum);

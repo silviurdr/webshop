@@ -31,12 +31,12 @@ public class PaymentConfController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BillingInformationDao billingInfo= BillingInformationDaoMem.getInstance();
-        CartProductDao cartProducts=CartProductDaoMem.getInstance();
+        CartProductDao cartProducts = CartProductDaoMem.getInstance();
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-        Set<Product> prodForCart = new HashSet<>(cartProducts.getAll());
+
         float sum = 0;
-        for (Product p : cartProducts.getAll()){
+        for (Product p : cartProducts.getAll().keySet()){
             sum+=p.getDefaultPrice();
         }
         
@@ -46,7 +46,7 @@ public class PaymentConfController extends HttpServlet {
         String sum2  = String.format("%.1f", sum);
         context.setVariable("total",sum2);
         context.setVariable("products", cartProducts.getAll() );
-        context.setVariable("productsSet",prodForCart);
+        context.setVariable("productsSet",cartProducts.getAll());
         context.setVariable("billingInfo",orderInfo);
         engine.process("product/confirmation.html", context, resp.getWriter());
 
