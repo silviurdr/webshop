@@ -2,6 +2,7 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.implementation.CheckoutDaoMem;
+import com.codecool.shop.model.SendMail;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet(urlPatterns = {"/payment"})
 public class PaymentController extends HttpServlet {
@@ -50,6 +52,18 @@ public class PaymentController extends HttpServlet {
         }catch (NumberFormatException e){
             resp.sendRedirect("/payment-error");
         }
+
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+        String to = "barbu.mihai1993@gmail.com";
+        String subject = "Order Conf";
+        String message =  "message";
+        String user = "codecool.shop.romania@gmail.com";
+        String pass = "1234asd@";
+        SendMail.send(to,subject, message, user, pass);
+        out.println("Mail send successfully");
+
+
 
 
         resp.sendRedirect("/confirmation");

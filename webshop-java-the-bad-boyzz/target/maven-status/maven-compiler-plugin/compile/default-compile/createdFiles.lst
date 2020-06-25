@@ -4,10 +4,12 @@ com/codecool/shop/controller/PaymentErrorController.class
 com/codecool/shop/dao/implementation/ProductDaoMem.class
 com/codecool/shop/controller/CartController.class
 com/codecool/shop/dao/implementation/ProductCategoryDaoMem.class
+com/codecool/shop/model/SendMail$1.class
 com/codecool/shop/dao/CartProductDao.class
 com/codecool/shop/config/ThymeleafConfig.class
 com/codecool/shop/dao/BillingInformationDao.class
 com/codecool/shop/dao/implementation/BillingInformationDaoMem.class
+com/codecool/shop/model/SendMail.class
 com/codecool/shop/controller/PaymentConfController.class
 com/codecool/shop/dao/SupplierDao.class
 com/codecool/shop/dao/implementation/SupplierDaoMem.class
