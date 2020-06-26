@@ -45,30 +45,22 @@ public class ProductController extends HttpServlet {
 
         context.setVariable("category", productCategoryDataStore.getAll());
         context.setVariable("supplier", productSupplierDataStore.getAll());
-        context.setVariable("products", productDataStore.getAll());
         context.setVariable("noOfProducts", noOfProducts);
 
+        //products
         if (categoryId != 0 && supplier != 0) {
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId), productSupplierDataStore.find(supplier)));
-            context.setVariable("category", productCategoryDataStore.getAll());
-            context.setVariable("supplier", productSupplierDataStore.getAll());
-            context.setVariable("noOfProducts", noOfProducts);
         } else if (categoryId != 0) {
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
-            context.setVariable("category", productCategoryDataStore.getAll());
-            context.setVariable("supplier", productSupplierDataStore.getAll());
-            context.setVariable("noOfProducts", noOfProducts);
-
-
         } else if (supplier != 0 ) {
             context.setVariable("products", productDataStore.getBy(productSupplierDataStore.find(supplier)));
-            context.setVariable("category", productCategoryDataStore.getAll());
-            context.setVariable("supplier", productSupplierDataStore.getAll());
-            context.setVariable("noOfProducts", noOfProducts);
         } else  {
             context.setVariable("products", productDataStore.getAll());
-            context.setVariable("noOfProducts", noOfProducts);
         }
+
+
+
+        engine.process("product/index.html", context, resp.getWriter());
 
         engine.process("product/index.html", context, resp.getWriter());
 
