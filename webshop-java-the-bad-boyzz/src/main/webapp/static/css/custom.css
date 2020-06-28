@@ -300,6 +300,7 @@ p.card-text {
 .logo-image {
     margin: 0 auto;
     font-weight: bold;
+    margin-top: 6em;
 }
 
 .logo-title {
@@ -341,6 +342,10 @@ p.card-text {
     padding: 0px;
 }
 
+.navbar {
+    margin: -3em auto 0em auto;
+}
+
 #navbarCollapse {
     float: right;
     margin-right: 2em;
@@ -349,6 +354,25 @@ p.card-text {
 a.nav-item  {
     float: right;
 }
+
+.navigation-links {
+    margin: -2em auto 2em auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.navigation-link {
+    margin-right: 1em;
+    color: black;
+}
+
+.navigation-link:hover {
+    color: black;
+    text-decoration: none;
+    border-bottom: 2px solid black;
+}
+
 
 .productImg {
     display: block;
