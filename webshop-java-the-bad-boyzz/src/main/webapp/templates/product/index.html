@@ -78,6 +78,17 @@
     <div class="filter-show-hide">
     <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>
     </div>
+    <div class="show-by">
+        <form>
+            <select>
+                <option  class="show-by-criteria" selected value="cheapest">Cheapest first</option>
+                <option value="popular">Most popular</option>
+                <option value="newest">Newest</option>
+                <option value="expensive">Most expensive</option>
+            </select>
+            <input class="show-by-criteria-button" type="submit" value="show">
+        </form>
+    </div>
     <div id="products" class="row">
         <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
             <div class="card">

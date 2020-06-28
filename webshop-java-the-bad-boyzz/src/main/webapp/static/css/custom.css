@@ -457,3 +457,25 @@ a.nav-item  {
     vertical-align: top;
     margin-left: -10px;
 }
+
+.show-by-criteria-button {
+    color: #888;
+}
+
+.show-by-criteria-button {
+    display: block;
+    cursor: pointer;
+    width: 4em;
+    font-size: 0.7em;
+    background-color: white;
+    border: 1px solid #555;
+}
+
+.show-by  select {
+    color: #888;
+    background-color: white;
+-webkit-border-radius: 0;
+border: 0;
+outline: 1px solid #ccc;
+outline-offset: -1px;
+}
