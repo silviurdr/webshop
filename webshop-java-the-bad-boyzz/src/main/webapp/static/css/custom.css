@@ -87,12 +87,13 @@ body {
 
 .filter-button {
     border:none;
-    background-color: #CA2C28;
+    background-color: #333;
     color: white;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
     padding: 5px;
+    border-radius: 4px;
 }
 
 .filter-button:hover {
@@ -292,13 +293,61 @@ p.card-text {
     color: black!important;
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+.logo {
+    margin: 2em auto;
+}
+
+.logo-image {
+    margin: 0 auto;
+    font-weight: bold;
+}
+
+.logo-title {
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+.signin-button {
+    border-radius: 20px;
+    height: 32px;
+    background-color: #388DC8;
+    padding: 8px 22px;
+    color: white !important;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-left: 0.5em;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.signin-button:hover {
+    cursor: pointer;
+}
+
+
+.currency {
+    border: 3px solid #000;
+    margin-left: 0.5em;
+    border-radius: 4px;
+    background-color: white;
+    padding: 0px 5px;
+    text-transform: uppercase;
+    margin-bottom: 0px !important;
+    height: 26px;
+    margin-top: 8px;
+}
+
+.currency-option {
+    padding: 0px;
+}
+
+#navbarCollapse {
+    float: right;
+    margin-right: 2em;
 }
 
 a.nav-item  {
-    color: white;
+    float: right;
 }
 
 .productImg {
@@ -313,7 +362,6 @@ a.nav-item  {
     width: 80%;
     margin: 0 100px 0 100px;
 }
-
 .cart-header {
     font-family: Helvetica;
     font-weight: bold;
@@ -480,11 +528,24 @@ a.nav-item  {
     display: none;
 }
 
-#lblCartCount {
-    font-size: 14px;
-    color: #fff;
-    vertical-align: top;
-    margin-left: -10px;
+.fa-shopping-cart {
+    font-size: 1.8em;
+    color: #333;
+    vertical-align: middle;
+}
+
+.lblCartCount {
+    background-color: #388DC8;
+    color: white;
+    font-size: 0.9em;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    margin-top: 8px;
+    margin-left: 0.5em;
+    text-align: center;
+    line-height: 26px;
+    display: inline-block;
 }
 
 .show-by {
@@ -511,6 +572,15 @@ a.nav-item  {
 border: 0;
 outline: 1px solid #ccc;
 outline-offset: -1px;
+}
+
+.plus-filter, .minus-filter {
+    color: #CA2C28;
+    margin-left: 0.5em;
+}
+
+.plus-filter:hover {
+    cursor: pointer;
 }
 
 .filter-checkbox, .filter-label {
@@ -540,6 +610,11 @@ input .filter-checkbox, input .filter-checkbox:active {
 
 
  */
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
 
 @media (min-width: 1200px) {
     .container {
