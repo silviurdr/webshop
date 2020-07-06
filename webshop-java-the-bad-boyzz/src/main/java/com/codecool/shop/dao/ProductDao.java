@@ -4,6 +4,7 @@ import com.codecool.shop.model.Supplier;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.ProductCategory;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ProductDao {
@@ -12,7 +13,7 @@ public interface ProductDao {
     Product find(int id);
     void remove(int id);
 
-    List<Product> getAll();
+    List<Product> getAll() throws SQLException;
     List<Product> getBy(Supplier supplier);
     List<Product> getBy(ProductCategory productCategory);
     List<Product> getBy(ProductCategory productCategory, Supplier supplier);
