@@ -297,17 +297,26 @@ p.card-text {
     margin: 2em auto;
 }
 
+.logo-modal {
+    margin: 0em auto;
+    margin-bottom: 1em;
+}
+
 .logo-image {
     margin: 0 auto;
     font-weight: bold;
     margin-top: 6em;
 }
 
+.logo-image-modal {
+    margin-top: 1em;
+}
+
 .logo-title {
     font-family: 'Rubik Mono One', sans-serif;
 }
 
-.signin-button {
+.signin-button, .signin-button-form {
     border-radius: 20px;
     height: 32px;
     background-color: #388DC8;
@@ -323,6 +332,19 @@ p.card-text {
 
 .signin-button:hover {
     cursor: pointer;
+}
+
+.signin-button-form {
+    border-radius: 30px;
+    width: 250px;
+    height: 50px;
+    border: none;
+    margin: 1em auto;
+}
+
+.signin-button-form:hover {
+    cursor: pointer;
+    background-color: #388DC8;
 }
 
 
@@ -625,6 +647,78 @@ input .filter-checkbox, input .filter-checkbox:active {
 .filter-type-container {
     margin-bottom: 1em;
     margin-top: 1em;
+}
+
+.nav-tabs {
+    margin-bottom: 15px;
+}
+.sign-with {
+    margin-top: 25px;
+    padding: 20px;
+}
+
+
+.modal .modal-dialog {
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    margin: 0;
+}
+.modal .modal-content {
+    border: 0;
+    border-radius: 0;
+    font-family: "Helvetica Neue";
+}
+.modal .modal-body {
+    overflow-y: auto;
+}
+
+.registration-form {
+    width: 30%;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+
+.modal-title-text {
+    border-bottom: 3px solid #CA2C28;
+    text-transform: uppercase;
+    color: #404752;
+}
+
+.modal-title {
+    margin-bottom: 1em;
+}
+
+input.form-control {
+    border-radius: 30px;
+    height: 50px;
+    border: 4px solid rgb(245,245,245);
+    padding-left: 40px;
+    text-align: left;
+}
+
+
+.form-horizontal {
+    margin: 0 auto;
+}
+
+input[type="text"], textarea {
+    outline: none;
+    box-shadow:none !important;
+    border: 4px solid rgb(245,245,245) !important;
+}
+
+input[type="email"], textarea {
+    outline: none;
+    box-shadow:none !important;
+    border: 4px solid rgb(245,245,245) !important;
+}
+
+input[type="password"], textarea {
+    outline: none;
+    box-shadow:none !important;
+    border: 4px solid rgb(245,245,245) !important;
 }
 
 

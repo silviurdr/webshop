@@ -16,8 +16,10 @@
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/PaymentErrorController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/BillingInformationDaoMem.java
+/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/UserDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoMem.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Product.java
+/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/User.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/PaymentController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductCategoryDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/CartProductDaoMem.java

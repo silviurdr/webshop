@@ -55,11 +55,69 @@
                     <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
                     <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
                 </select>
-                <a class="signin-button"><span class="signin-text">sign in</span></a>
+                <a class="signin-button" data-toggle="modal" data-target="#myModal">
+                    <span class="signin-text">register</span></a>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    X</button>
+                                <div class="logo-modal">
+                                    <div class="logo-image-modal text-center">
+                                        <h3 class="logo-title">Codecool Bazaar</h3>
+                                        <a href="#" class="navbar-brand">
+                                            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
+                                        </a>
+                                    </div>
+                                </div>
+                                <h4 class="modal-title text-center" id="myModalLabel">
+                                    <span class="modal-title-text">Register</span></h4>
+                                <div class="row registration-form">
+                                    <div class="col-md-12 form-inputs">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="Registration">
+                                                <form role="form" class="form-horizontal">
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                                    <input type="text" class="form-control" placeholder="Name" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input type="email" class="form-control" id="email" placeholder="Email" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input type="email" class="form-control" id="mobile" placeholder="Mobile" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input type="password" class="form-control" id="password" placeholder="Password" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="submit" class="signin-button-form">
+                                                                Register</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--            <div class="navbar-nav ml-auto">-->
-            <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
-            <!--            </div>-->
         </div>
     </nav>
 </div>
