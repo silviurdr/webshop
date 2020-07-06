@@ -19,8 +19,8 @@ import java.util.List;
 public class ProductDaoJDBC implements ProductDao {
 
 	private static ProductDaoJDBC instance = null;
-	private SupplierDao supplierDao = SupplierDaoMem.getInstance();
-	private ProductCategoryDao productCategoryDao = ProductCategoryDaoMem.getInstance();
+	private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
+	private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
 
 
 	public static ProductDaoJDBC getInstance() {
