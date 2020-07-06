@@ -11,7 +11,6 @@ body {
 
 
 body {
-    background-color:whitesmoke ;
     min-height: 100vh;
     position: relative;
     padding-bottom: 6em;
@@ -88,10 +87,13 @@ body {
 
 .filter-button {
     border:none;
-    text-decoration: underline;
+    background-color: #333;
+    color: white;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
+    padding: 5px;
+    border-radius: 4px;
 }
 
 .filter-button:hover {
@@ -108,43 +110,91 @@ body {
 }
 
 .card {
-    border:1px solid #ccc;
+    border:4px solid #eee;
     margin-bottom: 2em;
+    padding: 10px;
+    max-width: 330px;
+    min-width: 270px;
+}
+
+.card:hover {
+    border-color: #388DC8;
+}
+
+.card-title {
+    font-size: 1.3em;
 }
 
 .card-header {
-    min-height: 10em;
+    border-bottom: 0;
+}
+
+p.card-text {
+    font-size: 0.9em;
 }
 
 .card-body {
-    background-color:#EFEAE7 ;
     border:none;
+    padding: 0 1.25rem 1.25rem 1.25rem;
 }
 
+.card-info {
+    margin: 0 auto;
+}
+
+.card-info:hover {
+    cursor: pointer;
+}
+
+
 .lead {
-    color: #000;
-    font-weight: bold;
-    font-size: 1.2em;
+    color: #388DC8;
+    font-size: 1.4em;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    text-align: center;
+    margin-bottom: 1.4em;
 }
 
 
 .addcart {
-    background-color: #67A0CE;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    float: right;
+    background-color: #388DC8;
     transition: all 0.3s ease-in;
     border:none;
     text-transform: uppercase;
-    font-size: 0.8em;
+    font-size: 1.0em;
     font-weight: bold;
-    padding: 4px 16px;
+    padding: 10px 16px;
 }
 
 .addcart:hover  {
-    background-color: white;
+    background-color: #46b97a;
     border:none;
-    color: black;
     text-transform: uppercase;
-    font-size: 0.8em;
     font-weight: bold;
+}
+
+.quantity-modifier {
+    display: inline-block;
+}
+
+.quantity-modifier-icon {
+    color: #404752;
+    font-size: 1.2em;
+}
+
+.quantity-modifier-icon:hover {
+    cursor: pointer;
+}
+
+.quantity-to-add-to-cart {
+    border: 2px solid #e2e2e2;
+    color: #707070;
+    margin: 8px 10px;
+    width: 60px;
+    text-align: center;
+    vertical-align: center;
 }
 
 .payment-button {
@@ -187,15 +237,23 @@ body {
     height: 2em;
 }
 
+.right-side-container {
+    display: inline-block;
+    max-width: 1300px;
+    float:right;
+}
+
+#mySidenav {
+    display: inline-block;
+    min-width: 220px;
+}
+
 .sidenav {
-    margin-top: 6em;
     height: 100%;
     width: 0;
-    position: fixed;
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #EFEAE7;
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
@@ -235,38 +293,106 @@ body {
     color: black!important;
 }
 
-@media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
+.logo {
+    margin: 2em auto;
+}
+
+.logo-image {
+    margin: 0 auto;
+    font-weight: bold;
+    margin-top: 6em;
+}
+
+.logo-title {
+    font-family: 'Rubik Mono One', sans-serif;
+}
+
+.signin-button {
+    border-radius: 20px;
+    height: 32px;
+    background-color: #388DC8;
+    padding: 8px 22px;
+    color: white !important;
+    font-weight: bold;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-left: 0.5em;
+    margin-top: 12px;
+    text-align: center;
+}
+
+.signin-button:hover {
+    cursor: pointer;
+}
+
+
+.currency {
+    border: 3px solid #000;
+    margin-left: 0.5em;
+    border-radius: 4px;
+    background-color: white;
+    padding: 0px 5px;
+    text-transform: uppercase;
+    margin-bottom: 0px !important;
+    height: 26px;
+    margin-top: 8px;
+}
+
+.currency-option {
+    padding: 0px;
+}
+
+.navbar {
+    margin: -3em auto 0em auto;
+}
+
+#navbarCollapse {
+    float: right;
+    margin-right: 2em;
 }
 
 a.nav-item  {
-    color: white;
+    float: right;
 }
+
+.navigation-links {
+    margin: -2em auto 2em auto;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 1.2em;
+}
+
+.navigation-link {
+    margin-right: 1em;
+    color: black;
+}
+
+.navigation-link:hover {
+    color: black;
+    text-decoration: none;
+    border-bottom: 2px solid black;
+}
+
 
 .productImg {
-    /* filter: url(filters.svg#grayscale); Firefox 3.5+ */
-    filter: gray; /* IE5+ */
-    -webkit-filter: grayscale(1); /* Webkit Nightlies & Chrome Canary */
-    -webkit-transition: all .8s ease-in-out;
+    display: block;
+    width: 220px;
+    height: 170px;
+    margin: auto;
 }
 
-.productImg:hover {
-    filter: none;
-    -webkit-filter: grayscale(0);
-    -webkit-transform: scale(1.01);
-}
 
 .checkout {
     width: 80%;
     margin: 0 100px 0 100px;
 }
-
 .cart-header {
     font-family: Helvetica;
-    font-weight: 900;
+    font-weight: bold;
     font-size: 2.5em;
     text-transform: uppercase;
+    text-decoration: underline;
+    margin-bottom: 1em;
 }
 
 .cart-total-header {
@@ -305,8 +431,11 @@ a.nav-item  {
 
 .cart-container {
     font-family: Helvetica;
-    max-width: 1300px;
     margin: 0 auto;
+}
+
+.container {
+    width: 1700px!important;
 }
 
 .cart-item {
@@ -315,34 +444,45 @@ a.nav-item  {
     display: flex;
     font-size: 0.95em;
     background-color: white;
+    padding: 30px;
 }
 
 .cart-product-image {
-    width: 100%;
+    width: 175px;
+    height: 136px;
 }
 
 .cart-product-container {
     padding: 0px;
 }
 
-.cart-item-description {
-    padding: 20px;
-    margin-left: 1.5em;
-}
 
 .cart-product-name {
     text-transform: uppercase;
+    text-decoration: underline;
+    color:  #62C38d;
+    font-size: 1.2em;
+}
+
+.cart-product-name:hover {
+    cursor: pointer;
 }
 
 .cart-product-price {
-    float: right;
-    margin-right: 60px;
+    margin-right: 50px;
 }
 
 .cart-product-currency {
-    float: right;
     margin-right: 5px;
 }
+
+.cart-product-currency, .cart-product-price {
+    position: absolute;
+    bottom: 0em;
+    right: 2em;
+    font-size: 1.2em;
+}
+
 
 .cart-product-count {
     padding: 4px 20px;
@@ -384,7 +524,7 @@ a.nav-item  {
 
 .edit-cart-form {
     position: absolute;
-    bottom: 2em;
+    bottom: 0;
 }
 
 .cart-nav {
@@ -412,9 +552,96 @@ a.nav-item  {
     display: none;
 }
 
-#lblCartCount {
-    font-size: 14px;
-    color: #fff;
-    vertical-align: top;
-    margin-left: -10px;
+.fa-shopping-cart {
+    font-size: 1.8em;
+    color: #333;
+    vertical-align: middle;
+}
+
+.lblCartCount {
+    background-color: #388DC8;
+    color: white;
+    font-size: 0.9em;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    margin-top: 8px;
+    margin-left: 0.5em;
+    text-align: center;
+    line-height: 26px;
+    display: inline-block;
+}
+
+.show-by {
+    margin-bottom:2em;
+}
+
+.show-by-criteria-button {
+    color: #888;
+}
+
+.show-by-criteria-button {
+    display: block;
+    cursor: pointer;
+    width: 4em;
+    font-size: 0.7em;
+    background-color: white;
+    border: 1px solid #555;
+}
+
+.show-by  select {
+    color: #888;
+    background-color: white;
+-webkit-border-radius: 0;
+border: 0;
+outline: 1px solid #ccc;
+outline-offset: -1px;
+}
+
+.plus-filter, .minus-filter {
+    color: #CA2C28;
+    margin-left: 0.5em;
+}
+
+.plus-filter:hover {
+    cursor: pointer;
+}
+
+.filter-checkbox, .filter-label {
+    cursor: pointer;
+}
+
+input .filter-checkbox, input .filter-checkbox:active {
+    background-color:red !important;
+}
+
+.filter-type {
+    text-transform: uppercase;
+    border-bottom: 3px solid #CA2C28;
+    font-family: "Helvetica Neue";
+    font-size: 1.2em;
+}
+
+.filter-type-container {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+
+/*
+
+#### MEDIA QUERIES ###
+
+
+ */
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1740px;
+    }
 }

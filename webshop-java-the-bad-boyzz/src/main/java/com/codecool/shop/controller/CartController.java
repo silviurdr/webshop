@@ -33,35 +33,6 @@ public class CartController extends HttpServlet {
         int numOfProducts = 0;
 
 
-//        if (howMany != null) {
-//            int itemsRequest = Integer.parseInt(howMany);
-//
-//            System.out.println("Items requested " + itemsRequest);
-//            int prodIdInt = Integer.parseInt(prodId);
-//
-//            System.out.println("Prod id int :" + prodIdInt);
-//            Product prodSelected = productDataStore.find(prodIdInt);
-//            int alreadyPresent = 0;
-//
-//            for (int i = 0; i < cartProductCategoryDataStore.getAll().size(); i++) {
-//                System.out.println("How many are in the cart" + cartProductCategoryDataStore.getAll().get(i));
-//                if (cartProductCategoryDataStore.getAll().get(i).getId() == prodSelected.getId()) {
-//                    alreadyPresent++;
-//                }
-//            }
-//
-//            System.out.println("Already present " + alreadyPresent);
-//
-//            int itemsToAdd = itemsRequest - alreadyPresent;
-//
-//            System.out.println("Items to add " + itemsToAdd);
-//
-//            for (int j = 0; j < itemsToAdd; j++) {
-//                cartProductCategoryDataStore.add(productDataStore.find(prodIdInt));
-//                j++;
-//            }
-//        }
-
         if (howMany != null) {
             int howManyInt = Integer.parseInt(howMany);
             int prodIdInt = Integer.parseInt(prodId);
@@ -75,8 +46,6 @@ public class CartController extends HttpServlet {
                 }
             }
         }
-
-
 
 
         if (toAddId != null) {

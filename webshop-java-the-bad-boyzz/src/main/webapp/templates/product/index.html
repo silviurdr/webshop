@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>Codecool Shop</title>
 
@@ -14,11 +14,13 @@
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -26,23 +28,34 @@
     <!-- End of Bootstrap components -->
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<div >
-    <nav class="navbar navbar-expand-md navbar-light bg-dark">
-        <a href="#" class="navbar-brand">
-            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link active text-white">Home</a>
+<div>
+    <nav class="navbar navbar-expand-md navbar-light bg-white">
+        <div class="logo">
+            <div class="logo-image text-center">
+                <h3 class="logo-title">Codecool Bazaar</h3>
+                <a href="#" class="navbar-brand">
+                    <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
+                </a>
+            </div>
+        </div>
+        <div id="navbarCollapse">
+            <div class="right-nav">
                 <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
                 <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
-                <a href="/cart" class="nav-item nav-link text-white"> <i class="fas fa-shopping-cart"></i> Cart</a>
-                <span class='badge' id='lblCartCount' th:text="${noOfProducts}" > 5 </span>
+                <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
+                <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
+                <select class="currency">
+                    <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
+                    <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
+                </select>
+                <a class="signin-button"><span class="signin-text">sign in</span></a>
             </div>
             <!--            <div class="navbar-nav ml-auto">-->
             <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
@@ -52,52 +65,108 @@
 </div>
 <br>
 <br>
-<div class="container all-content">
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <form action="/" method="get">
-        <div  class="inner">
-        <select class="filters-drop-down" name="category">
-            <option selected value=0>Product Category</option>
-            <div th:each="category, iterStat : ${category}" >
-                <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>
-            </div>
-        </select>
-        </div>
-        <div class="inner">
-        <select class="filters-drop-down" name="suppliers">
-            <option selected value=0>Supplier</option>
-            <div th:each="supplier, iterStat : ${supplier}" >
-                <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>
-            </div>
-        </select>
-        </div>
-        <input class="btn-succes filter-button" type="submit" value="Find my products!" >
-    </form>
+<div class="navigation-links">
+    <a class="navigation-link" href="#">Mobile Phones</a>
+    <a class="navigation-link" href="#">Tablets</a>
+    <a class="navigation-link" href="#">Notebooks</a>
+    <a class="navigation-link" href="#">Books</a>
+    <a class="navigation-link" href="#">Toys</a>
+    <a class="navigation-link" href="#">Lots of Things</a>
+    <a class="navigation-link" href="#">Something Secret</a>
+    <a class="navigation-link" href="#">Don't Go Here</a>
+    <a class="navigation-link" href="#">Is The Page Full Yet</a>
 </div>
-    <div class="filter-show-hide">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>
-    </div>
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="productImg" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+<div class="row container-fluid all-content">
+    <div id="mySidenav" class="col-2 sidenav">
+        <form action="/" method="get">
+            <div class="inner">
+                <div class="filter-type-container"><span class="filter-type">Category</span> <span><i
+                        class="fas fa-plus plus-filter"></i>
+                    <i class="fas fa-minus minus-filter"></i>
+</span></div>
+                <div th:each="category, iterstat: ${category}">
+                    <input class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
+                    <label class="filter-label" th:for="${category.getName()}"
+                           th:text="${category.getName()}">Product</label></br>
                 </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
-                    </div>
-                    <div class="card-text">
-                        <a class="btn btn-success addcart" th:href="${prod.idForClass()}">Add to cart</a>
-                    </div>
+
+                <div class="filter-type-container"><span class="filter-type">Supplier</span> <span><i
+                        class="fas fa-plus plus-filter"></i>
+</span></div>
+                <div th:each="supplier, iterstat: ${supplier}">
+                    <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
+                    <label class="filter-label" th:for="${supplier.getName()}"
+                           th:text="${supplier.getName()}">Supplier</label></br>
                 </div>
+
+                <!--        <select class="filters-drop-down" name="category">-->
+                <!--            <option selected value=0>Product Category</option>-->
+                <!--            <div th:each="category, iterStat : ${category}" >-->
+                <!--                <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>-->
+                <!--            </div>-->
+                <!--        </select>-->
+                <!--        </div>-->
+                <!--        <div class="inner">-->
+                <!--        <select class="filters-drop-down" name="suppliers">-->
+                <!--            <option selected value=0>Supplier</option>-->
+                <!--            <div th:each="supplier, iterStat : ${supplier}" >-->
+                <!--                <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>-->
+                <!--            </div>-->
+                <!--        </select>-->
             </div>
-        </div>
+            <input class="btn-succes filter-button" type="submit" value="Find my products!">
+        </form>
     </div>
 
+    <div class="col-10 right-side-container">
+        <!--    <div class="filter-show-hide">-->
+        <!--    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>-->
+        <!--    </div>-->
+        <div class="show-by">
+            <form>
+                <select>
+                    <option class="show-by-criteria" selected value="cheapest">Cheapest first</option>
+                    <option value="popular">Most popular</option>
+                    <option value="newest">Newest</option>
+                    <option value="expensive">Most expensive</option>
+                </select>
+<!--                <input class="show-by-criteria-button" type="submit" value="show">-->
+            </form>
+        </div>
+        <div id="products" class="row">
+            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                <div class="card">
+                    <div class="card-info">
+                        <img class="productImg" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt=""/>
+                        <div class="card-header">
+                            <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                            <p class="card-text" th:text="${prod.description}">Product description... </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="card-text">
+                            <form id="add-to-cart-form">
+                                <div class="add-to-cart-container">
+                                    <div class="quantity-modifier">
+                                        <span class="icon icon-minus quantity-modifier-icon">-</span>
+                                        <input class="quantity-to-add-to-cart" type="text" name="cart-quantity"
+                                               value="1" min="1">
+                                        <span class="icon icon-plus quantity-modifier-icon">+</span>
+                                    </div>
+                                    <a class="btn btn-success addcart" th:href="${prod.idForClass()}">Add to cart</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>
