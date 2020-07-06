@@ -3,6 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductCategoryDaoJDBC.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoJDBC.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/SupplierDaoJDBC.java" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/webshop-java-the-bad-boyzz/src/main/sql/init_db.sql" dialect="PostgreSQL" />
   </component>
 </project>
