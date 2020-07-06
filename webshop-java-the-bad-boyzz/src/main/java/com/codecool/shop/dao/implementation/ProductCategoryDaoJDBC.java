@@ -2,7 +2,7 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.connection.dbConnection;
 import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.model.Product;
+
 import com.codecool.shop.model.ProductCategory;
 
 import java.io.IOException;
@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductCategoryDaoJDBC implements ProductCategoryDao {
@@ -53,7 +54,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 					String department = rs.getString("department");
 					String description = rs.getString("description");
 
-					return new ProductCategory(name,department,description);
+					return new ProductCategory(name, department, description);
 				} else {
 					return null;
 				}
@@ -69,7 +70,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 	public void remove(int id) {
 		try (Connection conn = dbConnection.getConnection()) {
 			assert conn != null;
-			try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM products WHERE id = ?");) {
+			try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM categories WHERE id = ?");) {
 				stmt.setInt(1, id);
 				stmt.executeUpdate();
 			}
@@ -79,7 +80,27 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 	}
 
 	@Override
-	public List<ProductCategory> getAll() {
-		return null;
+	public List<ProductCategory> getAll() throws SQLException {
+		try (Connection conn = dbConnection.getConnection()) {
+			assert conn != null;
+			try (PreparedStatement stmt = conn.prepareStatement
+					("SELECT * FROM categories")) {
+				ResultSet rs = stmt.executeQuery();
+				List<ProductCategory> categories = new ArrayList<>();
+
+				if (rs.next()) {
+
+					String name = rs.getString("name");
+					String department = rs.getString("department");
+					String description = rs.getString("description");
+
+					categories.add(new ProductCategory(name, department, description));
+				}
+				return categories;
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
+			return null;
+		}
 	}
 }
