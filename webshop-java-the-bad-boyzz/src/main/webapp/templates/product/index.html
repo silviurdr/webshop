@@ -85,7 +85,7 @@
                     <i class="fas fa-minus minus-filter"></i>
 </span></div>
                 <div th:each="category, iterstat: ${category}">
-                    <input class="filter-checkbox" th:type="checkbox" name="category" th:value="${category.getId()}">
+                    <input class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
                     <label class="filter-label" th:for="${category.getName()}"
                            th:text="${category.getName()}">Product</label></br>
                 </div>
@@ -94,7 +94,7 @@
                         class="fas fa-plus plus-filter"></i>
 </span></div>
                 <div th:each="supplier, iterstat: ${supplier}">
-                    <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:value="${supplier.getId()}">
+                    <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
                     <label class="filter-label" th:for="${supplier.getName()}"
                            th:text="${supplier.getName()}">Supplier</label></br>
                 </div>

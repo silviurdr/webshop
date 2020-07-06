@@ -3,22 +3,36 @@
 <body>
 
 <div th:fragment="copy">
-    <nav class="navbar navbar-expand-md navbar-light bg-dark">
-        <a href="#" class="navbar-brand">
-            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link active text-white">Home</a>
-<!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
-<!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
-                <a href="/cart" class="nav-item nav-link text-white"> <i class="fas fa-shopping-cart"></i> Cart</a>
+    <div>
+        <nav class="navbar navbar-expand-md navbar-light bg-white">
+            <div class="logo">
+                <div class="logo-image text-center">
+                    <h3 class="logo-title">Codecool Bazaar</h3>
+                    <a href="#" class="navbar-brand">
+                        <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
+                    </a>
+                </div>
             </div>
-<!--            <div class="navbar-nav ml-auto">-->
-<!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
-<!--            </div>-->
-        </div>
-    </nav>
+            <div id="navbarCollapse">
+                <div class="right-nav">
+                    <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
+                    <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
+                    <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
+                    <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
+                    <select class="currency">
+                        <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
+                        <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
+                    </select>
+                    <a class="signin-button"><span class="signin-text">sign in</span></a>
+                </div>
+                <!--            <div class="navbar-nav ml-auto">-->
+                <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
+                <!--            </div>-->
+            </div>
+        </nav>
+    </div>
+    <br>
+    <br>
 </div>
 
 </body>

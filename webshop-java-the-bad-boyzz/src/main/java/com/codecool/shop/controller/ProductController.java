@@ -42,7 +42,6 @@ public class ProductController extends HttpServlet {
         //products and supplier
         int categoryId = req.getParameter("category") == null ? 0 : Integer.parseInt(req.getParameter("category"));
         int supplier = req.getParameter("suppliers") == null ? 0 : Integer.parseInt(req.getParameter("suppliers"));
-        System.out.println(supplier);
 
         context.setVariable("category", productCategoryDataStore.getAll());
         context.setVariable("supplier", productSupplierDataStore.getAll());
