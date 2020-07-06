@@ -160,7 +160,6 @@ p.card-text {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     float: right;
     background-color: #388DC8;
-    transition: all 0.3s ease-in;
     border:none;
     text-transform: uppercase;
     font-size: 1.0em;
@@ -169,7 +168,7 @@ p.card-text {
 }
 
 .addcart:hover  {
-    background-color: #46b97a;
+    background-color: #317eb4;
     border:none;
     text-transform: uppercase;
     font-weight: bold;
@@ -345,6 +344,12 @@ p.card-text {
 .signin-button-form:hover {
     cursor: pointer;
     background-color: #388DC8;
+}
+
+.signin-button-form:active, .signin-button-form:focus  {
+    border:none;
+    outline: none !important;
+    box-shadow: none;
 }
 
 
@@ -706,19 +711,26 @@ input.form-control {
 input[type="text"], textarea {
     outline: none;
     box-shadow:none !important;
-    border: 4px solid rgb(245,245,245) !important;
+    border: 4px solid #f2f2f2 !important;
 }
 
 input[type="email"], textarea {
     outline: none;
     box-shadow:none !important;
-    border: 4px solid rgb(245,245,245) !important;
+    border: 4px solid #f2f2f2 !important;
 }
 
 input[type="password"], textarea {
     outline: none;
     box-shadow:none !important;
-    border: 4px solid rgb(245,245,245) !important;
+    border: 4px solid #f2f2f2 !important;
+}
+
+.btn-default, .btn-default:hover, .btn-default:active,
+.btn-default:active:focus, .btn-default:visited, .btn-default:focus {
+    color: #dcdcdc;
+    background-color: #232323;
+    outline: none;
 }
 
 
