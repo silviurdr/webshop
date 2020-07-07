@@ -1,15 +1,13 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.CartProductDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.CartProductDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import com.codecool.shop.utils.SaltedHashPassword;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -75,10 +73,10 @@ public class ProductController extends HttpServlet {
         String userEmail = req.getParameter("email");
         String userPhoneNumber = req.getParameter("mobile");
         String userPassword = req.getParameter("password");
-
         String saltedHashPassword = SaltedHashPassword.generateSaltedHashPassword(userPassword);
 
-        System.out.println(saltedHashPassword);
+        User newUser = new User(userFullName, userEmail, userPhoneNumber, saltedHashPassword);
+
 
         resp.sendRedirect("/");
 

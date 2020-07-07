@@ -19,6 +19,13 @@ public class User {
         this.status = "active";
     }
 
+    public User(int id, String name, String email, String mobileNumber) {
+        this.userID = id;
+        this.name = name;
+        this.email = email;
+        this.mobileNumber = mobileNumber;
+    }
+
 
     public String getName() {
         return name;
@@ -67,6 +74,20 @@ public class User {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+
+    @Override
+    public String toString() {
+
+        return String.format("id: %1d, " +
+                            "name: %2s, " +
+                            "email: %3s, " +
+                            "mobile number: %4s",
+                            this.userID,
+                            this.name,
+                            this.email,
+                            this.mobileNumber);
     }
 
 }
