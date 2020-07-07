@@ -1,12 +1,13 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.connection.dbConnection;
-import com.codecool.shop.dao.ProductCategoryDao;
+
 import com.codecool.shop.dao.SupplierDao;
-import com.codecool.shop.model.ProductCategory;
+
 import com.codecool.shop.model.Supplier;
 
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +18,12 @@ import java.util.List;
 public class SupplierDaoJDBC implements SupplierDao {
 	
 	private static SupplierDaoJDBC instance = null;
+	dbConnection myConn = dbConnection.getInstance();
 
-	public static SupplierDaoJDBC getInstance() {
+	public SupplierDaoJDBC() throws IOException {
+	}
+
+	public static SupplierDaoJDBC getInstance() throws IOException {
 		if (instance == null) instance = new SupplierDaoJDBC();
 		return instance;
 	}
@@ -26,7 +31,7 @@ public class SupplierDaoJDBC implements SupplierDao {
 	
 	@Override
 	public void add(Supplier supplier) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("INSERT INTO products (id, name, description) values (?, ? ,?)")) {
@@ -42,7 +47,7 @@ public class SupplierDaoJDBC implements SupplierDao {
 
 	@Override
 	public Supplier find(int id) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM suppliers WHERE id = ?;")) {
@@ -66,7 +71,7 @@ public class SupplierDaoJDBC implements SupplierDao {
 
 	@Override
 	public void remove(int id) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM suppliers WHERE id = ?");) {
 				stmt.setInt(1, id);
@@ -79,21 +84,20 @@ public class SupplierDaoJDBC implements SupplierDao {
 
 	@Override
 	public List<Supplier> getAll() {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM suppliers")) {
 				ResultSet rs = stmt.executeQuery();
 				List<Supplier> suppliers = new ArrayList<>();
-				if (rs.next()) {
+				while (rs.next()) {
 
 					String name = rs.getString("name");
 					String description = rs.getString("description");
 
 					suppliers.add(new Supplier(name, description));
-				} else {
-					return null;
 				}
+				return suppliers;
 			}
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();

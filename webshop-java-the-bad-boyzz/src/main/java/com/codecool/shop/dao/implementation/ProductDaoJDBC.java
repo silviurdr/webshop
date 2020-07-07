@@ -9,6 +9,7 @@ import com.codecool.shop.model.ProductCategory;
 import com.codecool.shop.model.Supplier;
 
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,8 +23,13 @@ public class ProductDaoJDBC implements ProductDao {
 	private SupplierDao supplierDao = SupplierDaoJDBC.getInstance();
 	private ProductCategoryDao productCategoryDao = ProductCategoryDaoJDBC.getInstance();
 
+	dbConnection myConn = dbConnection.getInstance();
 
-	public static ProductDaoJDBC getInstance() {
+	public ProductDaoJDBC() throws IOException {
+	}
+
+
+	public static ProductDaoJDBC getInstance() throws IOException {
 		if (instance == null) {
 			instance = new ProductDaoJDBC();
 		}
@@ -32,7 +38,7 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public void add(Product product) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("INSERT INTO products (id, supplier_id, category_id, name, description, image, price, currency) " +
@@ -56,7 +62,7 @@ public class ProductDaoJDBC implements ProductDao {
 	@Override
 	public Product find(int id) {
 
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products WHERE " + "id = ?;")) {
@@ -84,7 +90,7 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public void remove(int id) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM products WHERE id = ?");) {
 				stmt.setInt(1, id);
@@ -98,13 +104,13 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public List<Product> getAll()  {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products")) {
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
-				if (rs.next()) {
+				while (rs.next()) {
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
 					int categoryId = rs.getInt("category_id");
@@ -128,7 +134,7 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public List<Product> getBy(Supplier supplier) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products WHERE supplier_id = ?")) {
@@ -156,7 +162,7 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public List<Product> getBy(ProductCategory productCategory) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products WHERE category_id = ?")) {
@@ -184,7 +190,7 @@ public class ProductDaoJDBC implements ProductDao {
 
 	@Override
 	public List<Product> getBy(ProductCategory productCategory, Supplier supplier) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products WHERE supplier_id = ? AND category_id = ?")) {

@@ -16,15 +16,20 @@ import java.util.List;
 public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
 	private static ProductCategoryDao instance = null;
+	dbConnection myConn = dbConnection.getInstance();
 
-	public static ProductCategoryDao getInstance() {
+	public ProductCategoryDaoJDBC() throws IOException {
+	}
+
+
+	public static ProductCategoryDao getInstance() throws IOException {
 		if (instance == null) instance = new ProductCategoryDaoJDBC();
 		return instance;
 	}
 
 	@Override
 	public void add(ProductCategory category) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("INSERT INTO categories (id, name, department, description) " +
@@ -42,7 +47,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
 	@Override
 	public ProductCategory find(int id) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM categories WHERE id = ?;")) {
@@ -68,7 +73,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
 	@Override
 	public void remove(int id) {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement("DELETE FROM categories WHERE id = ?");) {
 				stmt.setInt(1, id);
@@ -81,14 +86,14 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 
 	@Override
 	public List<ProductCategory> getAll() throws SQLException {
-		try (Connection conn = dbConnection.getConnection()) {
+		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM categories")) {
 				ResultSet rs = stmt.executeQuery();
 				List<ProductCategory> categories = new ArrayList<>();
 
-				if (rs.next()) {
+				while (rs.next()) {
 
 					String name = rs.getString("name");
 					String department = rs.getString("department");

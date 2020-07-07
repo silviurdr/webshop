@@ -1,42 +1,34 @@
 package com.codecool.shop.connection;
 
 
+
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.util.logging.LogManager;
+
 
 public class dbConnection {
+	private final Properties dbProperties = new Properties();
+	private static dbConnection instance;
 
+	private dbConnection() throws IOException {
+		InputStream inputStream = getClass().getClassLoader().getResourceAsStream("connection.properties");
+		dbProperties.load(inputStream);
+	}
 
+	public static dbConnection getInstance() throws IOException {
+		if (instance == null) instance = new dbConnection();
+		return instance;
+	}
 
-	private static LogManager dbProperties;
-	private static final String DATABASE;
-	private static final String DB_USER;
-	private static final String DB_PASS;
-
-	static {
-		assert false;
-		DATABASE = dbProperties.getProperty("url");
-		DB_USER = dbProperties.getProperty("user");
-		DB_PASS = dbProperties.getProperty("pass");
+	public Connection getConnection() throws SQLException {
+		return DriverManager.getConnection(dbProperties.getProperty("url"), dbProperties.getProperty("user"),
+				dbProperties.getProperty("pass"));
 	}
 
 
-
-
-	public static Connection getConnection() {
-		try {
-			Connection connection = DriverManager.getConnection(DATABASE, DB_USER, DB_PASS);
-			return DriverManager.getConnection(
-					DATABASE,
-					DB_USER,
-					DB_PASS);
-		} catch (SQLException e) {
-			System.err.println("ERROR: Connection error.");
-			e.printStackTrace();
-		}
-		return null;
-	}
 }

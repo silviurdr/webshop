@@ -21,6 +21,5 @@ com/codecool/shop/controller/CheckoutController.class
 com/codecool/shop/controller/PaymentController$1.class
 com/codecool/shop/model/Order.class
 com/codecool/shop/model/Supplier.class
-com/codecool/shop/config/Initializer.class
 com/codecool/shop/model/Product.class
 com/codecool/shop/controller/PaymentController.class
