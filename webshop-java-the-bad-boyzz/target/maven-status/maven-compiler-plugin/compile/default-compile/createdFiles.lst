@@ -11,6 +11,7 @@ com/codecool/shop/config/ThymeleafConfig.class
 com/codecool/shop/model/User.class
 com/codecool/shop/dao/BillingInformationDao.class
 com/codecool/shop/dao/implementation/BillingInformationDaoMem.class
+com/codecool/shop/controller/UserController.class
 com/codecool/shop/dao/implementation/UserDaoJDBC.class
 com/codecool/shop/controller/PaymentConfController.class
 com/codecool/shop/dao/SupplierDao.class

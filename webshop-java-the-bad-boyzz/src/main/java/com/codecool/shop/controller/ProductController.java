@@ -60,29 +60,9 @@ public class ProductController extends HttpServlet {
         }
 
 
-
         engine.process("product/index.html", context, resp.getWriter());
 
     }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
-        String userFullName = req.getParameter("fullname");
-        String userEmail = req.getParameter("email");
-        String userPhoneNumber = req.getParameter("mobile");
-        String userPassword = req.getParameter("password");
-        String saltedHashPassword = SaltedHashPassword.generateSaltedHashPassword(userPassword);
-
-        User newUser = new User(userFullName, userEmail, userPhoneNumber, saltedHashPassword);
-
-
-        resp.sendRedirect("/");
-
-    }
-
-
 
 }
 
