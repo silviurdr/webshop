@@ -6,6 +6,7 @@ import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.implementation.CartProductDaoMem;
 import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
+import com.codecool.shop.dao.implementation.ProductDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
@@ -23,8 +24,7 @@ public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoJDBC.getInstance();
         CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
 
         String toAddId = req.getParameter("id");
