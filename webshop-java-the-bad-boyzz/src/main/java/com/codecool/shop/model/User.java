@@ -4,19 +4,19 @@ public class User {
 
     private String name;
 
-    private int userID = 1;
+    private int userID = 0;
     private String email;
     private String mobileNumber;
     private String password;
     private String status;
 
-    public User(String name, String email, String mobileNumber, String password, String status) {
+    public User(String name, String email, String mobileNumber, String password) {
         this.userID++;
         this.name = name;
         this.email = email;
         this.mobileNumber = mobileNumber;
         this.password = password;
-        this.status = status;
+        this.status = "active";
     }
 
 

@@ -7,3 +7,9 @@ function closeNav() {
 }
 
 
+
+jQuery(document).ready(function($){
+    $("input[name=mobile]").attr("maxlength", "10");
+    $("input[name=mobile]").attr("minlength", "10");
+});
+

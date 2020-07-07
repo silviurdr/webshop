@@ -662,6 +662,9 @@ input .filter-checkbox, input .filter-checkbox:active {
     padding: 20px;
 }
 
+#myModal {
+    padding-right: 0!important;
+}
 
 .modal .modal-dialog {
     width: 100%;
@@ -732,6 +735,9 @@ input[type="password"], textarea {
     background-color: #232323;
     outline: none;
 }
+
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
 
 
 /*

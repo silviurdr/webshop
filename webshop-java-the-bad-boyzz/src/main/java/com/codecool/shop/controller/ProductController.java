@@ -10,6 +10,7 @@ import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
 import com.codecool.shop.dao.implementation.ProductDaoMem;
 import com.codecool.shop.dao.implementation.SupplierDaoMem;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.utils.SaltedHashPassword;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
@@ -63,6 +66,25 @@ public class ProductController extends HttpServlet {
         engine.process("product/index.html", context, resp.getWriter());
 
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+        String userFullName = req.getParameter("fullname");
+        String userEmail = req.getParameter("email");
+        String userPhoneNumber = req.getParameter("mobile");
+        String userPassword = req.getParameter("password");
+
+        String saltedHashPassword = SaltedHashPassword.generateSaltedHashPassword(userPassword);
+
+        System.out.println(saltedHashPassword);
+
+        resp.sendRedirect("/");
+
+    }
+
+
 
 }
 

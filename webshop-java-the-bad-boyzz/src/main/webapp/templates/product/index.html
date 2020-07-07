@@ -79,25 +79,25 @@
                                     <div class="col-md-12 form-inputs">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="Registration">
-                                                <form role="form" class="form-horizontal">
+                                                <form role="form" action="/" method="post" class="form-horizontal">
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                                    <input type="text" class="form-control" placeholder="Name" />
+                                                                    <input type="text" class="form-control" th:name="fullname" placeholder="Full Name" required />
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="email" placeholder="Email" />
+                                                            <input type="email" class="form-control" id="email" th:name="email" placeholder="Email" required/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="mobile" placeholder="Mobile" />
+                                                            <input type="tel" class="form-control" id="mobile" pattern="[1-9]{1}[0-9]{9}" th:name="mobile" placeholder="Mobile number (10 digits)" required/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="password" class="form-control" id="password" placeholder="Password" />
+                                                            <input type="password" class="form-control" id="password"  th:name="password" minlength="8" maxlength="14" placeholder="Password" required/>
                                                         </div>
                                                     </div>
                                                     <div class="row">
