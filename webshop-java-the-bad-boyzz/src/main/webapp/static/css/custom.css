@@ -315,7 +315,7 @@ p.card-text {
     font-family: 'Rubik Mono One', sans-serif;
 }
 
-.signin-button, .signin-button-form {
+.signin-button, .signin-button-form, .register-button, .register-button-form {
     border-radius: 20px;
     height: 32px;
     background-color: #388DC8;
@@ -329,11 +329,11 @@ p.card-text {
     text-align: center;
 }
 
-.signin-button:hover {
+.signin-button:hover, .register-button:hover {
     cursor: pointer;
 }
 
-.signin-button-form {
+.signin-button-form, .register-button-form {
     border-radius: 30px;
     width: 250px;
     height: 50px;
@@ -341,15 +341,33 @@ p.card-text {
     margin: 1em auto;
 }
 
-.signin-button-form:hover {
+button.signin-button-form:hover, button.register-button-form:hover  {
     cursor: pointer;
     background-color: #388DC8;
 }
 
-.signin-button-form:active, .signin-button-form:focus  {
+.signin-button-form:active, .signin-button-form:focus, .register-button-form:active, .register-button-form:focus  {
     border:none;
     outline: none !important;
     box-shadow: none;
+}
+
+.register-text {
+    text-transform: uppercase;
+    color: #404752;
+    font-size: 1.6em;
+    float: none;
+    opacity: 1;
+}
+
+span.register-text:hover {
+    border-bottom: 3px solid #CA2C28;
+    cursor: pointer;
+}
+
+.register-link-container {
+    margin-top: 2em;
+    margin-bottom: 4em;
 }
 
 
@@ -662,7 +680,7 @@ input .filter-checkbox, input .filter-checkbox:active {
     padding: 20px;
 }
 
-#myModal {
+#myModalSignIn, #myModalRegister  {
     padding-right: 0!important;
 }
 

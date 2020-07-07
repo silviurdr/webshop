@@ -55,9 +55,12 @@
                     <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
                     <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
                 </select>
-                <a class="signin-button" data-toggle="modal" data-target="#myModal">
-                    <span class="signin-text">register</span></a>
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                <a class="register-button" data-toggle="modal" data-target="#myModalSignIn">
+                    <span class="signin-text">sign in</span></a>
+
+                <!--   REGISTER MODAL -->
+
+                <div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -104,7 +107,7 @@
                                                         <div class="col-sm-2">
                                                         </div>
                                                         <div class="col-sm-12">
-                                                            <button type="submit" class="signin-button-form">
+                                                            <button type="submit" class="register-button-form">
                                                                 Register</button>
                                                         </div>
                                                     </div>
@@ -117,6 +120,65 @@
                         </div>
                     </div>
                 </div>
+
+                <!--   SIGN IN MODAL -->
+
+                <div class="modal fade" id="myModalSignIn" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    x</button>
+                                <div class="logo-modal">
+                                    <div class="logo-image-modal text-center">
+                                        <h3 class="logo-title">Codecool Bazaar</h3>
+                                        <a href="#" class="navbar-brand">
+                                            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
+                                        </a>
+                                    </div>
+                                </div>
+                                <h4 class="modal-title text-center" id="myModalLabelSignIn">
+                                    <span class="modal-title-text">Sign In</span></h4>
+                                <div class="row registration-form">
+                                    <div class="col-md-12 form-inputs">
+                                        <div class="tab-content">
+                                            <div class="tab-pane active" id="Signin">
+                                                <form role="form" action="/signin" method="post" class="form-horizontal">
+
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input type="email" class="form-control" id="email-signin" th:name="email-signin" placeholder="Email" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-12">
+                                                            <input type="password" class="form-control" id="password-signin"  th:name="password-signin" placeholder="Password" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                        </div>
+                                                        <div class="col-sm-12">
+                                                            <button type="submit" class="register-button-form">
+                                                                Sign In</button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="register-link-container">
+                                                    <a class="register-link" data-toggle="modal" data-target="#myModalRegister">
+                                                        <span class="close register-text" data-dismiss="modal" aria-hidden="true">not a member yet?</span></a>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </nav>
