@@ -140,6 +140,7 @@ p.card-text {
 
 .card-info {
     margin: 0 auto;
+    min-height: 293px;
 }
 
 .card-info:hover {
@@ -167,12 +168,25 @@ p.card-text {
     padding: 10px 16px;
 }
 
-.addcart:hover, .subscribe-button:hover  {
-    background-color: #317eb4;
+.addcart:hover, .addcart:active, .addcart:focus, .subscribe-button:hover  {
+    background-color: #317eb4!important;
     border:none;
     text-transform: uppercase;
     font-weight: bold;
+    outline: none !important;
 }
+
+.btn:focus {
+    box-shadow: none;
+}
+
+/*.btn .btn-success .addcart {*/
+/*    background-color: #317eb4!important;*/
+/*    border:none;*/
+/*    text-transform: uppercase;*/
+/*    font-weight: bold;*/
+/*}*/
+
 
 .subscribe-form {
     color: whitesmoke;
@@ -343,7 +357,8 @@ button.close:active, button.close:focus {
 }
 
 .logo-title {
-    font-family: 'Rubik Mono One', sans-serif;
+    font-family: sans-serif;
+    font-weight: bold;
 }
 
 .signin-button, .signin-button-form, .register-button, .register-button-form {

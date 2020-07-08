@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/books</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="codecoolshop@localhost [3]" uuid="f26759db-ecc3-42c6-8816-73a111161dad">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/codecoolshop</jdbc-url>
+    </data-source>
   </component>
 </project>
