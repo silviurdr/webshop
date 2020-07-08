@@ -1,5 +1,6 @@
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/ProductController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/CartProductDao.java
+/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/RegisterController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/CheckoutDaoMem.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/ThymeleafConfig.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/ProductCategory.java
@@ -13,12 +14,12 @@
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Order.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/BillingInformationDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/Initializer.java
+/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/LoginController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/PaymentErrorController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/BillingInformationDaoMem.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/utils/SaltedHashPassword.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/UserDao.java
-/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/UserController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoMem.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Product.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/User.java

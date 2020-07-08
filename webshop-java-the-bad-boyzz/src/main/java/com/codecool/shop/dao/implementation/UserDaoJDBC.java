@@ -97,6 +97,38 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
+    public String getUserPasswordByEmail(String email) throws SQLException {
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+
+        try {
+            conn = dataSource.getConnection();
+            String sql = "SELECT * from user WHERE email=?";
+            preparedStatement= conn.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                String password = rs.getString("password");
+                return password;
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            rs.close();
+            preparedStatement.close();
+            conn.close();
+        }
+
+        return null;
+    }
+
+
+    @Override
     public List<User> getAll() throws SQLException {
 
         List<User> users = new ArrayList<>();

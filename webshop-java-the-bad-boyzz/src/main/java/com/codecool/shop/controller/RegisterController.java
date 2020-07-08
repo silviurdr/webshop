@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 
 @WebServlet(urlPatterns = {"/register"})
-public class UserController extends HttpServlet {
+public class RegisterController extends HttpServlet {
 
 
     @Override
@@ -23,7 +25,14 @@ public class UserController extends HttpServlet {
         String userEmail = req.getParameter("email");
         String userPhoneNumber = req.getParameter("mobile");
         String userPassword = req.getParameter("password");
-        String saltedHashPassword = SaltedHashPassword.generateSaltedHashPassword(userPassword);
+        String saltedHashPassword = null;
+        try {
+            saltedHashPassword = SaltedHashPassword.generateStrongPasswordHash(userPassword);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (InvalidKeySpecException e) {
+            e.printStackTrace();
+        }
 
         User newUser = new User(userFullName, userEmail, userPhoneNumber, saltedHashPassword);
 

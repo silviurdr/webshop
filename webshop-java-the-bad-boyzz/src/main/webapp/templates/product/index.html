@@ -40,7 +40,7 @@
         <div class="logo">
             <div class="logo-image text-center">
                 <h3 class="logo-title">Codecool Bazaar</h3>
-                <a href="#" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
                 </a>
             </div>
@@ -145,16 +145,16 @@
                                     <div class="col-md-12 form-inputs">
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="Signin">
-                                                <form role="form" action="/signin" method="post" class="form-horizontal">
+                                                <form role="form" action="/login" method="post" class="form-horizontal">
 
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="email-signin" th:name="email-signin" placeholder="Email" required/>
+                                                            <input type="email" class="form-control" id="login-email" th:name="login-email" placeholder="Email" required/>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-12">
-                                                            <input type="password" class="form-control" id="password-signin"  th:name="password-signin" placeholder="Password" required/>
+                                                            <input type="password" class="form-control" id="login-password"  th:name="login-password" placeholder="Password" required/>
                                                         </div>
                                                     </div>
                                                     <div class="row">
