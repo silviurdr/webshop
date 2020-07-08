@@ -156,7 +156,7 @@ p.card-text {
 }
 
 
-.addcart {
+.addcart, .subscribe-button {
     font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
     float: right;
     background-color: #388DC8;
@@ -167,11 +167,29 @@ p.card-text {
     padding: 10px 16px;
 }
 
-.addcart:hover  {
+.addcart:hover, .subscribe-button:hover  {
     background-color: #317eb4;
     border:none;
     text-transform: uppercase;
     font-weight: bold;
+}
+
+.subscribe-form {
+    color: whitesmoke;
+    text-align: center;
+}
+
+.subscribe-button, .subscribe-button:hover {
+    padding: 6px 20px;
+    width: 260px;
+    text-transform: capitalize;
+    font-size: 0.9em;
+    float: left;
+    border-radius: 2px;
+    margin-top: 1em;
+}
+.subscribe-button:hover {
+    cursor: pointer;
 }
 
 .quantity-modifier {
@@ -581,7 +599,58 @@ a.nav-item  {
 }
 
 .footer {
-    background-color: #333333;
+    font-family: Verdana;
+}
+
+.footer-up {
+
+    background-color: #f3f3f3;
+    height: 12em;
+    padding: 2em;
+    color: #8b8b8b;
+    font-size: 1.1em;
+}
+
+.footer-header {
+    color: #388DC8;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    font-size: 1.1em;
+}
+
+.footer-lists {
+
+}
+
+.footer .top .col {
+    float: left;
+    width: 25%;
+    padding-right: 20px;
+}
+
+.footer .top .col ul {
+    list-style: none;
+    width: 40%;
+    float:left;
+    max-width: 200px;
+}
+
+.footer-list-item {
+    padding: 0.2em;
+}
+
+.footer-links {
+    color: #8b8b8b;
+}
+
+.footer-links:hover {
+    color: #8b8b8b;
+}
+
+.footer-down {
+    text-transform: uppercase;
+    background-color: #388DC8;
+    color: #eee6e6;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -589,6 +658,21 @@ a.nav-item  {
     color:whitesmoke;
     padding: 2em;
 }
+
+.social {
+    font-size: 1.4em;
+}
+
+.social-icon {
+    margin-right: 1em;
+    cursor: pointer;
+    color: #4f5764;
+}
+
+.social-icon:hover {
+    color: #7e899a;
+}
+
 #cardDisplay {
     display: none;
 }
@@ -746,6 +830,13 @@ input[type="password"], textarea {
     box-shadow:none !important;
     border: 4px solid #f2f2f2 !important;
 }
+
+.footer input[type="text"], textarea {
+    padding: 3px 20px;
+    border: 1px solid #ccc!important;
+    border-radius: 5px;
+}
+
 
 .btn-default, .btn-default:hover, .btn-default:active,
 .btn-default:active:focus, .btn-default:visited, .btn-default:focus {
