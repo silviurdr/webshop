@@ -59,8 +59,6 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 					String description = rs.getString("description");
 
 					return new ProductCategory(id, name, department, description);
-				} else {
-					return null;
 				}
 			}
 		} catch (SQLException throwables) {

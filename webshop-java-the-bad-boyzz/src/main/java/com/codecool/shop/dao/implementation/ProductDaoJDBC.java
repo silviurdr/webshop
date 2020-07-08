@@ -64,7 +64,7 @@ public class ProductDaoJDBC implements ProductDao {
 		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
-					("SELECT * FROM products WHERE " + "id = ?;")) {
+					("SELECT * FROM products WHERE " + " id = ?;")) {
 				stmt.setInt(1, id);
 				ResultSet rs = stmt.executeQuery();
 				if (rs.next()) {
@@ -77,8 +77,6 @@ public class ProductDaoJDBC implements ProductDao {
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
 					return new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image);
-				} else {
-					return null;
 				}
 			}
 		} catch (SQLException throwables) {
@@ -141,7 +139,7 @@ public class ProductDaoJDBC implements ProductDao {
 				stmt.setInt(1, supplier.getId());
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
-				if (rs.next()) {
+				while (rs.next()) {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
@@ -170,7 +168,7 @@ public class ProductDaoJDBC implements ProductDao {
 				stmt.setInt(1, productCategory.getId());
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
-				if (rs.next()) {
+				while (rs.next()) {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
@@ -197,10 +195,10 @@ public class ProductDaoJDBC implements ProductDao {
 			try (PreparedStatement stmt = conn.prepareStatement
 					("SELECT * FROM products WHERE supplier_id = ? AND category_id = ?")) {
 				stmt.setInt(1, supplier.getId());
-				stmt.setInt(1, productCategory.getId());
+				stmt.setInt(2, productCategory.getId());
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
-				if (rs.next()) {
+				while (rs.next()) {
 					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
