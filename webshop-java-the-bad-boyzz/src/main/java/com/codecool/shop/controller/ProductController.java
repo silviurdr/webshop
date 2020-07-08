@@ -1,11 +1,11 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.*;
-import com.codecool.shop.dao.implementation.CartProductDaoMem;
-import com.codecool.shop.dao.implementation.ProductCategoryDaoMem;
-import com.codecool.shop.dao.implementation.ProductDaoMem;
-import com.codecool.shop.dao.implementation.SupplierDaoMem;
+import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.ProductCategoryDao;
+import com.codecool.shop.dao.ProductDao;
+import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
 import com.codecool.shop.model.User;
 import com.codecool.shop.utils.SaltedHashPassword;
@@ -20,15 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/"})
 public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoMem.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoMem.getInstance();
-        SupplierDao productSupplierDataStore = SupplierDaoMem.getInstance();
+        ProductDao productDataStore = ProductDaoJDBC.getInstance();
+        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
+        SupplierDao productSupplierDataStore = SupplierDaoJDBC.getInstance();
         CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
         int noOfProducts = 0;
 
@@ -44,7 +45,12 @@ public class ProductController extends HttpServlet {
         int categoryId = req.getParameter("category") == null ? 0 : Integer.parseInt(req.getParameter("category"));
         int supplier = req.getParameter("suppliers") == null ? 0 : Integer.parseInt(req.getParameter("suppliers"));
 
-        context.setVariable("category", productCategoryDataStore.getAll());
+
+        try {
+            context.setVariable("category", productCategoryDataStore.getAll());
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         context.setVariable("supplier", productSupplierDataStore.getAll());
         context.setVariable("noOfProducts", noOfProducts);
 
@@ -56,11 +62,15 @@ public class ProductController extends HttpServlet {
         } else if (supplier != 0 ) {
             context.setVariable("products", productDataStore.getBy(productSupplierDataStore.find(supplier)));
         } else  {
-            context.setVariable("products", productDataStore.getAll());
+            try {
+                context.setVariable("products", productDataStore.getAll());
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
 
-
         engine.process("product/index.html", context, resp.getWriter());
+
 
     }
 

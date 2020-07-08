@@ -2,6 +2,7 @@ package com.codecool.shop.dao;
 
 import com.codecool.shop.model.ProductCategory;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ProductCategoryDao {
@@ -10,6 +11,6 @@ public interface ProductCategoryDao {
     ProductCategory find(int id);
     void remove(int id);
 
-    List<ProductCategory> getAll();
+    List<ProductCategory> getAll() throws SQLException;
 
 }
