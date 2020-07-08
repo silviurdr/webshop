@@ -34,10 +34,9 @@ public class SupplierDaoJDBC implements SupplierDao {
 		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
-					("INSERT INTO products (id, name, description) values (?, ? ,?)")) {
-				stmt.setInt(1, supplier.getId());
-				stmt.setString(2, supplier.getName());
-				stmt.setString(4, supplier.getDescription());
+					("INSERT INTO products (name, description) values (?, ? ,?)")) {
+				stmt.setString(1, supplier.getName());
+				stmt.setString(2, supplier.getDescription());
 				stmt.executeUpdate();
 			}
 		} catch (SQLException throwables) {
@@ -58,7 +57,7 @@ public class SupplierDaoJDBC implements SupplierDao {
 					String name = rs.getString("name");
 					String description = rs.getString("description");
 
-					return new Supplier(name, description);
+					return new Supplier(id,name, description);
 				} else {
 					return null;
 				}
@@ -91,11 +90,11 @@ public class SupplierDaoJDBC implements SupplierDao {
 				ResultSet rs = stmt.executeQuery();
 				List<Supplier> suppliers = new ArrayList<>();
 				while (rs.next()) {
-
+                    int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String description = rs.getString("description");
 
-					suppliers.add(new Supplier(name, description));
+					suppliers.add(new Supplier(id, name, description));
 				}
 				return suppliers;
 			}

@@ -41,16 +41,15 @@ public class ProductDaoJDBC implements ProductDao {
 		try (Connection conn = myConn.getConnection()) {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
-					("INSERT INTO products (id, supplier_id, category_id, name, description, image, price, currency) " +
-							"values (?, ?, ?, ?,?, ?, ?, ?)")) {
-				stmt.setInt(1, product.getId());
-				stmt.setInt(2, product.getSupplier().getId());
-				stmt.setInt(3, product.getProductCategory().getId());
-				stmt.setString(4, product.getName());
-				stmt.setString(5, product.getDescription());
-				stmt.setString(6, product.getImage());
-				stmt.setFloat(7, product.getDefaultPrice());
-				stmt.setString(8, product.getDefaultCurrency().toString());
+					("INSERT INTO products (supplier_id, category_id, name, description, image, price, currency) " +
+							"values (?, ?, ?,?, ?, ?, ?)")) {
+				stmt.setInt(1, product.getSupplier().getId());
+				stmt.setInt(2, product.getProductCategory().getId());
+				stmt.setString(3, product.getName());
+				stmt.setString(4, product.getDescription());
+				stmt.setString(5, product.getImage());
+				stmt.setFloat(6, product.getDefaultPrice());
+				stmt.setString(7, product.getDefaultCurrency().toString());
 				stmt.executeUpdate();
 			}
 		} catch (SQLException throwables) {
@@ -77,7 +76,7 @@ public class ProductDaoJDBC implements ProductDao {
 					String image = rs.getString("image");
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
-					return new Product(name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image);
+					return new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image);
 				} else {
 					return null;
 				}
@@ -111,6 +110,7 @@ public class ProductDaoJDBC implements ProductDao {
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
 				while (rs.next()) {
+					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
 					int categoryId = rs.getInt("category_id");
@@ -118,7 +118,7 @@ public class ProductDaoJDBC implements ProductDao {
 					String image = rs.getString("image");
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
-					products.add(new Product(name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
+					products.add(new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
 				}
 				return products;
 			}
@@ -142,6 +142,7 @@ public class ProductDaoJDBC implements ProductDao {
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
 				if (rs.next()) {
+					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
 					int categoryId = rs.getInt("category_id");
@@ -149,7 +150,7 @@ public class ProductDaoJDBC implements ProductDao {
 					String image = rs.getString("image");
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
-					products.add(new Product(name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
+					products.add(new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
 				}
 				return products;
 			}
@@ -170,6 +171,7 @@ public class ProductDaoJDBC implements ProductDao {
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
 				if (rs.next()) {
+					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
 					int categoryId = rs.getInt("category_id");
@@ -177,7 +179,7 @@ public class ProductDaoJDBC implements ProductDao {
 					String image = rs.getString("image");
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
-					products.add(new Product(name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
+					products.add(new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
 				}
 				return products;
 			}
@@ -199,6 +201,7 @@ public class ProductDaoJDBC implements ProductDao {
 				ResultSet rs = stmt.executeQuery();
 				List<Product> products = new ArrayList<>();
 				if (rs.next()) {
+					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					int supplierId = rs.getInt("supplier_id");
 					int categoryId = rs.getInt("category_id");
@@ -206,7 +209,7 @@ public class ProductDaoJDBC implements ProductDao {
 					String image = rs.getString("image");
 					float price = rs.getFloat("price");
 					String currency = rs.getString("currency");
-					products.add(new Product(name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
+					products.add(new Product(id, name, price, currency, description, productCategoryDao.find(categoryId), supplierDao.find(supplierId), image));
 				}
 				return products;
 			}

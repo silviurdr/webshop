@@ -33,11 +33,10 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 			assert conn != null;
 			try (PreparedStatement stmt = conn.prepareStatement
 					("INSERT INTO categories (id, name, department, description) " +
-							"values (?, ? ,? ,?)")) {
-				stmt.setInt(1, category.getId());
-				stmt.setString(2, category.getName());
-				stmt.setString(3, category.getDepartment());
-				stmt.setString(4, category.getDescription());
+							"values ( ? ,? ,?)")) {
+				stmt.setString(1, category.getName());
+				stmt.setString(2, category.getDepartment());
+				stmt.setString(3, category.getDescription());
 				stmt.executeUpdate();
 			}
 		} catch (SQLException throwables) {
@@ -59,7 +58,7 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 					String department = rs.getString("department");
 					String description = rs.getString("description");
 
-					return new ProductCategory(name, department, description);
+					return new ProductCategory(id, name, department, description);
 				} else {
 					return null;
 				}
@@ -94,12 +93,12 @@ public class ProductCategoryDaoJDBC implements ProductCategoryDao {
 				List<ProductCategory> categories = new ArrayList<>();
 
 				while (rs.next()) {
-
+					int id = rs.getInt("id");
 					String name = rs.getString("name");
 					String department = rs.getString("department");
 					String description = rs.getString("description");
 
-					categories.add(new ProductCategory(name, department, description));
+					categories.add(new ProductCategory(id, name, department, description));
 				}
 				return categories;
 			} catch (SQLException throwables) {

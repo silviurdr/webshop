@@ -12,12 +12,13 @@ public class Product extends BaseModel {
     private String image;
 
 
-    public Product(String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String image) {
+    public Product(int id,String name, float defaultPrice, String currencyString, String description, ProductCategory productCategory, Supplier supplier, String image) {
         super(name, description);
         this.setPrice(defaultPrice, currencyString);
         this.setSupplier(supplier);
         this.setProductCategory(productCategory);
         this.image = image;
+        this.id= id;
     }
 
     public String getImage() {

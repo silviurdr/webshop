@@ -41,16 +41,16 @@ public class ProductController extends HttpServlet {
 
         //products and supplier
         int categoryId = req.getParameter("category") == null ? 0 : Integer.parseInt(req.getParameter("category"));
+        System.out.println("categori id : " + categoryId);
         int supplier = req.getParameter("suppliers") == null ? 0 : Integer.parseInt(req.getParameter("suppliers"));
+        System.out.println("supplier id : " + supplier);
 
         try {
             context.setVariable("category", productCategoryDataStore.getAll());
-            System.out.println(productCategoryDataStore.getAll());
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
         context.setVariable("supplier", productSupplierDataStore.getAll());
-        System.out.println(productSupplierDataStore.getAll());
         context.setVariable("noOfProducts", noOfProducts);
 
         //products
@@ -58,6 +58,7 @@ public class ProductController extends HttpServlet {
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId), productSupplierDataStore.find(supplier)));
         } else if (categoryId != 0) {
             context.setVariable("products", productDataStore.getBy(productCategoryDataStore.find(categoryId)));
+            System.out.println(productCategoryDataStore.find(categoryId));
         } else if (supplier != 0 ) {
             context.setVariable("products", productDataStore.getBy(productSupplierDataStore.find(supplier)));
         } else  {
