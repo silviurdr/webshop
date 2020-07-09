@@ -10,6 +10,7 @@ import com.codecool.shop.model.Supplier;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Categories;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -79,6 +80,40 @@ public class JDBCTest {
         List<Product> products = new ArrayList<>(Arrays.asList(product1,product2,product3,product4));
         List result=productDao.getAll();
         assertEquals(result.toString(),products.toString());
+    }
+
+    @Test
+    public void findCategoryTest() throws IOException,SQLException{
+        ProductCategoryDao categoryDao=ProductCategoryDaoJDBC.getInstance();
+        ProductCategory category=new ProductCategory(2,"Notebook","Hardware","A notebook computer is a battery- or AC-powered personal computer generally smaller than a briefcase that can easily be transported and conveniently used in temporary spaces such as on airplanes, in libraries, temporary offices, and at meetings..");
+        assertEquals(category.toString(),categoryDao.find(2).toString());
+    }
+
+    @Test
+    public void getAllCategoriesTest() throws IOException,SQLException{
+        ProductCategoryDao categoryDao=ProductCategoryDaoJDBC.getInstance();
+        ProductCategory category2=new ProductCategory(2,"Notebook","Hardware","A notebook computer is a battery- or AC-powered personal computer generally smaller than a briefcase that can easily be transported and conveniently used in temporary spaces such as on airplanes, in libraries, temporary offices, and at meetings..");
+        ProductCategory category1=new ProductCategory(1,"Tablets","Hardware","A tablet computer, commonly shortened to tablet, is a thin, flat mobile computer with a touchscreen display.");
+        List<ProductCategory> categories = new ArrayList<>(Arrays.asList(category1,category2));
+        List result= categoryDao.getAll();
+        assertEquals(result.toString(),categories.toString());
+    }
+
+    @Test
+    public void findSupplierTest() throws IOException,SQLException{
+        SupplierDao supplierDao= SupplierDaoJDBC.getInstance();
+        Supplier supplier = new Supplier(1,"Amazon","Digital content and services.");
+        assertEquals(supplier.toString(),supplierDao.find(1).toString());
+    }
+
+    @Test
+    public void getAllSuppliersTest() throws IOException,SQLException{
+        SupplierDao supplierDao= SupplierDaoJDBC.getInstance();
+        Supplier supplier1 = new Supplier(1,"Amazon","Digital content and services.");
+        Supplier supplier2= new Supplier(2,"HP","Computers and electronics.");
+        List<Supplier> suppliers = new ArrayList<>(Arrays.asList(supplier1,supplier2));
+        List result= supplierDao.getAll();
+        assertEquals(result.toString(),suppliers.toString());
     }
 
 }
