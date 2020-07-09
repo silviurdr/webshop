@@ -60,6 +60,10 @@
                     <span class="signin-text">Sign In</span></button>
                 </div>
                 <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                        <button type="submit"  class="register-button">
+                            <span class="signin-text">your account</span></button>
+                </div>
+                <div style="display: inline-block" th:if="${userSession} == 'Yes'">
                     <form action="/logout">
                     <button type="submit"  class="register-button">
                         <span class="signin-text">Log Out</span></button>
