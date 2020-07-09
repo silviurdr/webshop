@@ -30,102 +30,126 @@
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
 
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@700&family=Rubik+Mono+One&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
 
 <div>
-    <nav class="navbar navbar-expand-md navbar-light bg-white">
-        <div class="logo">
-            <div class="logo-image text-center">
-                <h3 class="logo-title">Codecool Bazaar</h3>
-                <a href="/" class="navbar-brand">
-                    <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-                </a>
-            </div>
-        </div>
-        <div id="navbarCollapse">
-            <div class="right-nav">
-                <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
-                <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
-                <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
-                <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
-                <select class="currency">
-                    <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
-                    <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
-                </select>
-                <div style="display: inline-block" th:if="${userSession} == 'No'">
-                <button type="submit"  class="register-button" data-toggle="modal" data-target="#myModalSignIn">
-                    <span class="signin-text">Sign In</span></button>
+    <div class="navbar-container">
+        <nav class="navbar navbar-light">
+            <div class="logo">
+                <div class="logo-image text-center">
+                    <a href="/" class="navbar-brand">
+                        <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                    </a>
                 </div>
-                <div style="display: inline-block" th:if="${userSession} == 'Yes'">
-                        <button type="submit"  class="register-button">
+            </div>
+            <div class="search-bar-container">
+                <input class="search-bar" type="text">
+                <div class="icon-search"><a><i class="fas fa-search"></i></a></div>
+            </div>
+            <div id="navbarCollapse">
+                <div class="right-nav">
+                    <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
+                    <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
+                    <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
+                    <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
+                    <select class="currency">
+                        <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
+                        <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
+                    </select>
+                    <div style="display: inline-block" th:if="${userSession} == 'No'">
+                        <button type="submit" class="register-button" data-toggle="modal" data-target="#myModalSignIn">
+                            <span class="signin-text">Sign In</span></button>
+                    </div>
+                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                        <button type="submit" class="register-button">
                             <span class="signin-text">your account</span></button>
-                </div>
-                <div style="display: inline-block" th:if="${userSession} == 'Yes'">
-                    <form action="/logout">
-                    <button type="submit"  class="register-button">
-                        <span class="signin-text">Log Out</span></button>
-                    </form>
-                </div>
+                    </div>
+                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                        <form action="/logout">
+                            <button type="submit" class="register-button">
+                                <span class="signin-text">Log Out</span></button>
+                        </form>
+                    </div>
 
-                <!--   REGISTER MODAL -->
+                    <!--   REGISTER MODAL -->
 
-                <div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                    <div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
 
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    x</button>
-                                <div class="logo-modal">
-                                    <div class="logo-image-modal text-center">
-                                        <h5 class="logo-title">Codecool Bazaar</h5>
-                                        <a href="#" class="navbar-brand">
-                                            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-                                        </a>
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        x
+                                    </button>
+                                    <div class="logo-modal">
+                                        <div class="logo-image-modal text-center">
+                                            <a href="#" class="navbar-brand">
+                                                <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <h4 class="modal-title text-center" id="myModalLabel">
-                                    <span class="modal-title-text">Register</span></h4>
-                                    <p class="email-error" id="emailValidation" name="emailValidation" th:text="${emailValidation}">Nothing</p>
-                                <div class="row registration-form">
-                                    <div class="col-md-12 form-inputs">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="Registration">
-                                                <form role="form" action="/register" method="post" class="form-horizontal">
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                                    <input type="text" class="form-control" id="fullName" th:value="${registerName}" th:name="fullname" placeholder="Full Name" required />
+                                    <h4 class="modal-title text-center" id="myModalLabel">
+                                        <span class="modal-title-text">Register</span></h4>
+                                    <p class="email-error" id="emailValidation" name="emailValidation"
+                                       th:text="${emailValidation}">Nothing</p>
+                                    <div class="row registration-form">
+                                        <div class="col-md-12 form-inputs">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="Registration">
+                                                    <form role="form" action="/register" method="post"
+                                                          class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" class="form-control" id="fullName"
+                                                                       th:value="${registerName}" th:name="fullname"
+                                                                       placeholder="Full Name" required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div id="email-Error"><p name="email-error" th:text="${emailError}"></p></div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="email" th:name="email" placeholder="Email" required/>
+                                                        <div id="email-Error"><p name="email-error"
+                                                                                 th:text="${emailError}"></p></div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="email" class="form-control" id="email"
+                                                                       th:name="email" placeholder="Email" required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <input type="tel" class="form-control" id="mobile" pattern="[0-9]{10}" th:value="${registerMobile}" th:name="mobile" placeholder="Mobile number (10 digits)" required/>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="tel" class="form-control" id="mobile"
+                                                                       pattern="[0-9]{10}" th:value="${registerMobile}"
+                                                                       th:name="mobile"
+                                                                       placeholder="Mobile number (10 digits)"
+                                                                       required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <input type="password" class="form-control" id="password"  th:name="password" minlength="8" maxlength="14" placeholder="Password" required/>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="password" class="form-control"
+                                                                       id="password" th:name="password" minlength="8"
+                                                                       maxlength="14" placeholder="Password" required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <button type="submit" id="#registerButton"
+                                                                        class="register-button-form">
+                                                                    Register
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-12">
-                                                            <button type="submit" id="#registerButton" class="register-button-form">
-                                                                Register</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -133,57 +157,66 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!--   SIGN IN MODAL -->
+                    <!--   SIGN IN MODAL -->
 
-                <div class="modal fade" id="myModalSignIn" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                     aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
+                    <div class="modal fade" id="myModalSignIn" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
 
-                            <div class="modal-body">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                                    x</button>
-                                <div class="logo-modal">
-                                    <div class="logo-image-modal text-center">
-                                        <h5 class="logo-title">Codecool Bazaar</h5>
-                                        <a href="#" class="navbar-brand">
-                                            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-                                        </a>
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        x
+                                    </button>
+                                    <div class="logo-modal">
+                                        <div class="logo-image-modal text-center">
+                                            <a href="#" class="navbar-brand">
+                                                <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <h4 class="modal-title text-center" id="myModalLabelSignIn">
-                                    <span class="modal-title-text">Sign In</span></h4>
-                                <div class="row registration-form">
-                                    <div class="col-md-12 form-inputs">
-                                        <div class="tab-content">
-                                            <div class="tab-pane active" id="Signin">
-                                                <form role="form" action="/login" method="post" class="form-horizontal">
+                                    <h4 class="modal-title text-center" id="myModalLabelSignIn">
+                                        <span class="modal-title-text">Sign In</span></h4>
+                                    <div class="row registration-form">
+                                        <div class="col-md-12 form-inputs">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="Signin">
+                                                    <form role="form" action="/login" method="post"
+                                                          class="form-horizontal">
 
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <input type="email" class="form-control" id="login-email" th:name="login-email" placeholder="Email" required/>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="email" class="form-control"
+                                                                       id="login-email" th:name="login-email"
+                                                                       placeholder="Email" required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="col-sm-12">
-                                                            <input type="password" class="form-control" id="login-password"  th:name="login-password" placeholder="Password" required/>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="password" class="form-control"
+                                                                       id="login-password" th:name="login-password"
+                                                                       placeholder="Password" required/>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-sm-2">
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <button type="submit" class="register-button-form">
+                                                                    Sign In
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                        <div class="col-sm-12">
-                                                            <button type="submit" class="register-button-form">
-                                                                Sign In</button>
+                                                        <div class="register-link-container">
+                                                            <a class="register-link" data-toggle="modal"
+                                                               data-target="#myModalRegister">
+                                                                <span class="close register-text" data-dismiss="modal"
+                                                                      aria-hidden="true">not a member yet?</span></a>
                                                         </div>
-                                                    </div>
-                                                    <div class="register-link-container">
-                                                    <a class="register-link" data-toggle="modal" data-target="#myModalRegister">
-                                                        <span class="close register-text" data-dismiss="modal" aria-hidden="true">not a member yet?</span></a>
-                                                    </div>
-                                                </form>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -191,11 +224,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </div>
 </div>
 <br>
 <br>
@@ -219,7 +252,8 @@
                     <i class="fas fa-minus minus-filter"></i>
 </span></div>
                 <div th:each="category, iterstat: ${category}">
-                    <input class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
+                    <input class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()}
+                           th:value="${category.getId()}">
                     <label class="filter-label" th:for="${category.getName()}"
                            th:text="${category.getName()}">Product</label></br>
                 </div>
@@ -228,7 +262,8 @@
                         class="fas fa-plus plus-filter"></i>
 </span></div>
                 <div th:each="supplier, iterstat: ${supplier}">
-                    <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
+                    <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()}
+                           th:value="${supplier.getId()}">
                     <label class="filter-label" th:for="${supplier.getName()}"
                            th:text="${supplier.getName()}">Supplier</label></br>
                 </div>
@@ -264,7 +299,7 @@
                     <option value="newest">Newest</option>
                     <option value="expensive">Most expensive</option>
                 </select>
-<!--                <input class="show-by-criteria-button" type="submit" value="show">-->
+                <!--                <input class="show-by-criteria-button" type="submit" value="show">-->
             </form>
         </div>
         <div id="products" class="row">

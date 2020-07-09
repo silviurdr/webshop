@@ -7,6 +7,7 @@
 html,
 body {
     margin: 0;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 
@@ -106,10 +107,17 @@ body {
 }
 
 .all-content {
+    font-family: 'Ubuntu', sans-serif;
     margin-bottom: 4em;
 }
 
+.mb-3 {
+    font-family: 'Abel', sans-serif !important;
+
+}
+
 .card {
+    font-family: 'Abel', sans-serif;
     border:4px solid #eee;
     margin-bottom: 2em;
     padding: 10px;
@@ -118,7 +126,7 @@ body {
 }
 
 .card:hover {
-    border-color: #388DC8;
+    border-color: #1BA098;
 }
 
 .card-title {
@@ -130,7 +138,7 @@ body {
 }
 
 p.card-text {
-    font-size: 0.9em;
+    font-size: 1em;
 }
 
 .card-body {
@@ -140,7 +148,7 @@ p.card-text {
 
 .card-info {
     margin: 0 auto;
-    min-height: 293px;
+    min-height: 273px;
 }
 
 .card-info:hover {
@@ -149,27 +157,29 @@ p.card-text {
 
 
 .lead {
-    color: #388DC8;
-    font-size: 1.4em;
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    color: #1BA098;
+    font-size: 1.2em;
+    font-weight: bold;
+    font-family: 'Abel', sans-serif;
     text-align: center;
     margin-bottom: 1.4em;
 }
 
 
 .addcart, .subscribe-button {
-    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    font-family: 'Abel', sans-serif;
     float: right;
-    background-color: #388DC8;
+    background-color: #1BA098;
     border:none;
     text-transform: uppercase;
     font-size: 1.0em;
     font-weight: bold;
-    padding: 10px 16px;
+    padding: 6px 12px;
+    transition: all 0.2s ease;
 }
 
 .addcart:hover, .addcart:active, .addcart:focus, .subscribe-button:hover  {
-    background-color: #317eb4!important;
+    background-color: #16837c !important;
     border:none;
     text-transform: uppercase;
     font-weight: bold;
@@ -322,20 +332,22 @@ p.card-text {
 }
 
 .closebtn:hover {
-    color: black!important;
+    color: #666666!important;
 }
 
 .logo {
-    margin: 2em auto;
+    float: left;
 }
 
 button.close {
+    color: #666666;
     font-size: 3.2em;
     font-family: Arial;
     opacity: 1;
 }
 
 button.close:active, button.close:focus {
+    color: #666666;
     border:none;
     outline: none !important;
     box-shadow: none;
@@ -349,7 +361,6 @@ button.close:active, button.close:focus {
 .logo-image {
     margin: 0 auto;
     font-weight: bold;
-    margin-top: 6em;
 }
 
 .logo-image-modal {
@@ -362,9 +373,10 @@ button.close:active, button.close:focus {
 }
 
 .signin-button, .signin-button-form, .register-button, .register-button-form, .logout-button {
+    font-family: 'Ubuntu', sans-serif;
     border-radius: 20px;
     height: 32px;
-    background-color: #388DC8;
+    background-color: #1BA098;
     padding: 8px 22px;
     color: white !important;
     font-weight: bold;
@@ -374,6 +386,12 @@ button.close:active, button.close:focus {
     margin-top: 12px;
     text-align: center;
 }
+
+
+.register-button-form, .signin-button-form {
+    background-color: #1BA098;
+}
+
 
 .signin-button:hover, .register-button:hover, .logout-button:hover {
     cursor: pointer;
@@ -393,7 +411,7 @@ button.close:active, button.close:focus {
 
 button.signin-button-form:hover, button.register-button-form:hover  {
     cursor: pointer;
-    background-color: #388DC8;
+    background-color: #1BA098;
 }
 
 .signin-button-form:active, .signin-button-form:focus, .register-button-form:active, .register-button-form:focus, .logout-button:active, logout-button:focus  {
@@ -403,6 +421,7 @@ button.signin-button-form:hover, button.register-button-form:hover  {
 }
 
 .register-text {
+    font-family: 'Abel', sans-serif;
     text-transform: uppercase;
     color: #404752;
     font-size: 1.3em;
@@ -411,7 +430,7 @@ button.signin-button-form:hover, button.register-button-form:hover  {
 }
 
 span.register-text:hover {
-    border-bottom: 3px solid #CA2C28;
+    border-bottom: 3px solid #666666;
     cursor: pointer;
 }
 
@@ -437,13 +456,59 @@ span.register-text:hover {
     padding: 0px;
 }
 
+.navbar-container {
+    background-color: white;
+    border-bottom: 0.2em solid black;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+}
+
 .navbar {
-    margin: -3em auto 0em auto;
+    margin: 0 auto;
+    width: 75%;
+}
+
+.search-bar-container {
+    background-color: white;
+    margin-top: 2.2em;
+    min-width: 500px;
+    height: 40px;
+    margin-right: 2em;
+    border-radius: 20px;
+    border: 3px solid #1BA098 !important;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.search-bar {
+    padding: 0 8px;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    margin-left: 1em;
+    position: relative;
+    min-width: 440px;
+}
+
+.icon-search {
+    margin-top: 0.25em;
+    color: #444;
+    font-size: 1.2em;
+    display: inline-block;
+}
+
+.icon-search:hover {
+    cursor: pointer;
+}
+
+input[type="text"], textarea {
+
 }
 
 #navbarCollapse {
-    float: right;
-    margin-right: 2em;
+    position: relative;
+    margin-top: 2.2em;
+    right: 2em;
 }
 
 a.nav-item  {
@@ -451,7 +516,8 @@ a.nav-item  {
 }
 
 .navigation-links {
-    margin: -2em auto 2em auto;
+    font-family: 'Abel', sans-serif;
+    margin: 0em auto 2em auto;
     text-align: center;
     text-transform: uppercase;
     font-size: 1.2em;
@@ -459,20 +525,20 @@ a.nav-item  {
 
 .navigation-link {
     margin-right: 1em;
-    color: black;
+    color: #8c8c8c;
 }
 
 .navigation-link:hover {
-    color: black;
+    cursor: not-allowed;
+    color: #8c8c8c;
     text-decoration: none;
-    border-bottom: 2px solid black;
 }
 
 
 .productImg {
     display: block;
-    width: 220px;
-    height: 170px;
+    width: 180px;
+    height: 140px;
     margin: auto;
 }
 
@@ -482,9 +548,9 @@ a.nav-item  {
     margin: 0 100px 0 100px;
 }
 .cart-header {
-    font-family: Helvetica;
+    font-family: 'Abel', sans-serif;
     font-weight: bold;
-    font-size: 2.5em;
+    font-size: 2em;
     text-transform: uppercase;
     text-decoration: underline;
     margin-bottom: 1em;
@@ -501,7 +567,7 @@ a.nav-item  {
     border: 2px solid #333;
     transition: all 0.2s linear;
     font-size: 0.9em;
-    font-family: Helvetica;
+    font-family: 'Abel', sans-serif;
     background-color: #000;
     font-weight: bold;
     margin-bottom: 2em;
@@ -525,7 +591,7 @@ a.nav-item  {
 }
 
 .cart-container {
-    font-family: Helvetica;
+    font-family: 'Ubuntu', sans-serif;
     margin: 0 auto;
 }
 
@@ -544,8 +610,8 @@ a.nav-item  {
 }
 
 .cart-product-image {
-    width: 175px;
-    height: 136px;
+    width: 150px;
+    height: 117px;
 }
 
 .cart-product-container {
@@ -554,10 +620,11 @@ a.nav-item  {
 
 
 .cart-product-name {
+    font-family: 'Abel', sans-serif;
     text-transform: uppercase;
     text-decoration: underline;
-    color:  #388DC8;
-    font-size: 1.2em;
+    color:  #1BA098;
+    font-size: 1.1em;
 }
 
 .cart-product-name:hover {
@@ -589,6 +656,7 @@ a.nav-item  {
 }
 
 .order-summary-header {
+    font-family: 'Abel', sans-serif;
     text-transform: uppercase;
     font-size: 1.2em;
     font-weight: 900;
@@ -614,7 +682,7 @@ a.nav-item  {
 }
 
 .free-delivery {
-    color:#67A0CE;
+    color:#1BA098;
     font-weight:900;
 }
 
@@ -632,8 +700,9 @@ a.nav-item  {
 }
 
 .footer {
-    font-family: Verdana;
+    font-family: 'Ubuntu', sans-serif;
     margin-top: 4em;
+    font-size: 0.8em;
 }
 
 .footer-up {
@@ -642,14 +711,15 @@ a.nav-item  {
     height: 12em;
     padding: 2em;
     color: #8b8b8b;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .footer-header {
-    color: #388DC8;
+    font-family: 'Abel', sans-serif;
+    color: #4d4d4d;
     text-transform: uppercase;
     margin-bottom: 1em;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .footer-lists {
@@ -683,8 +753,9 @@ a.nav-item  {
 
 .footer-down {
     text-transform: uppercase;
-    background-color: #388DC8;
+    background-color: #1BA098;
     color: #eee6e6;
+    font-size: 1.1em;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -717,12 +788,12 @@ a.nav-item  {
 
 .fa-shopping-cart {
     font-size: 1.8em;
-    color: #333;
+    color: #1BA098;
     vertical-align: middle;
 }
 
 .lblCartCount {
-    background-color: #388DC8;
+    background-color: #888888;
     color: white;
     font-size: 0.9em;
     border-radius: 50%;
@@ -762,7 +833,7 @@ outline-offset: -1px;
 }
 
 .plus-filter, .minus-filter {
-    color: #CA2C28;
+    color: #666666;
     margin-left: 0.5em;
 }
 
@@ -772,6 +843,7 @@ outline-offset: -1px;
 
 .filter-checkbox, .filter-label {
     cursor: pointer;
+    margin-left: 0.3em;
 }
 
 input .filter-checkbox, input .filter-checkbox:active {
@@ -780,8 +852,8 @@ input .filter-checkbox, input .filter-checkbox:active {
 
 .filter-type {
     text-transform: uppercase;
-    border-bottom: 3px solid #CA2C28;
-    font-family: "Helvetica Neue";
+    border-bottom: 3px solid #666666;
+    font-family: 'Abel', sans-serif;
     font-size: 1.2em;
 }
 
@@ -825,7 +897,8 @@ input .filter-checkbox, input .filter-checkbox:active {
 }
 
 .modal-title-text {
-    border-bottom: 3px solid #CA2C28;
+    font-family: 'Abel', sans-serif;
+    border-bottom: 3px solid #666666;
     text-transform: uppercase;
     color: #404752;
     margin-right: 1.8em;
@@ -836,9 +909,10 @@ input .filter-checkbox, input .filter-checkbox:active {
 }
 
 input.form-control {
+    font-family: 'Ubuntu', sans-serif;
     border-radius: 30px;
     height: 50px;
-    border: 4px solid rgb(245,245,245);
+    border: 4px solid #e6e6e6;
     padding-left: 40px;
     text-align: left;
 }
@@ -848,11 +922,11 @@ input.form-control {
     margin: 0 auto;
 }
 
-input[type="text"], textarea {
-    outline: none;
-    box-shadow:none !important;
-    border: 4px solid #f2f2f2 !important;
-}
+/*input[type="text"], textarea {*/
+/*    outline: none;*/
+/*    box-shadow:none !important;*/
+/*    border: 4px solid #f2f2f2 !important;*/
+/*}*/
 
 input[type="submit"]{
     outline: none;
@@ -862,13 +936,13 @@ input[type="submit"]{
 input[type="email"], textarea {
     outline: none;
     box-shadow:none !important;
-    border: 4px solid #f2f2f2 !important;
+    border: 4px solid #e6e6e6 !important;
 }
 
 input[type="password"], textarea {
     outline: none;
     box-shadow:none !important;
-    border: 4px solid #f2f2f2 !important;
+    border: 4px solid #e6e6e6 !important;
 }
 
 .footer input[type="text"], textarea {

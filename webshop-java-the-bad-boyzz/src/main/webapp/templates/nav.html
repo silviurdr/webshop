@@ -1,48 +1,53 @@
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <body>
 
 <div th:fragment="copy">
     <div>
-        <nav class="navbar navbar-expand-md navbar-light bg-white">
-            <div class="logo">
-                <div class="logo-image text-center">
-                    <h3 class="logo-title">Codecool Bazaar</h3>
-                    <a href="/" class="navbar-brand">
-                        <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-                    </a>
-                </div>
-            </div>
-            <div id="navbarCollapse">
-                <div class="right-nav">
-                    <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
-                    <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
-                    <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
-                    <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
-                    <select class="currency">
-                        <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
-                        <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
-                    </select>
-                    <div style="display: inline-block" th:if="${userSession} == 'No'">
-                        <button type="submit"  class="register-button" data-toggle="modal" data-target="#myModalSignIn">
-                            <span class="signin-text">Sign In</span></button>
-                    </div>
-                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
-                        <button type="submit"  class="register-button">
-                            <span class="signin-text">your account</span></button>
-                    </div>
-                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
-                        <form action="/logout">
-                            <button type="submit"  class="register-button">
-                                <span class="signin-text">Log Out</span></button>
-                        </form>
+        <div class="navbar-container">
+            <nav class="navbar navbar-light bg-white">
+                <div class="logo">
+                    <div class="logo-image text-center">
+                        <a href="/" class="navbar-brand">
+                            <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                        </a>
                     </div>
                 </div>
-                <!--            <div class="navbar-nav ml-auto">-->
-                <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
-                <!--            </div>-->
-            </div>
-        </nav>
+                <div class="search-bar-container">
+                    <input class="search-bar" type="text">
+                    <div class="icon-search"><a><i class="fas fa-search"></i></a></div>
+                </div>
+                <div id="navbarCollapse">
+                    <div class="right-nav">
+                        <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
+                        <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
+                        <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
+                        <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
+                        <select class="currency">
+                            <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
+                            <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
+                        </select>
+                        <div style="display: inline-block" th:if="${userSession} == 'No'">
+                            <button type="submit" class="register-button" data-toggle="modal"
+                                    data-target="#myModalSignIn">
+                                <span class="signin-text">Sign In</span></button>
+                        </div>
+                        <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                            <button type="submit" class="register-button">
+                                <span class="signin-text">your account</span></button>
+                        </div>
+                        <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                            <form action="/logout">
+                                <button type="submit" class="register-button">
+                                    <span class="signin-text">Log Out</span></button>
+                            </form>
+                        </div>
+                    </div>
+                    <!--            <div class="navbar-nav ml-auto">-->
+                    <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
+                    <!--            </div>-->
+                </div>
+            </nav>
+        </div>
     </div>
     <br>
     <br>
