@@ -2,6 +2,7 @@
 DROP TABLE IF EXISTS products CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS suppliers CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 
 CREATE TABLE categories
@@ -31,6 +32,16 @@ CREATE TABLE products
     currency    VARCHAR(10)
 );
 
+CREATE TABLE users
+(
+    user_id SERIAL PRIMARY KEY NOT NULL,
+    full_name VARCHAR(64),
+    email VARCHAR(255) UNIQUE,
+    mobile_number VARCHAR(16),
+    password VARCHAR(256),
+    status VARCHAR(16)
+);
+
 
 INSERT INTO suppliers (name, description)
 VALUES ('Amazon', 'Digital content and services.');
@@ -52,10 +63,8 @@ INSERT INTO products (supplier_id, category_id, name, description, image, price,
 VALUES (1, 1, 'Amazon Fire HD 8','Latest Fire HD 8 tablet is a great value for media consumption.', 'product_3.jpg', 89, 'USD');
 
 INSERT INTO products (supplier_id, category_id, name, description, image, price, currency)
-VALUES (1, 1, 'Lenovo IdeaPad Miix 700','Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports.', 'picture_2.jpg', 479, 'USD');
+VALUES (1, 1, 'Lenovo IdeaPad Miix 700','Keyboard cover is included. Fanless Core m5 processor. Full-size USB ports.', 'product_2.jpg', 479, 'USD');
 
 INSERT INTO products (supplier_id, category_id, name, description, image, price, currency)
-VALUES (2, 2,'HP Pavilion','HP Laptop. Great value at a greater price", notebook, amazon.', 'picture_4.jpg', 700, 'USD');
-
-
+VALUES (2, 2,'HP Pavilion','HP Laptop. Great value at a greater price", notebook, amazon.', 'product_4.jpg', 700, 'USD');
 

@@ -16,6 +16,7 @@
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/connection/dbConnection.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/BillingInformationDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/Initializer.java
+/home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/LogoutController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/LoginController.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductDao.java
 /home/silviu/Documents/Codecool/oop_module/TW4/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/PaymentErrorController.java

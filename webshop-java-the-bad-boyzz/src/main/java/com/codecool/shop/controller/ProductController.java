@@ -17,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -27,6 +28,12 @@ public class ProductController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        String emailValidation = (String) session.getAttribute("email");
+        String emailError = "Email Address Already in Use!";
+
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoJDBC.getInstance();
@@ -53,6 +60,11 @@ public class ProductController extends HttpServlet {
         }
         context.setVariable("supplier", productSupplierDataStore.getAll());
         context.setVariable("noOfProducts", noOfProducts);
+        context.setVariable("emailValidation", emailValidation);
+        context.setVariable("emailError", emailError);
+        context.setVariable("registerName", session.getAttribute("registerName"));
+        context.setVariable("registerMobile", session.getAttribute("registerMobile"));
+
 
         //products
         if (categoryId != 0 && supplier != 0) {

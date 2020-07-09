@@ -1,7 +1,11 @@
 package com.codecool.shop.controller;
 
+import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.utils.SaltedHashPassword;
+import org.junit.Test;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.WebContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +21,11 @@ import java.sql.SQLException;
 @WebServlet(urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
-    UserDao userDao;
+
+
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 
         String loginUserEmail = req.getParameter("login-email");
         String password = req.getParameter("login-password");

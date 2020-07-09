@@ -27,5 +27,6 @@ com/codecool/shop/controller/PaymentController$1.class
 com/codecool/shop/model/Order.class
 com/codecool/shop/model/Supplier.class
 com/codecool/shop/model/Product.class
+com/codecool/shop/controller/LogoutController.class
 com/codecool/shop/controller/RegisterController.class
 com/codecool/shop/controller/PaymentController.class

@@ -551,7 +551,7 @@ a.nav-item  {
 .cart-product-name {
     text-transform: uppercase;
     text-decoration: underline;
-    color:  #62C38d;
+    color:  #388DC8;
     font-size: 1.2em;
 }
 
@@ -875,6 +875,16 @@ input[type="password"], textarea {
 
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 input[type=number]{-moz-appearance:textfield}
+
+#email-Error {
+    color: #CA2C28;
+    display: none;
+    margin-top: 1.5em;
+}
+
+#emailValidation {
+    display: none;
+}
 
 
 /*

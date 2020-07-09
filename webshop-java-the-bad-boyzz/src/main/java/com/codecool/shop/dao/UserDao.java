@@ -9,6 +9,7 @@ public interface UserDao {
 
     void add(User user) throws SQLException;
     User find(int id) throws SQLException;
+    User find(String email);
     void remove(int id);
     String getUserPasswordByEmail(String string) throws SQLException;
 
