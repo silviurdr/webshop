@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -31,6 +32,7 @@ public class CheckoutController extends HttpServlet {
         CartDao cartProductCategoryDataStore = CartDaoMem.getInstance();
         int noOfProducts = 0;
         float sum = 0;
+        HttpSession session = req.getSession();
 
         // disscount code
         String redeemCode  = req.getParameter("redeem");
@@ -67,6 +69,7 @@ public class CheckoutController extends HttpServlet {
         context.setVariable("noOfProducts", noOfProducts);
         context.setVariable("redeemCode", redeemCode);
         context.setVariable("redeemCodeValue", redeemCodeValue);
+        context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
 
 
         engine.process("product/checkout.html", context, resp.getWriter());

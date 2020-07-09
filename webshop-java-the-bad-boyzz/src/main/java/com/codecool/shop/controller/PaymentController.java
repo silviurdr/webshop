@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Properties;
@@ -36,8 +37,18 @@ public class PaymentController extends HttpServlet {
         log.addToFile("Payment");
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        HttpSession session = req.getSession();
+
+        int numOfProducts = 0;
+
+        for (Product p : order.getAll().keySet()) {
+            numOfProducts += order.getAll().get(p);
+        }
 
         context.setVariable("order", order );
+        context.setVariable("noOfProducts", numOfProducts);
+        context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
+
         engine.process("product/payment.html", context, resp.getWriter());
     }
 
