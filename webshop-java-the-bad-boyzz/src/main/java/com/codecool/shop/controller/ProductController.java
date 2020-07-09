@@ -64,6 +64,7 @@ public class ProductController extends HttpServlet {
         context.setVariable("emailError", emailError);
         context.setVariable("registerName", session.getAttribute("registerName"));
         context.setVariable("registerMobile", session.getAttribute("registerMobile"));
+        context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
 
 
         //products

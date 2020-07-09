@@ -27,6 +27,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        HttpSession session = req.getSession();
         String loginUserEmail = req.getParameter("login-email");
         String password = req.getParameter("login-password");
         String loginPasswordDB = null;
@@ -47,6 +48,7 @@ public class LoginController extends HttpServlet {
 
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("sessuser", loginUserEmail.trim());
+                session.setAttribute("userSession", "Yes");
 
             }
         } catch (NoSuchAlgorithmException e) {

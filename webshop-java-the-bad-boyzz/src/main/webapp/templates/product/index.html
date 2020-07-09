@@ -55,8 +55,16 @@
                     <option id="ron" class="currency-option" name="ron" value="ron">Ron</option>
                     <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
                 </select>
-                <a class="register-button" data-toggle="modal" data-target="#myModalSignIn">
-                    <span class="signin-text">sign in</span></a>
+                <div style="display: inline-block" th:if="${userSession} == 'No'">
+                <button type="submit"  class="register-button" data-toggle="modal" data-target="#myModalSignIn">
+                    <span class="signin-text">Sign In</span></button>
+                </div>
+                <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                    <form action="/logout">
+                    <button type="submit"  class="register-button">
+                        <span class="signin-text">Log Out</span></button>
+                    </form>
+                </div>
 
                 <!--   REGISTER MODAL -->
 
