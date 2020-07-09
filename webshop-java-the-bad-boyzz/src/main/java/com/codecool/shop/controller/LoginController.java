@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         String loginPasswordDB = null;
 
         try {
-            loginPasswordDB = SaltedHashPassword.generateStrongPasswordHash("parapanta");
+            loginPasswordDB = SaltedHashPassword.generateStrongPasswordHash(password);
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException throwables) {
             throwables.printStackTrace();
