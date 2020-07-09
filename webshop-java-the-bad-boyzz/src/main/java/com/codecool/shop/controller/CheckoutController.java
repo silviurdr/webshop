@@ -2,11 +2,11 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.BillingInformationDao;
-import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
-import com.codecool.shop.dao.implementation.CartProductDaoMem;
-import com.codecool.shop.dao.implementation.CheckoutDaoMem;
-import com.codecool.shop.model.Order;
+import com.codecool.shop.dao.implementation.CartDaoMem;
+//import com.codecool.shop.dao.implementation.CheckoutDaoMem;
+import com.codecool.shop.model.AdminLog;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 
 @WebServlet(urlPatterns = {"/checkout"})
@@ -28,7 +24,11 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //cart and details for checkout
-        CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
+        CartDaoMem order = CartDaoMem.getInstance();
+        AdminLog log = AdminLog.getInstance();
+        log.jsonifyLog(order);
+        log.addToFile("Checkout");
+        CartDao cartProductCategoryDataStore = CartDaoMem.getInstance();
         int noOfProducts = 0;
         float sum = 0;
 
@@ -74,7 +74,8 @@ public class CheckoutController extends HttpServlet {
     }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Order order= new Order();
+        CartDaoMem order= CartDaoMem.getInstance();
+        String forAdminLog = "Proceed checkout";
         order.setCustomerName(req.getParameter("name"));
         order.setCustomerEmail(req.getParameter("email"));
         order.setCustomerAddress(req.getParameter("address"));
@@ -84,14 +85,15 @@ public class CheckoutController extends HttpServlet {
         order.setCustomerZip(req.getParameter("zip"));
         BillingInformationDao billingInfo=BillingInformationDaoMem.getInstance();
         billingInfo.add(order);
-        CheckoutDaoMem checkoutDetails = CheckoutDaoMem.getInstance();
-        checkoutDetails.setCustomerName(req.getParameter("name"));
-        checkoutDetails.setCustomerEmail(req.getParameter("email"));
-        checkoutDetails.setCustomerAddress(req.getParameter("address"));
-        checkoutDetails.setCustomerCountry(req.getParameter("country"));
-        checkoutDetails.setCustomerCity(req.getParameter("city"));
-        checkoutDetails.setCustomerPhone(req.getParameter("phone"));
-        checkoutDetails.setCustomerZip(req.getParameter("zip"));
+//        CheckoutDaoMem checkoutDetails = CheckoutDaoMem.getInstance();
+//        checkoutDetails.setCustomerName(req.getParameter("name"));
+//        checkoutDetails.setCustomerEmail(req.getParameter("email"));
+//        checkoutDetails.setCustomerAddress(req.getParameter("address"));
+//        checkoutDetails.setCustomerCountry(req.getParameter("country"));
+//        checkoutDetails.setCustomerCity(req.getParameter("city"));
+//        checkoutDetails.setCustomerPhone(req.getParameter("phone"));
+//        checkoutDetails.setCustomerZip(req.getParameter("zip"));
+
 
         resp.sendRedirect("/payment");
     }

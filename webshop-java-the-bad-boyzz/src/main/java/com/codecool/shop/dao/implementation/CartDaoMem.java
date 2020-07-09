@@ -1,11 +1,16 @@
-package com.codecool.shop.model;
+package com.codecool.shop.dao.implementation;
 
+import com.codecool.shop.dao.CartDao;
+import com.codecool.shop.model.Product;
 import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.concurrent.ConcurrentHashMap;
 
-public class Order {
+public class CartDaoMem implements CartDao {
+
+    private int id;
     private String customerName;
     private String customerEmail;
     private String customerPhone;
@@ -13,14 +18,27 @@ public class Order {
     private String customerZip;
     private String customerCity;
     private String customerAddress;
-    private int topay;
+    private ConcurrentHashMap<Product, Integer> data = new ConcurrentHashMap<>();
+    private static CartDaoMem instance = null;
+
+    /* A private Constructor prevents any other class from instantiating.
+     */
+    private CartDaoMem() {
+
+    }
+
+    public static CartDaoMem getInstance() {
+        if (instance == null) {
+            instance = new CartDaoMem();
+        }
+        return instance;
+    }
+
+
 
     public String getCustomerName() {
         return customerName;
     }
-    public Order(){
-    }
-
 
     public void Jsonify() {
         JSONObject jsonObject = new JSONObject();
@@ -38,10 +56,8 @@ public class Order {
             file.write(jsonObject.toJSONString());
             file.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        System.out.println("JSON file created: " + jsonObject);
     }
 
     public void setCustomerName(String customerName) {
@@ -96,11 +112,48 @@ public class Order {
         this.customerAddress = customerAddress;
     }
 
-    public int getTopay() {
-        return topay;
+    public int getId() {
+        return id;
     }
 
-    public void setTopay(int topay) {
-        this.topay = topay;
+    @Override
+    public void add(Product product) {
+        data.merge(product, 1, Integer::sum);
     }
+
+
+    @Override
+    public Product find(int id) {
+
+        for (Product p: data.keySet()) {
+            if (id == p.getId()) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+
+    @Override
+    public void remove(int id) {
+
+        for (Product p: data.keySet()) {
+            if (id == p.getId()) {
+                data.remove(p);
+            }
+        }
+    }
+
+    @Override
+    public ConcurrentHashMap<Product, Integer> getAll() {
+        return data;
+    }
+
+    @Override
+    public void clearCart() {
+        data.clear();
+    }
+
+
+
 }

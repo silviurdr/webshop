@@ -2,12 +2,12 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.BillingInformationDao;
-import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
-import com.codecool.shop.dao.implementation.CartProductDaoMem;
-import com.codecool.shop.dao.implementation.CheckoutDaoMem;
+import com.codecool.shop.dao.implementation.CartDaoMem;
+//import com.codecool.shop.dao.implementation.CheckoutDaoMem;
 //import com.codecool.shop.model.SendMail;
-import com.codecool.shop.model.Order;
+import com.codecool.shop.model.AdminLog;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -18,7 +18,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.management.openmbean.CompositeData;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,11 +31,13 @@ import java.util.Properties;
 public class PaymentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CheckoutDaoMem checkout = CheckoutDaoMem.getInstance();
+        CartDaoMem order = CartDaoMem.getInstance();
+        AdminLog log = AdminLog.getInstance();
+        log.addToFile("Payment");
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
-        context.setVariable("order", checkout );
+        context.setVariable("order", order );
         engine.process("product/payment.html", context, resp.getWriter());
     }
 
@@ -55,15 +56,15 @@ public class PaymentController extends HttpServlet {
         int cardNumberFormated;
         int cvvFormated;
 
-        try{
-            cardNumberFormated=Integer.parseInt(cardNumber);
-            cvvFormated=Integer.parseInt(cvv);
-        }catch (NumberFormatException e){
-            resp.sendRedirect("/payment-error");
-        }
+//        try{
+//            cardNumberFormated=Integer.parseInt(cardNumber);
+//            cvvFormated=Integer.parseInt(cvv);
+//        }catch (NumberFormatException e){
+//            resp.sendRedirect("/payment-error");
+//        }
 
         float sum = 0;
-        CartProductDao cartProducts = CartProductDaoMem.getInstance();
+        CartDao cartProducts = CartDaoMem.getInstance();
         for (Product p : cartProducts.getAll().keySet()){
             sum+=p.getDefaultPrice();
         }
