@@ -3,8 +3,8 @@ com/codecool/shop/utils/SaltedHashPassword.class
 com/codecool/shop/controller/PaymentErrorController.class
 com/codecool/shop/dao/implementation/ProductDaoMem.class
 com/codecool/shop/controller/CartController.class
-com/codecool/shop/dao/implementation/ProductCategoryDaoMem.class
 com/codecool/shop/dao/UserDao.class
+com/codecool/shop/dao/implementation/ProductCategoryDaoMem.class
 com/codecool/shop/dao/implementation/CartDaoMem.class
 com/codecool/shop/config/ThymeleafConfig.class
 com/codecool/shop/model/User.class
