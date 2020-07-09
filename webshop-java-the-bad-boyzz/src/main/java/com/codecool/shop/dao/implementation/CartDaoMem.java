@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class CartDaoMem implements CartDao {
 
     private int id;
-    private static int count=0;
     private String customerName;
     private String customerEmail;
     private String customerPhone;
@@ -19,14 +18,13 @@ public class CartDaoMem implements CartDao {
     private String customerZip;
     private String customerCity;
     private String customerAddress;
-    private int topay;
     private ConcurrentHashMap<Product, Integer> data = new ConcurrentHashMap<>();
     private static CartDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
      */
     private CartDaoMem() {
-        id =++count;
+
     }
 
     public static CartDaoMem getInstance() {
@@ -118,14 +116,6 @@ public class CartDaoMem implements CartDao {
         return id;
     }
 
-    public int getTopay() {
-        return topay;
-    }
-
-    public void setTopay(int topay) {
-        this.topay = topay;
-    }
-
     @Override
     public void add(Product product) {
         data.merge(product, 1, Integer::sum);
@@ -133,7 +123,7 @@ public class CartDaoMem implements CartDao {
 
 
     @Override
-    public Product find( int id) {
+    public Product find(int id) {
 
         for (Product p: data.keySet()) {
             if (id == p.getId()) {

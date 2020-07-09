@@ -56,12 +56,12 @@ public class PaymentController extends HttpServlet {
         int cardNumberFormated;
         int cvvFormated;
 
-        try{
-            cardNumberFormated=Integer.parseInt(cardNumber);
-            cvvFormated=Integer.parseInt(cvv);
-        }catch (NumberFormatException e){
-            resp.sendRedirect("/payment-error");
-        }
+//        try{
+//            cardNumberFormated=Integer.parseInt(cardNumber);
+//            cvvFormated=Integer.parseInt(cvv);
+//        }catch (NumberFormatException e){
+//            resp.sendRedirect("/payment-error");
+//        }
 
         float sum = 0;
         CartDao cartProducts = CartDaoMem.getInstance();

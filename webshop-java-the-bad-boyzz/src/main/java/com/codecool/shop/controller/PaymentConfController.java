@@ -24,7 +24,6 @@ public class PaymentConfController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BillingInformationDao billingInfo= BillingInformationDaoMem.getInstance();
-        CartDaoMem order = CartDaoMem.getInstance();
         AdminLog log = AdminLog.getInstance();
         log.addToFile("Confirmation");
         CartDao cartProducts = CartDaoMem.getInstance();

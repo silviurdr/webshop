@@ -54,7 +54,7 @@ public class AdminLog {
             obj.put("Checkout", true);
             obj.put("Payment Method", true);
             obj.put("Payment Confirmation", false);
-        } else if(process.equals("confirmation")){
+        } else if(process.equals("Confirmation")){
             obj.put("Checkout", true);
             obj.put("Payment Method", true);
             obj.put("Payment Confirmation", true);
@@ -66,6 +66,7 @@ public class AdminLog {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println("Added to file:");
 
     }
 }

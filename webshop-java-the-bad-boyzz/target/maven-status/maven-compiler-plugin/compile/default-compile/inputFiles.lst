@@ -4,7 +4,6 @@
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/CartController.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductCategoryDao.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/TemplateEngineUtil.java
-/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/CartProductDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/PaymentController.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/RegisterController.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/CheckoutController.java
@@ -14,12 +13,12 @@
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/SupplierDaoJDBC.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/BaseModel.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/config/ThymeleafConfig.java
-/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/Order.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/BillingInformationDao.java
-/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/CartProductDao.java
+/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/CartDao.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/BillingInformationDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/ProductDao.java
+/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/AdminLog.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductDaoJDBC.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/connection/dbConnection.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/ProductController.java
@@ -29,7 +28,7 @@
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/controller/LoginController.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/User.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/SupplierDao.java
+/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/CartDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/UserDao.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/ProductCategoryDaoJDBC.java
-/home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/dao/implementation/CheckoutDaoMem.java
 /home/www/Desktop/OOP/nearby-el/webshop/webshop-java-the-bad-boyzz/src/main/java/com/codecool/shop/model/ProductCategory.java
