@@ -106,7 +106,7 @@ body {
 }
 
 .all-content {
-    margin-bottom: 2em;
+    margin-bottom: 4em;
 }
 
 .card {
@@ -229,7 +229,7 @@ p.card-text {
 }
 
 .payment-button {
-    background-color: #3e86c1;
+    background-color: #444;
     transition: all 0.3s ease-in;
     border:none;
     text-transform: uppercase;
@@ -240,7 +240,7 @@ p.card-text {
 
 
 .payment-button:hover {
-    background-color: #67A0CE;
+    background-color: #333;
     border:none;
     text-transform: uppercase;
     font-size: 0.8em;
@@ -531,6 +531,7 @@ a.nav-item  {
 
 .container {
     width: 1700px!important;
+    margin-bottom: 4em;
 }
 
 .cart-item {
@@ -632,6 +633,7 @@ a.nav-item  {
 
 .footer {
     font-family: Verdana;
+    margin-top: 4em;
 }
 
 .footer-up {

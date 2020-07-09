@@ -77,6 +77,7 @@ public class RegisterController extends HttpServlet {
                 userDao.add(newUser);
                 session.setAttribute("email", userEmail);
                 session.setAttribute("emailError", emailError);
+                JOptionPane.showMessageDialog(null, "Account created successfully");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
