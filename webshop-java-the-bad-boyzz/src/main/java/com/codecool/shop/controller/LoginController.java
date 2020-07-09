@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         String loginPasswordDB = null;
 
         try {
-            loginPasswordDB = SaltedHashPassword.generateStrongPasswordHash("parapanta");
+            loginPasswordDB = SaltedHashPassword.generateStrongPasswordHash(password);
 
         } catch (NoSuchAlgorithmException | InvalidKeySpecException throwables) {
             throwables.printStackTrace();
@@ -49,6 +49,8 @@ public class LoginController extends HttpServlet {
                 HttpSession httpSession = req.getSession(true);
                 httpSession.setAttribute("sessuser", loginUserEmail.trim());
                 session.setAttribute("userSession", "Yes");
+                System.out.println(session.getAttribute("userSession"));
+                System.out.println("maaaaaata");
 
             }
         } catch (NoSuchAlgorithmException e) {
