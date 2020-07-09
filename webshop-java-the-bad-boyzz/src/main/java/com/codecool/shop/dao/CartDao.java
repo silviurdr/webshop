@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-public interface CartProductDao {
+public interface CartDao {
 
     void add(Product product);
     Product find(int id);

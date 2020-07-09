@@ -2,10 +2,10 @@ package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.BillingInformationDao;
-import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
-import com.codecool.shop.dao.implementation.CartProductDaoMem;
-import com.codecool.shop.model.Order;
+import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.model.AdminLog;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
@@ -24,7 +24,10 @@ public class PaymentConfController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BillingInformationDao billingInfo= BillingInformationDaoMem.getInstance();
-        CartProductDao cartProducts = CartProductDaoMem.getInstance();
+        CartDaoMem order = CartDaoMem.getInstance();
+        AdminLog log = AdminLog.getInstance();
+        log.addToFile("Confirmation");
+        CartDao cartProducts = CartDaoMem.getInstance();
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
@@ -33,7 +36,7 @@ public class PaymentConfController extends HttpServlet {
             sum+=p.getDefaultPrice();
         }
         
-        Order orderInfo = billingInfo.getFirst();
+        CartDaoMem orderInfo = billingInfo.getFirst();
 
         orderInfo.Jsonify();
         String sum2  = String.format("%.1f", sum);

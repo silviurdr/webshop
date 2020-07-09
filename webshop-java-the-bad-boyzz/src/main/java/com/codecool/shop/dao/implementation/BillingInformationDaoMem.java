@@ -1,13 +1,12 @@
 package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.BillingInformationDao;
-import com.codecool.shop.model.Order;
 
 import java.util.LinkedHashMap;
 
 public class BillingInformationDaoMem implements BillingInformationDao {
 
-    private LinkedHashMap<Integer,Order> data = new LinkedHashMap<>();
+    private LinkedHashMap<Integer,CartDaoMem> data = new LinkedHashMap<>();
     private static BillingInformationDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -23,7 +22,7 @@ public class BillingInformationDaoMem implements BillingInformationDao {
     }
 
     @Override
-    public void add(Order order) {
+    public void add(CartDaoMem order) {
         data.put(1,order);
     }
 
@@ -38,11 +37,11 @@ public class BillingInformationDaoMem implements BillingInformationDao {
     }
 
     @Override
-    public LinkedHashMap<Integer, Order> getAll() {
+    public LinkedHashMap<Integer, CartDaoMem> getAll() {
         return data;
     }
     @Override
-    public Order getFirst(){
+    public CartDaoMem getFirst(){
         return data.get(1);
     }
 

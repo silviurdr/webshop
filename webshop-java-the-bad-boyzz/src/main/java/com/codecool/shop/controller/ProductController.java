@@ -1,14 +1,12 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.CartProductDao;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.ProductDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.dao.implementation.*;
 import com.codecool.shop.model.Product;
-import com.codecool.shop.model.User;
-import com.codecool.shop.utils.SaltedHashPassword;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -18,8 +16,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/"})
@@ -30,7 +26,7 @@ public class ProductController extends HttpServlet {
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoJDBC.getInstance();
-        CartProductDao cartProductCategoryDataStore = CartProductDaoMem.getInstance();
+        CartDao cartProductCategoryDataStore = CartDaoMem.getInstance();
         int noOfProducts = 0;
 
 
