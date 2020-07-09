@@ -2,7 +2,6 @@ package com.codecool.shop.dao.implementation;
 
 import com.codecool.shop.dao.UserDao;
 import com.codecool.shop.model.User;
-import sun.jvm.hotspot.runtime.VMObject;
 
 import javax.sql.DataSource;
 import java.sql.*;
