@@ -214,48 +214,42 @@
     <div id="mySidenav" class="col-2 sidenav">
         <form action="/" method="get">
             <div class="inner">
-                <div class="filter-type-container"><span class="filter-type">Category</span> <span><i
-                        class="fas fa-plus plus-filter"></i>
-                    <i class="fas fa-minus minus-filter"></i>
-</span></div>
-                <div th:each="category, iterstat: ${category}">
-                    <input class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
+
+                <div class="filter-type-container">
+                    <span class="filter-type">Category</span>
+                    <span>
+                        <i class="fas fa-plus plus-filter categoryp"></i>
+                        <i class="fas fa-minus minus-filter categorym"> </i>
+                    </span>
+                   </div>
+                    <div id="categories">
+                <div  th:each="category, iterstat: ${category}">
+                    <input  class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
                     <label class="filter-label" th:for="${category.getName()}"
                            th:text="${category.getName()}">Product</label></br>
                 </div>
+                    </div>
 
-                <div class="filter-type-container"><span class="filter-type">Supplier</span> <span><i
-                        class="fas fa-plus plus-filter"></i>
-</span></div>
-                <div th:each="supplier, iterstat: ${supplier}">
+                <div class="filter-type-container"><span class="filter-type">Supplier</span>
+                    <span >
+                     <i class="fas fa-plus plus-filter supplierp"></i>
+                     <i class="fas fa-minus minus-filter supplierm"></i>
+                    </span>
+                </div>
+
+                <div id="suppliers">
+                <div  th:each="supplier, iterstat: ${supplier}">
                     <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
                     <label class="filter-label" th:for="${supplier.getName()}"
                            th:text="${supplier.getName()}">Supplier</label></br>
                 </div>
-
-                <!--        <select class="filters-drop-down" name="category">-->
-                <!--            <option selected value=0>Product Category</option>-->
-                <!--            <div th:each="category, iterStat : ${category}" >-->
-                <!--                <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>-->
-                <!--            </div>-->
-                <!--        </select>-->
-                <!--        </div>-->
-                <!--        <div class="inner">-->
-                <!--        <select class="filters-drop-down" name="suppliers">-->
-                <!--            <option selected value=0>Supplier</option>-->
-                <!--            <div th:each="supplier, iterStat : ${supplier}" >-->
-                <!--                <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>-->
-                <!--            </div>-->
-                <!--        </select>-->
+                </div>
             </div>
             <input class="btn-succes filter-button" type="submit" value="Find my products!">
         </form>
     </div>
 
     <div class="col-10 right-side-container">
-        <!--    <div class="filter-show-hide">-->
-        <!--    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>-->
-        <!--    </div>-->
         <div class="show-by">
             <form>
                 <select>

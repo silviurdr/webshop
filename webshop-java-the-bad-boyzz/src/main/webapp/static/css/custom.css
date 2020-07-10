@@ -770,6 +770,10 @@ outline-offset: -1px;
     cursor: pointer;
 }
 
+.minus-filter:hover {
+    cursor:pointer;
+}
+
 .filter-checkbox, .filter-label {
     cursor: pointer;
 }
@@ -915,4 +919,12 @@ input[type=number]{-moz-appearance:textfield}
     .container {
         max-width: 1740px;
     }
+}
+
+#categories {
+    display: none;
+}
+
+#suppliers {
+    display: none;
 }
