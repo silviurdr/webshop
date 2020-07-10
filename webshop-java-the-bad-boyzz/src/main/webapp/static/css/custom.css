@@ -88,8 +88,8 @@ body {
 
 .filter-button {
     border:none;
-    background-color: #333;
-    color: white;
+    background-color: #444;
+    color: whitesmoke;
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s;
@@ -98,7 +98,7 @@ body {
 }
 
 .filter-button:hover {
-    background-color: black;
+    background-color: #333;
     color:white;
 }
 
@@ -458,7 +458,7 @@ span.register-text:hover {
 
 .navbar-container {
     background-color: white;
-    border-bottom: 0.2em solid black;
+    border-bottom: 0.2em solid #888;
     margin-bottom: 1em;
     padding-bottom: 0.5em;
 }
@@ -564,15 +564,15 @@ a.nav-item  {
     text-transform: uppercase;
     width: 300px;
     padding: 5px 2em;
-    border: 2px solid #333;
+    border: 2px solid #666;
     transition: all 0.2s linear;
     font-size: 0.9em;
     font-family: 'Abel', sans-serif;
-    background-color: #000;
+    background-color: #444;
     font-weight: bold;
     margin-bottom: 2em;
     margin-top: 1em;
-    color: white;
+    color: whitesmoke;
     outline: none !important;
 }
 
@@ -581,8 +581,9 @@ a.nav-item  {
 }
 
 .checkout-button:hover, .checkout-button-right:hover {
+    background-color: #333;
     cursor: pointer;
-    color:#727677;
+    color:white;
 }
 
 .checkout-arrow {
