@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="search-bar-container">
-                <input class="search-bar" type="text">
+                <input id ="search-bar" class="search-bar" type="text">
                 <div class="icon-search"><a><i class="fas fa-search"></i></a></div>
             </div>
             <div id="navbarCollapse">
@@ -251,7 +251,6 @@
                     <span class="filter-type">Category</span>
                     <span>
                         <i class="fas fa-plus plus-filter categoryp"></i>
-                        <i class="fas fa-minus minus-filter categorym"> </i>
                     </span>
                 </div>
                 <div id="categories">
@@ -265,13 +264,12 @@
                 <div class="filter-type-container"><span class="filter-type">Supplier</span>
                     <span >
                      <i class="fas fa-plus plus-filter supplierp"></i>
-                     <i class="fas fa-minus minus-filter supplierm"></i>
                     </span>
                 </div>
 
                 <div id="suppliers">
                     <div  th:each="supplier, iterstat: ${supplier}">
-                        <input class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
+                        <input  class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
                         <label class="filter-label" th:for="${supplier.getName()}"
                                th:text="${supplier.getName()}">Supplier</label></br>
                     </div>

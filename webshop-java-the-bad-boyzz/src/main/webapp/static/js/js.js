@@ -23,37 +23,42 @@ window.onload = function () {
 
 // hide and show cat filters
 let plusCat = document.querySelector(".categoryp");
-let minCat = document.querySelector(".categorym");
+
 let catFilters = document.getElementById("categories")
 plusCat.addEventListener("click", function () {
     catFilters.style.display = "inline";
 })
-minCat.addEventListener("click", function () {
-    catFilters.style.display = "none";
-})
+
 
 
 //hide and show supplier filters
 let plusSup = document.querySelector(".supplierp");
-let minSup = document.querySelector(".supplierm");
 let supFilters = document.getElementById("suppliers")
 plusSup.addEventListener("click", function () {
     supFilters.style.display = "block";
 })
-minSup.addEventListener("click", function () {
-    supFilters.style.display = "none";
-})
+document.getElementById('search-bar').readOnly = true;
 
-const inputs = document.getElementsByTagName("input");
-for(let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener("click" ,function() {
+jQuery(function(){
+    if (localStorage.input) {
+        showTable()
+        let checks = JSON.parse(localStorage.input);
+        jQuery(':checkbox').prop('checked', function(i) {
+            return checks[i];
+        });
+    }
+});
 
-        if (inputs[i].checked === false) {
-            inputs[i].checked = true;
-        } else {
-            if (inputs[i].checked === true) {
-                inputs[i].checked = false;
-            }
-        }
-    })
+jQuery(':checkbox').on('change', function() {
+    localStorage.input = JSON.stringify(jQuery(':checkbox').map(function() {
+        return this.checked;
+    }).get());
+});
+
+function showTable() {
+    document.getElementById('categories').style.display = "block";
+    document.getElementById('suppliers').style.display = "block";
+    localStorage.setItem('show', 'true'); //store state in localStorage
 }
+
+

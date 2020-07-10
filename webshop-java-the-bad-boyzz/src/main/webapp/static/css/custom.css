@@ -534,6 +534,9 @@ a.nav-item  {
     text-decoration: none;
 }
 
+#search-bar:hover{
+    cursor: not-allowed;
+}
 
 .productImg {
     display: block;
