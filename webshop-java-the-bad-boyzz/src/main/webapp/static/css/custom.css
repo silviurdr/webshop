@@ -990,3 +990,11 @@ input[type=number]{-moz-appearance:textfield}
         max-width: 1740px;
     }
 }
+
+#categories {
+    display: none;
+}
+
+#suppliers {
+    display: none;
+}
