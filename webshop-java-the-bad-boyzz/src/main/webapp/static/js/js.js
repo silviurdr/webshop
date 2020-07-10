@@ -41,7 +41,7 @@ document.getElementById('search-bar').readOnly = true;
 
 jQuery(function(){
     if (localStorage.input) {
-        var checks = JSON.parse(localStorage.input);
+        let checks = JSON.parse(localStorage.input);
         jQuery(':checkbox').prop('checked', function(i) {
             return checks[i];
         });
