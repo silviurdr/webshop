@@ -255,7 +255,7 @@
                 </div>
                 <div id="categories">
                     <div  th:each="category, iterstat: ${category}">
-                        <input id="checkBox" class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
+                        <input  class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
                         <label class="filter-label" th:for="${category.getName()}"
                                th:text="${category.getName()}">Product</label></br>
                     </div>

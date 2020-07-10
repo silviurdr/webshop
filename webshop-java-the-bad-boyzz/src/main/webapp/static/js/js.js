@@ -41,6 +41,7 @@ document.getElementById('search-bar').readOnly = true;
 
 jQuery(function(){
     if (localStorage.input) {
+        showTable()
         let checks = JSON.parse(localStorage.input);
         jQuery(':checkbox').prop('checked', function(i) {
             return checks[i];
@@ -53,4 +54,11 @@ jQuery(':checkbox').on('change', function() {
         return this.checked;
     }).get());
 });
+
+function showTable() {
+    document.getElementById('categories').style.display = "block";
+    document.getElementById('suppliers').style.display = "block";
+    localStorage.setItem('show', 'true'); //store state in localStorage
+}
+
 
