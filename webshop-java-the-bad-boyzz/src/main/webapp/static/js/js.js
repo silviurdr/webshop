@@ -37,20 +37,20 @@ let supFilters = document.getElementById("suppliers")
 plusSup.addEventListener("click", function () {
     supFilters.style.display = "block";
 })
-
-
-const inputs = document.getElementsByTagName("input");
-for(let i = 0; i < inputs.length; i++) {
-    inputs[i].addEventListener("click" ,function() {
-
-        if (inputs[i].checked === false) {
-            inputs[i].checked = true;
-        } else {
-            if (inputs[i].checked === true) {
-                inputs[i].checked = false;
-            }
-        }
-    })
-}
-
 document.getElementById('search-bar').readOnly = true;
+
+jQuery(function(){
+    if (localStorage.input) {
+        var checks = JSON.parse(localStorage.input);
+        jQuery(':checkbox').prop('checked', function(i) {
+            return checks[i];
+        });
+    }
+});
+
+jQuery(':checkbox').on('change', function() {
+    localStorage.input = JSON.stringify(jQuery(':checkbox').map(function() {
+        return this.checked;
+    }).get());
+});
+
