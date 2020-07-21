@@ -4,7 +4,6 @@ import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.BillingInformationDao;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.BillingInformationDaoMem;
-import com.codecool.shop.dao.implementation.CartDaoMem;
 import com.codecool.shop.model.AdminLog;
 import com.codecool.shop.model.Product;
 import org.thymeleaf.TemplateEngine;

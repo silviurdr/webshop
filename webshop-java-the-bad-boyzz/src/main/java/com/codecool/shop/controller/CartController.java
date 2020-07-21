@@ -3,9 +3,13 @@ package com.codecool.shop.controller;
 import com.codecool.shop.config.TemplateEngineUtil;
 import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.CartDaoJDBC;
 import com.codecool.shop.dao.implementation.ProductDaoJDBC;
+import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -16,78 +20,91 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductDao productDataStore = ProductDaoJDBC.getInstance();
-        CartDao cartProductCategoryDataStore = CartDaoMem.getInstance();
 
         HttpSession session = req.getSession();
+
+        String userEmail = (String) session.getAttribute("sessuser");
+
+        UserDao userDataStore = UserDaoJDBC.getInstance();
+        CartDao cartDataStore = CartDaoJDBC.getInstance();
+
+        User user = userDataStore.find(userEmail);
+        int numOfProducts = 0;
+
+        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        try {
+            Cart cart = cartDataStore.findByUserID(user.getId());
+            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
+                numOfProducts += cartDataStore.getCartProducts(cart).get(p);
+            }
+            float sum = 0;
+            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
+                sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
+            }
+            String sum2  = String.format("%.1f", sum);
+
+
+            WebContext context = new WebContext(req, resp, req.getServletContext());
+            context.setVariable("products1", cartDataStore.getCartProducts(cart));
+            context.setVariable("productsSet", cartDataStore.getCartProducts(cart));
+            context.setVariable("sum", sum2);
+            context.setVariable("numOfProducts", numOfProducts);
+            context.setVariable("noOfProducts", numOfProducts);
+            context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
+
+
+            engine.process("product/cart.html", context, resp.getWriter());
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        String userEmail = (String) session.getAttribute("sessuser");
+
+        UserDao userDataStore = UserDaoJDBC.getInstance();
+        CartDao cartDataStore = CartDaoJDBC.getInstance();
+
+        User user = userDataStore.find(userEmail);
+
+
 
         String toAddId = req.getParameter("id");
         String howMany = req.getParameter("howMany");
         String prodId = req.getParameter("prodId");
-        int numOfProducts = 0;
 
 
-        if (howMany != null) {
-            int howManyInt = Integer.parseInt(howMany);
-            int prodIdInt = Integer.parseInt(prodId);
-            for(Product p: cartProductCategoryDataStore.getAll().keySet()) {
-                if (p.getId() ==  prodIdInt) {
-                    if(howManyInt == 0) {
-                        cartProductCategoryDataStore.remove(prodIdInt);
-                    } else {
-                        cartProductCategoryDataStore.getAll().put(p, howManyInt);
+        Cart cart = null;
+        try {
+            cart = cartDataStore.findByUserID(user.getId());
+            if (howMany != null) {
+                int howManyInt = Integer.parseInt(howMany);
+                int prodIdInt = Integer.parseInt(prodId);
+                for(Product p: cartDataStore.getCartProducts(cart).keySet()) {
+                    if (p.getId() ==  prodIdInt) {
+                        if(howManyInt == 0) {
+                            cartDataStore.remove(prodIdInt, user.getId());
+                        } else {
+                            cartDataStore.getCartProducts(cart).put(p, howManyInt);
+                        }
                     }
                 }
             }
-        }
-
-
-        if (toAddId != null) {
-            cartProductCategoryDataStore.add(productDataStore.find(Integer.parseInt(toAddId)));
-
-        }
-
-        TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
-
-        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
-            numOfProducts += cartProductCategoryDataStore.getAll().get(p);
-        }
-
-
-        float sum = 0;
-        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
-            sum += p.getDefaultPrice() * cartProductCategoryDataStore.getAll().get(p);
-        }
-        String sum2  = String.format("%.1f", sum);
-
-
-        WebContext context = new WebContext(req, resp, req.getServletContext());
-        context.setVariable("products1", cartProductCategoryDataStore.getAll());
-        context.setVariable("productsSet", cartProductCategoryDataStore.getAll());
-        context.setVariable("sum", sum2);
-        context.setVariable("numOfProducts", numOfProducts);
-        context.setVariable("noOfProducts", numOfProducts);
-        context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
-        // // Alternative setting of the template context
-        // Map<String, Object> params = new HashMap<>();
-        // params.put("category", productCategoryDataStore.find(1));
-        // params.put("products", productDataStore.getBy(productCategoryDataStore.find(1)));
-        // context.setVariables(params);
-        if (toAddId != null) {
-//            engine.process("product/index.html", context, resp.getWriter());
-            resp.sendRedirect("/");
-            toAddId = null;
-        } else {
-            engine.process("product/cart.html", context, resp.getWriter());
-
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
     }
-
 }

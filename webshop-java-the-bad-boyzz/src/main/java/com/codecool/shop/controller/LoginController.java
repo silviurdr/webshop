@@ -50,7 +50,6 @@ public class LoginController extends HttpServlet {
                 httpSession.setAttribute("sessuser", loginUserEmail.trim());
                 session.setAttribute("userSession", "Yes");
                 System.out.println(session.getAttribute("userSession"));
-                System.out.println("maaaaaata");
 
             }
         } catch (NoSuchAlgorithmException e) {

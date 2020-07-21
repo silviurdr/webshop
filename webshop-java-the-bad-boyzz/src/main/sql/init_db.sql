@@ -42,6 +42,37 @@ CREATE TABLE users
     status VARCHAR(16)
 );
 
+CREATE TABLE orders
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    customer_name VARCHAR(255),
+    customer_email VARCHAR(255),
+    customer_phone VARCHAR(255),
+    customer_country VARCHAR(255),
+    customer_zip VARCHAR(255),
+    customer_city VARCHAR(255),
+    customer_address VARCHAR(255),
+    user_id INTEGER
+);
+
+CREATE TABLE orders_products(
+    order_id INTEGER ,
+    product_id INTEGER,
+    product_quantity INTEGER
+
+);
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(user_id);
+
+ALTER TABLE ONLY orders_products
+    ADD CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(id);
+
+ALTER TABLE ONLY orders_products
+    ADD CONSTRAINT fk_product_id FOREIGN KEY (product_id) REFERENCES products(id);
+
+
+
 
 INSERT INTO suppliers (name, description)
 VALUES ('Amazon', 'Digital content and services.');

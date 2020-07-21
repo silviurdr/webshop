@@ -1,13 +1,13 @@
 package com.codecool.shop.dao;
 
-import com.codecool.shop.dao.implementation.CartDaoMem;
+import com.codecool.shop.model.Cart;
 
 import java.util.LinkedHashMap;
 
 public interface BillingInformationDao {
-    void add(CartDaoMem order);
+    void add(Cart order);
     void remove(int id);
     void clear();
-    CartDaoMem getFirst();
-    LinkedHashMap<Integer,CartDaoMem> getAll();
+    Cart getFirst();
+    LinkedHashMap<Integer,Cart> getAll();
 }

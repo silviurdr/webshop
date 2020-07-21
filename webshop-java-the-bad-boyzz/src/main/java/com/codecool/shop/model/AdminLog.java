@@ -1,5 +1,6 @@
 package com.codecool.shop.model;
 
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.implementation.CartDaoMem;
 import org.json.simple.JSONObject;
 
@@ -30,7 +31,7 @@ public class AdminLog {
         return instance;
     }
 
-    public void jsonifyLog(CartDaoMem order) {
+    public void jsonifyLog(CartDao order) {
 
         JSONObject jsonObject = new JSONObject();
         String filename = this.filename;

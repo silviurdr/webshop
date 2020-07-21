@@ -6,7 +6,7 @@ import java.util.LinkedHashMap;
 
 public class BillingInformationDaoMem implements BillingInformationDao {
 
-    private LinkedHashMap<Integer,CartDaoMem> data = new LinkedHashMap<>();
+    private LinkedHashMap<Integer,Cart> data = new LinkedHashMap<>();
     private static BillingInformationDaoMem instance = null;
 
     /* A private Constructor prevents any other class from instantiating.
@@ -22,7 +22,7 @@ public class BillingInformationDaoMem implements BillingInformationDao {
     }
 
     @Override
-    public void add(CartDaoMem order) {
+    public void add(Cart order) {
         data.put(1,order);
     }
 
@@ -37,11 +37,11 @@ public class BillingInformationDaoMem implements BillingInformationDao {
     }
 
     @Override
-    public LinkedHashMap<Integer, CartDaoMem> getAll() {
+    public LinkedHashMap<Integer, Cart> getAll() {
         return data;
     }
     @Override
-    public CartDaoMem getFirst(){
+    public Cart getFirst(){
         return data.get(1);
     }
 
