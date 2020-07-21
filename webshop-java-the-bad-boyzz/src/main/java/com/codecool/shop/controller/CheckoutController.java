@@ -34,12 +34,9 @@ public class CheckoutController extends HttpServlet {
 
         UserDao userDataStore = UserDaoJDBC.getInstance();
         CartDao cartDataStore = CartDaoJDBC.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
 
         User user = userDataStore.find(userEmail);
         AdminLog log = AdminLog.getInstance();
-        log.jsonifyLog(cartDataStore);
-        log.addToFile("Checkout");
         int noOfProducts = 0;
         float sum = 0;
 
@@ -60,11 +57,10 @@ public class CheckoutController extends HttpServlet {
         Cart cart = null;
         try {
             cart = cartDataStore.findByUserID(user.getId());
+            log.jsonifyLog(cart);
+            log.addToFile("Checkout");
             for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
                 noOfProducts += cartDataStore.getCartProducts(cart).get(p);
-            }
-
-            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
                 sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
             }
 
@@ -98,7 +94,6 @@ public class CheckoutController extends HttpServlet {
 
         CartDao cartDataStore= CartDaoJDBC.getInstance();
         UserDao userDataStore = UserDaoJDBC.getInstance();
-        ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
 
         User user = userDataStore.find(userEmail);
         String forAdminLog = "Proceed checkout";
@@ -112,13 +107,9 @@ public class CheckoutController extends HttpServlet {
             cart.setCustomerCity(req.getParameter("city"));
             cart.setCustomerPhone(req.getParameter("phone"));
             cart.setCustomerZip(req.getParameter("zip"));
-//            BillingInformationDao billingInfo=BillingInformationDaoMem.getInstance();
-//            billingInfo.add(cart);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-
-
 
         resp.sendRedirect("/payment");
     }

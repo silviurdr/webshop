@@ -1,12 +1,11 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
-import com.codecool.shop.dao.CartDao;
-import com.codecool.shop.dao.ProductCategoryDao;
-import com.codecool.shop.dao.ProductDao;
-import com.codecool.shop.dao.SupplierDao;
+import com.codecool.shop.dao.*;
 import com.codecool.shop.dao.implementation.*;
+import com.codecool.shop.model.Cart;
 import com.codecool.shop.model.Product;
+import com.codecool.shop.model.User;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
@@ -29,17 +28,29 @@ public class ProductController extends HttpServlet {
 
         String emailValidation = (String) session.getAttribute("email");
         String emailError = "Email Address Already in Use!";
+        String userEmail = (String) session.getAttribute("sessuser");
 
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoJDBC.getInstance();
-        CartDao cartProductCategoryDataStore = CartDaoMem.getInstance();
+        CartDao cartDataStore = CartDaoJDBC.getInstance();
         int noOfProducts = 0;
+        UserDao userDataStore = UserDaoJDBC.getInstance();
+        User user = userDataStore.find(userEmail);
+        Cart cart = null;
+        try {
+            if (user!=null){
+                cart = cartDataStore.findByUserID(user.getId());
+                for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
+                    noOfProducts += cartDataStore.getCartProducts(cart).get(p);
+                }
+            }
 
 
-        for (Product p : cartProductCategoryDataStore.getAll().keySet()) {
-            noOfProducts += cartProductCategoryDataStore.getAll().get(p);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+
 
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());

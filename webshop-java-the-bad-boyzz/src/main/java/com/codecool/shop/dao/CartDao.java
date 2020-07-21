@@ -16,8 +16,8 @@ public interface CartDao {
     Cart findByUserID(int id) throws SQLException;
     void remove(int id, int user_id) throws SQLException;
     Cart createCart(User user) throws SQLException;
-
     void clearCart(Cart cart) throws SQLException;
+    void Jsonify(Cart cart);
 
     ConcurrentHashMap<Product, Integer> getCartProducts(Cart cart) throws SQLException;
 

@@ -283,7 +283,7 @@
                             <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
                         </div>
                         <div class="card-text">
-                            <form id="add-to-cart-form">
+                            <form id="add-to-cart-form", method="post">
                                 <div class="add-to-cart-container">
                                     <div class="quantity-modifier">
                                         <span class="icon icon-minus quantity-modifier-icon">-</span>

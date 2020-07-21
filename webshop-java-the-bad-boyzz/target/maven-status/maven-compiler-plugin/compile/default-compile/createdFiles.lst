@@ -5,11 +5,8 @@ com/codecool/shop/dao/implementation/ProductDaoMem.class
 com/codecool/shop/controller/CartController.class
 com/codecool/shop/dao/implementation/ProductCategoryDaoMem.class
 com/codecool/shop/dao/UserDao.class
-com/codecool/shop/dao/implementation/CartDaoMem.class
 com/codecool/shop/config/ThymeleafConfig.class
 com/codecool/shop/model/User.class
-com/codecool/shop/dao/BillingInformationDao.class
-com/codecool/shop/dao/implementation/BillingInformationDaoMem.class
 com/codecool/shop/dao/implementation/UserDaoJDBC.class
 com/codecool/shop/model/Cart.class
 com/codecool/shop/dao/CartDao.class

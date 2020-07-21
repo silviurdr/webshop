@@ -39,19 +39,21 @@ public class CartController extends HttpServlet {
         int numOfProducts = 0;
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
+        WebContext context = new WebContext(req, resp, req.getServletContext());
+
+        Cart cart = null;
         try {
-            Cart cart = cartDataStore.findByUserID(user.getId());
-            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                numOfProducts += cartDataStore.getCartProducts(cart).get(p);
-            }
             float sum = 0;
-            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
+            if (user!=null) {
+                cart = cartDataStore.findByUserID(user.getId());
+                for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
+                    numOfProducts += cartDataStore.getCartProducts(cart).get(p);
+                    sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
+                }
             }
             String sum2  = String.format("%.1f", sum);
 
 
-            WebContext context = new WebContext(req, resp, req.getServletContext());
             context.setVariable("products1", cartDataStore.getCartProducts(cart));
             context.setVariable("productsSet", cartDataStore.getCartProducts(cart));
             context.setVariable("sum", sum2);
@@ -60,11 +62,13 @@ public class CartController extends HttpServlet {
             context.setVariable("userSession", session.getAttribute("userSession") != null ? session.getAttribute("userSession")  : "No");
 
 
-            engine.process("product/cart.html", context, resp.getWriter());
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        engine.process("product/cart.html", context, resp.getWriter());
+
     }
 
     @Override
@@ -89,6 +93,10 @@ public class CartController extends HttpServlet {
         Cart cart = null;
         try {
             cart = cartDataStore.findByUserID(user.getId());
+            if (cart == null) {
+                cartDataStore.createCart(user);
+            }
+
             if (howMany != null) {
                 int howManyInt = Integer.parseInt(howMany);
                 int prodIdInt = Integer.parseInt(prodId);

@@ -5,6 +5,9 @@ import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.ProductCategoryDao;
 import com.codecool.shop.dao.SupplierDao;
 import com.codecool.shop.model.*;
+import org.json.simple.JSONObject;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,7 +142,7 @@ public class CartDaoJDBC implements CartDao {
     	Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
-					("SELECT * FROM producs WHERE id==product_id AND order_id==? JOIN orders_products");
+					("SELECT * FROM products WHERE id==product_id AND order_id==? JOIN orders_products");
 		stmt.setInt(1,cart.getId());
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
@@ -163,6 +166,27 @@ public class CartDaoJDBC implements CartDao {
 		PreparedStatement stmt = conn.prepareStatement("DELETE FROM orders_products WHERE order_id = ?");
 		stmt.setInt(1, cart.getId());
 		stmt.executeUpdate();
+    }
+
+    @Override
+	public void Jsonify(Cart cart) {
+        JSONObject jsonObject = new JSONObject();
+        //Inserting key-value pairs into the json object
+        jsonObject.put("Name", cart.getCustomerName());
+        jsonObject.put("Phone", cart.getCustomerPhone());
+        jsonObject.put("Adress", cart.getCustomerAddress());
+        jsonObject.put("City", cart.getCustomerCity());
+        jsonObject.put("Country", cart.getCustomerCountry());
+        jsonObject.put("Email", cart.getCustomerEmail());
+        jsonObject.put("Zip", cart.getCustomerZip());
+
+        try {
+            FileWriter file = new FileWriter("src/main/webapp/static/json/paymentDetails.json");
+            file.write(jsonObject.toJSONString());
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
