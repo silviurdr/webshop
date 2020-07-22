@@ -61,8 +61,8 @@ public class CheckoutController extends HttpServlet {
             log.jsonifyLog(cart);
             log.addToFile("Checkout");
             for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                noOfProducts += cartDataStore.getCartProducts(cart).get(p);
-                sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
+                noOfProducts++;
+                sum += p.getDefaultPrice();
             }
 
             float totalSum = sum - redeemCodeValue;
@@ -102,13 +102,9 @@ public class CheckoutController extends HttpServlet {
         try {
             User user = userDataStore.find(userEmail);
             Cart cart = cartDataStore.findByUserID(user.getId());
-            cart.setCustomerName(req.getParameter("name"));
-            cart.setCustomerEmail(req.getParameter("email"));
-            cart.setCustomerAddress(req.getParameter("address"));
-            cart.setCustomerCountry(req.getParameter("country"));
-            cart.setCustomerCity(req.getParameter("city"));
-            cart.setCustomerPhone(req.getParameter("phone"));
-            cart.setCustomerZip(req.getParameter("zip"));
+            cart.updateCustomerData(req.getParameter("name"),req.getParameter("email"),req.getParameter("address"),
+                    req.getParameter("country"),req.getParameter("zip"),req.getParameter("city"),req.getParameter("phone"));
+            cartDataStore.updateCustomerInfo(cart);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

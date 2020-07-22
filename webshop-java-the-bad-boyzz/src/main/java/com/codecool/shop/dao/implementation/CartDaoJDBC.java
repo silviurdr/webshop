@@ -9,10 +9,7 @@ import org.json.simple.JSONObject;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -44,7 +41,7 @@ public class CartDaoJDBC implements CartDao {
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
 				("INSERT INTO orders_products (order_id , product_id , product_quantity) " +
-						"values (?, ?, ?)");
+						"values (?, ?, ?);");
 		stmt.setInt(1, cart.getId());
 		stmt.setInt(2, product.getId());
 		stmt.setInt(3, quantity);
@@ -57,24 +54,44 @@ public class CartDaoJDBC implements CartDao {
 	}
 
 	@Override
+	public void updateCustomerInfo(Cart cart) throws SQLException {
+		Connection conn = myConn.getConnection();
+		assert conn != null;
+		PreparedStatement stmt = conn.prepareStatement
+				("UPDATE orders " +
+						" SET customer_name=?, customer_email=?, customer_phone=?, customer_country=?, customer_zip=?, customer_city=?, customer_address=? " +
+						"WHERE id=? AND user_id=?;" );
+		stmt.setString(1, cart.getCustomerName());
+		stmt.setString(2, cart.getCustomerEmail());
+		stmt.setString(3, cart.getCustomerPhone());
+		stmt.setString(4, cart.getCustomerCountry());
+		stmt.setString(5, cart.getCustomerZip());
+		stmt.setString(6, cart.getCustomerCity());
+		stmt.setString(7, cart.getCustomerAddress());
+		stmt.setInt(8, cart.getId());
+		stmt.setInt(9, cart.getCustomerId());
+
+		stmt.executeUpdate();
+	}
+
+	@Override
 	public Cart createCart(User user) throws SQLException {
 		Cart cart = new Cart();
 		Connection conn = myConn.getConnection();
 		assert conn != null;
-		try (PreparedStatement stmt = conn.prepareStatement
-				("INSERT INTO orders (user_id) " +
-						"values (?)")) {
-			stmt.setInt(1, user.getId());
-			stmt.executeUpdate();
-			ResultSet rs = stmt.getGeneratedKeys();
-			if (rs.next()) {
-				int id = rs.getInt(1);
-				cart.setId(id);
-				cart.setCustomerId(user.getId());
-			}
-			return cart;
+		PreparedStatement stmt = conn.prepareStatement
+				("INSERT INTO orders (user_id) values (?);", Statement.RETURN_GENERATED_KEYS);
+		stmt.setInt(1, user.getId());
+		stmt.executeUpdate();
+		ResultSet rs = stmt.getGeneratedKeys();
+		if (rs.next()) {
+			int id = rs.getInt(1);
+			cart.setId(id);
+			cart.setCustomerId(user.getId());
 		}
-	}
+		return cart;
+		}
+
 
 
     @Override
@@ -119,9 +136,10 @@ public class CartDaoJDBC implements CartDao {
 			String customer_zip = rs.getString("customer_zip");
 			String customer_city = rs.getString("customer_city");
 			String customer_address = rs.getString("customer_address");
-			int id = rs.getInt("user_id");
+			int id = rs.getInt("id");
 			cart.updateCustomerData(customer_name, customer_email, customer_phone, customer_country, customer_zip, customer_city, customer_address);
 			cart.setId(id);
+			cart.setCustomerId(user_id);
 			return cart;
 		}else {
 			return null;
@@ -133,7 +151,7 @@ public class CartDaoJDBC implements CartDao {
     public void remove(int product_id, int user_id) throws SQLException {
     	Connection conn = myConn.getConnection() ;
 		assert conn != null;
-		PreparedStatement stmt = conn.prepareStatement("DELETE FROM orders_products WHERE order_id = ? AND user_id= ? ");
+		PreparedStatement stmt = conn.prepareStatement("DELETE FROM orders_products WHERE order_id = ? AND user_id= ?;");
 		stmt.setInt(1, product_id);
 		stmt.setInt(2, user_id);
 		stmt.executeUpdate();
@@ -146,7 +164,7 @@ public class CartDaoJDBC implements CartDao {
     	Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
-					("SELECT * FROM products JOIN orders_products ON id=product_id WHERE order_id=?");
+					("SELECT * FROM products JOIN orders_products ON id=product_id WHERE order_id=?;");
 		stmt.setInt(1,cart.getId());
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {

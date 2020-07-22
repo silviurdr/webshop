@@ -114,7 +114,7 @@ public class CartController extends HttpServlet {
             User user = userDataStore.find(userEmail);
             cart = cartDataStore.findByUserID(user.getId());
             if (cart == null) {
-                cartDataStore.createCart(user);
+                cart = cartDataStore.createCart(user);
             }
             cartDataStore.add(productDataStore.find(prodId), cart);
 

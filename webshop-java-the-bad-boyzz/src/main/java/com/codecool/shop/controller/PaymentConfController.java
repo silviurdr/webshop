@@ -49,7 +49,7 @@ public class PaymentConfController extends HttpServlet {
             int noOfProducts = 0;
             for (Product p : cartDataStore.getCartProducts(cart).keySet()){
                 sum+=p.getDefaultPrice();
-                noOfProducts += cartDataStore.getCartProducts(cart).get(p);
+                noOfProducts++;
             }
 
 
