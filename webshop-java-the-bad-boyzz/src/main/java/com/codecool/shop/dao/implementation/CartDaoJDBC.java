@@ -107,9 +107,10 @@ public class CartDaoJDBC implements CartDao {
 		Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
-				("SELECT * FROM orders WHERE " + " user_id = ?;");
+				("SELECT * FROM orders WHERE user_id = ?;");
 		stmt.setInt(1, user_id);
 		ResultSet rs = stmt.executeQuery();
+
 		if (rs.next()) {
 			String customer_name = rs.getString("customer_name");
 			String customer_email = rs.getString("customer_email");
@@ -121,8 +122,11 @@ public class CartDaoJDBC implements CartDao {
 			int id = rs.getInt("user_id");
 			cart.updateCustomerData(customer_name, customer_email, customer_phone, customer_country, customer_zip, customer_city, customer_address);
 			cart.setId(id);
+			return cart;
+		}else {
+			return null;
 		}
-		return cart;
+
 	}
 
     @Override
@@ -142,7 +146,7 @@ public class CartDaoJDBC implements CartDao {
     	Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
-					("SELECT * FROM products WHERE id==product_id AND order_id==? JOIN orders_products");
+					("SELECT * FROM products JOIN orders_products ON id=product_id WHERE order_id=?");
 		stmt.setInt(1,cart.getId());
 		ResultSet rs = stmt.executeQuery();
 		while (rs.next()) {
@@ -153,7 +157,7 @@ public class CartDaoJDBC implements CartDao {
 			String description = rs.getString("description");
 			String image = rs.getString("image");
 			float price = rs.getFloat("price");
-			String currency = rs.getString("curency");
+			String currency = rs.getString("currency");
 			products.merge( new Product(id, name, price, currency, description, productCategoryDaoJDBC.find(category_id) , supplierDao.find(supplier_id), image), 1, Integer::sum);
 		}
 		return products;

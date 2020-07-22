@@ -47,11 +47,12 @@ public class PaymentController extends HttpServlet {
         UserDao userDataStore = UserDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+
         String forAdminLog = "Proceed checkout";
 
 
         try {
+            User user = userDataStore.find(userEmail);
             Cart cart = cartDataStore.findByUserID(user.getId());
             int numOfProducts = 0;
 
@@ -82,7 +83,7 @@ public class PaymentController extends HttpServlet {
         CartDao cartDataStore= CartDaoJDBC.getInstance();
         UserDao userDataStore = UserDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+
         String forAdminLog = "Proceed checkout";
 
         String cardOwner = req.getParameter("cardOwner");
@@ -96,6 +97,7 @@ public class PaymentController extends HttpServlet {
 
 
         try {
+            User user = userDataStore.find(userEmail);
             Cart cart = cartDataStore.findByUserID(user.getId());
             float sum = 0;
             for (Product p : cartDataStore.getCartProducts(cart).keySet()){

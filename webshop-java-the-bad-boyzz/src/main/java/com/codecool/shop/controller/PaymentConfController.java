@@ -37,12 +37,13 @@ public class PaymentConfController extends HttpServlet {
         CartDao cartDataStore= CartDaoJDBC.getInstance();
         UserDao userDataStore = UserDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+        User user = null;
 
         WebContext context = new WebContext(req, resp, req.getServletContext());
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
 
         try {
+            user = userDataStore.find(userEmail);
             Cart cart = cartDataStore.findByUserID(user.getId());
             float sum = 0;
             int noOfProducts = 0;

@@ -36,13 +36,15 @@ public class ProductController extends HttpServlet {
         CartDao cartDataStore = CartDaoJDBC.getInstance();
         int noOfProducts = 0;
         UserDao userDataStore = UserDaoJDBC.getInstance();
-        User user = userDataStore.find(userEmail);
         Cart cart = null;
         try {
+            User user = userDataStore.find(userEmail);
             if (user!=null){
                 cart = cartDataStore.findByUserID(user.getId());
-                for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                    noOfProducts += cartDataStore.getCartProducts(cart).get(p);
+                if(cart!=null){
+                    for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
+                        noOfProducts++;
+                    }
                 }
             }
 

@@ -35,7 +35,7 @@ public class CheckoutController extends HttpServlet {
         UserDao userDataStore = UserDaoJDBC.getInstance();
         CartDao cartDataStore = CartDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+
         AdminLog log = AdminLog.getInstance();
         int noOfProducts = 0;
         float sum = 0;
@@ -56,6 +56,7 @@ public class CheckoutController extends HttpServlet {
 
         Cart cart = null;
         try {
+            User user = userDataStore.find(userEmail);
             cart = cartDataStore.findByUserID(user.getId());
             log.jsonifyLog(cart);
             log.addToFile("Checkout");
@@ -95,10 +96,11 @@ public class CheckoutController extends HttpServlet {
         CartDao cartDataStore= CartDaoJDBC.getInstance();
         UserDao userDataStore = UserDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+
         String forAdminLog = "Proceed checkout";
 
         try {
+            User user = userDataStore.find(userEmail);
             Cart cart = cartDataStore.findByUserID(user.getId());
             cart.setCustomerName(req.getParameter("name"));
             cart.setCustomerEmail(req.getParameter("email"));

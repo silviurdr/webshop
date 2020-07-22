@@ -9,7 +9,7 @@ public interface UserDao {
 
     void add(User user) throws SQLException;
     User find(int id) throws SQLException;
-    User find(String email);
+    User find(String email) throws SQLException;
     void remove(int id);
     String getUserPasswordByEmail(String string) throws SQLException;
 

@@ -35,20 +35,42 @@ public class CartController extends HttpServlet {
         UserDao userDataStore = UserDaoJDBC.getInstance();
         CartDao cartDataStore = CartDaoJDBC.getInstance();
 
-        User user = userDataStore.find(userEmail);
+        User user = null;
+
         int numOfProducts = 0;
+        String howMany = req.getParameter("howMany");
+        String prodId = req.getParameter("prodId");
 
         TemplateEngine engine = TemplateEngineUtil.getTemplateEngine(req.getServletContext());
         WebContext context = new WebContext(req, resp, req.getServletContext());
 
         Cart cart = null;
+        float sum = 0;
         try {
-            float sum = 0;
+            user = userDataStore.find(userEmail);
             if (user!=null) {
                 cart = cartDataStore.findByUserID(user.getId());
                 for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                    numOfProducts += cartDataStore.getCartProducts(cart).get(p);
-                    sum += p.getDefaultPrice() * cartDataStore.getCartProducts(cart).get(p);
+                    numOfProducts ++;
+                    sum += p.getDefaultPrice();
+                }
+                if(numOfProducts==0){
+                    cart = cartDataStore.createCart(user);
+                }
+                if (howMany != null) {
+                    int howManyInt = Integer.parseInt(howMany);
+                    if (howManyInt==0){
+                    }
+                    int prodIdInt = Integer.parseInt(prodId);
+                    for(Product p: cartDataStore.getCartProducts(cart).keySet()) {
+                        if (p.getId() ==  prodIdInt) {
+                            if(howManyInt == 0) {
+                                cartDataStore.remove(prodIdInt, user.getId());
+                            } else {
+                                cartDataStore.getCartProducts(cart).put(p, howManyInt);
+                            }
+                        }
+                    }
                 }
             }
             String sum2  = String.format("%.1f", sum);
@@ -80,39 +102,28 @@ public class CartController extends HttpServlet {
 
         UserDao userDataStore = UserDaoJDBC.getInstance();
         CartDao cartDataStore = CartDaoJDBC.getInstance();
-
-        User user = userDataStore.find(userEmail);
-
+        ProductDao productDataStore = ProductDaoJDBC.getInstance();
 
 
-        String toAddId = req.getParameter("id");
-        String howMany = req.getParameter("howMany");
-        String prodId = req.getParameter("prodId");
+
+        int prodId =Integer.parseInt(req.getParameter("id"));
 
 
         Cart cart = null;
         try {
+            User user = userDataStore.find(userEmail);
             cart = cartDataStore.findByUserID(user.getId());
             if (cart == null) {
                 cartDataStore.createCart(user);
             }
+            cartDataStore.add(productDataStore.find(prodId), cart);
 
-            if (howMany != null) {
-                int howManyInt = Integer.parseInt(howMany);
-                int prodIdInt = Integer.parseInt(prodId);
-                for(Product p: cartDataStore.getCartProducts(cart).keySet()) {
-                    if (p.getId() ==  prodIdInt) {
-                        if(howManyInt == 0) {
-                            cartDataStore.remove(prodIdInt, user.getId());
-                        } else {
-                            cartDataStore.getCartProducts(cart).put(p, howManyInt);
-                        }
-                    }
-                }
-            }
+
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
+        resp.sendRedirect("/");
 
     }
 }
