@@ -1,9 +1,6 @@
 package com.codecool.shop.model;
 
-import com.codecool.shop.dao.implementation.CartDaoMem;
 import org.json.simple.JSONObject;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -13,27 +10,30 @@ import java.util.Date;
 public class AdminLog {
 
     private static AdminLog instance = null;
-    CartDaoMem order = CartDaoMem.getInstance();
     private Date date= new Date();
     private DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     private String date1 = dateFormat.format(date);
-    public String filename = "src/main/webapp/static/json/"+order.getId()+"-date-"+date1+".json";
+    public String filename;
 
-    private AdminLog() {
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    private AdminLog() throws IOException {
 
     }
 
-    public static AdminLog getInstance() {
+    public static AdminLog getInstance() throws IOException {
         if (instance == null) {
             instance = new AdminLog();
         }
         return instance;
     }
 
-    public void jsonifyLog(CartDaoMem order) {
+    public void jsonifyLog(Cart cart) {
 
         JSONObject jsonObject = new JSONObject();
-        String filename = this.filename;
+        this.setFilename("src/main/webapp/static/json/"+cart.getId()+"-date-"+date1+".json");
         try {
             FileWriter file = new FileWriter(filename);
             file.write(jsonObject.toJSONString());

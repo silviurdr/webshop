@@ -51,10 +51,9 @@ public class LoginController extends HttpServlet {
                 System.out.println("Password matching!");
 
                 HttpSession httpSession = req.getSession(true);
-                httpSession.setAttribute("sessuser", loginUserEmail.trim());
+                httpSession.setAttribute("sessuser", loginUserEmail);
                 session.setAttribute("userSession", "Yes");
                 System.out.println(session.getAttribute("userSession"));
-                System.out.println("maaaaaata");
 
             }
 

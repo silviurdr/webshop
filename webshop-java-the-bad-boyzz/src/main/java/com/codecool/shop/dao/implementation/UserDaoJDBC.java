@@ -90,35 +90,27 @@ public class UserDaoJDBC implements UserDao {
     }
 
     @Override
-    public User find(String email) {
+    public User find(String email) throws SQLException {
 
-        Connection conn = null;
+        Connection conn = myConn.getConnection();
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
+        String sql = "SELECT * FROM users WHERE email=?";
+        preparedStatement = conn.prepareStatement(sql);
+        preparedStatement.setString(1, email);
 
-        try {
-            conn = myConn.getConnection();
-            String sql = "SELECT * FROM users WHERE email=?";
-            preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setString(1, email);
+        rs = preparedStatement.executeQuery();
 
-            rs = preparedStatement.executeQuery();
-
-            if (rs.next()) {
-                int existingUserID = rs.getInt("user_id");
-                String existingUserName = rs.getString("full_name");
-                String existingUserEmail = rs.getString("email");
-                String existingMobileNumber = rs.getString("mobile_number");
-                User existingUser = new User(existingUserID, existingUserName, existingUserEmail, existingMobileNumber);
-                return existingUser;
-            }
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        while (rs.next()) {
+            int existingUserID = rs.getInt("user_id");
+            String existingUserName = rs.getString("full_name");
+            String existingUserEmail = rs.getString("email");
+            String existingMobileNumber = rs.getString("mobile_number");
+            User existingUser = new User(existingUserID, existingUserName, existingUserEmail, existingMobileNumber);
+            return existingUser;
         }
-
         return null;
+
     }
 
     @Override
