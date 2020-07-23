@@ -60,10 +60,18 @@ public class LoginController extends HttpServlet {
 
                 UserDao userDataStore = UserDaoJDBC.getInstance();
                 CartDao cartDataStore = CartDaoJDBC.getInstance();
-                int order_id = (int) session.getAttribute("order_id");
+                int order_id = 0;
+                try {
+                    order_id = (int) session.getAttribute("order_id");
+                }catch (NullPointerException exception){
+
+                }
                 String userEmail = (String) session.getAttribute("sessuser");
                 User user = userDataStore.find(userEmail);
-                cartDataStore.connectUserToCart(order_id,user.getId());
+                if(order_id!=0){
+                    cartDataStore.connectUserToCart(order_id,user.getId());
+                }
+
 
             }
 
