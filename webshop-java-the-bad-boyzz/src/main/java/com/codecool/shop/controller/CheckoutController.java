@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 
 @WebServlet(urlPatterns = {"/checkout"})
@@ -61,9 +62,9 @@ public class CheckoutController extends HttpServlet {
             cart = cartDataStore.findByUserID(user.getId());
             log.jsonifyLog(cart);
             log.addToFile("Checkout");
-            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                noOfProducts++;
-                sum += p.getDefaultPrice();
+            for (Map.Entry<Product, Integer> entry : cartDataStore.getCartProducts(cart).entrySet()) {
+                noOfProducts+=entry.getValue();
+                sum += entry.getKey().getDefaultPrice()* entry.getValue();
             }
 
             float totalSum = sum - redeemCodeValue;
@@ -72,7 +73,7 @@ public class CheckoutController extends HttpServlet {
 
 
 
-            context.setVariable("products1", cartDataStore.getCartProducts(cart));
+            context.setVariable("products1", cartDataStore.getCartProducts(cart).entrySet());
             context.setVariable("productsSet", cartDataStore.getCartProducts(cart));
             context.setVariable("sum", sum2);
             context.setVariable("noOfProducts", noOfProducts);
