@@ -42,8 +42,8 @@ public class ProductController extends HttpServlet {
             if (user!=null){
                 cart = cartDataStore.findByUserID(user.getId());
                 if(cart!=null){
-                    for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                        noOfProducts++;
+                    for (int nrProduct : cartDataStore.getCartProducts(cart).values()) {
+                        noOfProducts+=nrProduct;
                     }
                 }
             }

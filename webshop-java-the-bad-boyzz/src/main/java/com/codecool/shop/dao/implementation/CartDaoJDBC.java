@@ -11,7 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class CartDaoJDBC implements CartDao {
@@ -35,22 +37,67 @@ public class CartDaoJDBC implements CartDao {
 		return instance;
 	}
 
-    @Override
-	public void add(Product product,Cart cart, int quantity) throws SQLException {
+	@Override
+	public HashMap getCartProducts(int order_id) throws SQLException {
+		HashMap<Integer, Integer> cartProducts = new HashMap<>();
 		Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
-				("INSERT INTO orders_products (order_id , product_id , product_quantity) " +
-						"values (?, ?, ?);");
-		stmt.setInt(1, cart.getId());
-		stmt.setInt(2, product.getId());
-		stmt.setInt(3, quantity);
-		stmt.executeUpdate();
+				("SELECT * FROM orders_products WHERE order_id = ?;");
+		stmt.setInt(1, order_id);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+			int product_id = rs.getInt("product_id");
+			int product_quantity = rs.getInt("product_quantity");
+			cartProducts.put(product_id, product_quantity);
+		}
+		return cartProducts;
 	}
 
 	@Override
-	public void add(Product product, Cart cart) throws SQLException {
-		add(product, cart,1);
+	public void updateProductQuantity(Product product, Cart cart, int quantity) throws SQLException {
+		Connection conn = myConn.getConnection();
+		assert conn != null;
+		if (quantity==0){
+			remove(product,cart);
+		}else {
+			PreparedStatement stmt = conn.prepareStatement
+					("UPDATE orders_products SET product_quantity=? " +
+							"WHERE order_id=? AND product_id=?;");
+			stmt.setInt(1, quantity);
+			stmt.setInt(2, cart.getId());
+			stmt.setInt(3, product.getId());
+			stmt.executeUpdate();
+		}
+	}
+
+	@Override
+	public void add(Product product,Cart cart, int quantity, HashMap<Integer, Integer> cartProducts) throws SQLException {
+    	Connection conn = myConn.getConnection();
+		assert conn != null;
+		int product_id = product.getId();
+		if(cartProducts.containsKey(product_id)){
+			PreparedStatement stmt = conn.prepareStatement
+					("UPDATE orders_products SET product_quantity=product_quantity+? " +
+							"WHERE order_id=? AND product_id=?;");
+			stmt.setInt(1, quantity);
+			stmt.setInt(2, cart.getId());
+			stmt.setInt(3, product.getId());
+			stmt.executeUpdate();
+		}else {
+			PreparedStatement stmt = conn.prepareStatement
+					("INSERT INTO orders_products (order_id , product_id , product_quantity) " +
+							"values (?, ?, ?);");
+			stmt.setInt(1, cart.getId());
+			stmt.setInt(2, product.getId());
+			stmt.setInt(3, quantity);
+			stmt.executeUpdate();
+		}
+	}
+
+	@Override
+	public void add(Product product, Cart cart, HashMap<Integer, Integer> cartProducts) throws SQLException {
+		add(product, cart,1, cartProducts);
 	}
 
 	@Override
@@ -148,12 +195,12 @@ public class CartDaoJDBC implements CartDao {
 	}
 
     @Override
-    public void remove(int product_id, int user_id) throws SQLException {
+    public void remove(Product product, Cart cart) throws SQLException {
     	Connection conn = myConn.getConnection() ;
 		assert conn != null;
-		PreparedStatement stmt = conn.prepareStatement("DELETE FROM orders_products WHERE order_id = ? AND user_id= ?;");
-		stmt.setInt(1, product_id);
-		stmt.setInt(2, user_id);
+		PreparedStatement stmt = conn.prepareStatement("DELETE FROM orders_products WHERE order_id = ? AND product_id= ?;");
+		stmt.setInt(1, cart.getId());
+		stmt.setInt(2, product.getId());
 		stmt.executeUpdate();
 
     }
@@ -176,7 +223,8 @@ public class CartDaoJDBC implements CartDao {
 			String image = rs.getString("image");
 			float price = rs.getFloat("price");
 			String currency = rs.getString("currency");
-			products.merge( new Product(id, name, price, currency, description, productCategoryDaoJDBC.find(category_id) , supplierDao.find(supplier_id), image), 1, Integer::sum);
+			int quantity = rs.getInt("product_quantity");
+			products.put( new Product(id, name, price, currency, description, productCategoryDaoJDBC.find(category_id) , supplierDao.find(supplier_id), image), quantity);
 		}
 		return products;
 	}

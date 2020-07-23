@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
 public class CartController extends HttpServlet {
@@ -50,13 +51,6 @@ public class CartController extends HttpServlet {
             user = userDataStore.find(userEmail);
             if (user!=null) {
                 cart = cartDataStore.findByUserID(user.getId());
-                for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                    numOfProducts ++;
-                    sum += p.getDefaultPrice();
-                }
-                if(numOfProducts==0){
-                    cart = cartDataStore.createCart(user);
-                }
                 if (howMany != null) {
                     int howManyInt = Integer.parseInt(howMany);
                     if (howManyInt==0){
@@ -64,14 +58,18 @@ public class CartController extends HttpServlet {
                     int prodIdInt = Integer.parseInt(prodId);
                     for(Product p: cartDataStore.getCartProducts(cart).keySet()) {
                         if (p.getId() ==  prodIdInt) {
-                            if(howManyInt == 0) {
-                                cartDataStore.remove(prodIdInt, user.getId());
-                            } else {
-                                cartDataStore.getCartProducts(cart).put(p, howManyInt);
-                            }
+                            cartDataStore.updateProductQuantity(p, cart, howManyInt);
                         }
                     }
                 }
+                for (Map.Entry<Product, Integer> entry : cartDataStore.getCartProducts(cart).entrySet()) {
+                    numOfProducts+=entry.getValue();
+                    sum += entry.getKey().getDefaultPrice()* entry.getValue();
+                }
+                if(numOfProducts==0){
+                    cart = cartDataStore.createCart(user);
+                }
+
             }
             String sum2  = String.format("%.1f", sum);
 
@@ -116,7 +114,7 @@ public class CartController extends HttpServlet {
             if (cart == null) {
                 cart = cartDataStore.createCart(user);
             }
-            cartDataStore.add(productDataStore.find(prodId), cart);
+            cartDataStore.add(productDataStore.find(prodId), cart, cartDataStore.getCartProducts(cart.getId()));
 
 
         } catch (SQLException throwables) {
