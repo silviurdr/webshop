@@ -72,7 +72,7 @@ public class CartDaoJDBC implements CartDao {
 	}
 
 	@Override
-	public void add(Product product,Cart cart, int quantity, HashMap<Integer, Integer> cartProducts) throws SQLException {
+	public void add(Product product,int id, int quantity, HashMap<Integer, Integer> cartProducts) throws SQLException {
     	Connection conn = myConn.getConnection();
 		assert conn != null;
 		int product_id = product.getId();
@@ -81,14 +81,14 @@ public class CartDaoJDBC implements CartDao {
 					("UPDATE orders_products SET product_quantity=product_quantity+? " +
 							"WHERE order_id=? AND product_id=?;");
 			stmt.setInt(1, quantity);
-			stmt.setInt(2, cart.getId());
+			stmt.setInt(2, id);
 			stmt.setInt(3, product.getId());
 			stmt.executeUpdate();
 		}else {
 			PreparedStatement stmt = conn.prepareStatement
 					("INSERT INTO orders_products (order_id , product_id , product_quantity) " +
 							"values (?, ?, ?);");
-			stmt.setInt(1, cart.getId());
+			stmt.setInt(1, id);
 			stmt.setInt(2, product.getId());
 			stmt.setInt(3, quantity);
 			stmt.executeUpdate();
@@ -96,8 +96,8 @@ public class CartDaoJDBC implements CartDao {
 	}
 
 	@Override
-	public void add(Product product, Cart cart, HashMap<Integer, Integer> cartProducts) throws SQLException {
-		add(product, cart,1, cartProducts);
+	public void add(Product product,int id, HashMap<Integer, Integer> cartProducts) throws SQLException {
+		add(product, id,1, cartProducts);
 	}
 
 	@Override
@@ -122,19 +122,43 @@ public class CartDaoJDBC implements CartDao {
 	}
 
 	@Override
+	public void connectUserToCart(int order_id, int user_id) throws SQLException {
+		Connection conn = myConn.getConnection();
+		assert conn != null;
+		PreparedStatement stmt = conn.prepareStatement
+				("UPDATE orders SET user_id=? " +
+						"WHERE id=?;");
+		stmt.setInt(1, user_id);
+		stmt.setInt(2, order_id);
+		stmt.executeUpdate();
+
+
+	}
+
+	@Override
 	public Cart createCart(User user) throws SQLException {
 		Cart cart = new Cart();
 		Connection conn = myConn.getConnection();
 		assert conn != null;
 		PreparedStatement stmt = conn.prepareStatement
 				("INSERT INTO orders (user_id) values (?);", Statement.RETURN_GENERATED_KEYS);
-		stmt.setInt(1, user.getId());
-		stmt.executeUpdate();
-		ResultSet rs = stmt.getGeneratedKeys();
-		if (rs.next()) {
-			int id = rs.getInt(1);
-			cart.setId(id);
-			cart.setCustomerId(user.getId());
+		if(user==null){
+			stmt.setNull(1, Types.INTEGER);
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				int id = rs.getInt(1);
+				cart.setId(id);
+			}
+		}else{
+			stmt.setInt (1, user.getId());
+			stmt.executeUpdate();
+			ResultSet rs = stmt.getGeneratedKeys();
+			if (rs.next()) {
+				int id = rs.getInt(1);
+				cart.setId(id);
+				cart.setCustomerId(user.getId());
+			}
 		}
 		return cart;
 		}
@@ -143,6 +167,9 @@ public class CartDaoJDBC implements CartDao {
 
     @Override
     public Cart findById(int id) throws SQLException {
+    	if (id==0){
+    		return null;
+		}
 		Cart cart = new Cart();
 		Connection conn = myConn.getConnection();
 		assert conn != null;

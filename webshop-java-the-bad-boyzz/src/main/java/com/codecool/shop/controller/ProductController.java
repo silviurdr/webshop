@@ -30,6 +30,7 @@ public class ProductController extends HttpServlet {
         String emailError = "Email Address Already in Use!";
         String userEmail = (String) session.getAttribute("sessuser");
 
+
         ProductDao productDataStore = ProductDaoJDBC.getInstance();
         ProductCategoryDao productCategoryDataStore = ProductCategoryDaoJDBC.getInstance();
         SupplierDao productSupplierDataStore = SupplierDaoJDBC.getInstance();
@@ -42,6 +43,20 @@ public class ProductController extends HttpServlet {
             if (user!=null){
                 cart = cartDataStore.findByUserID(user.getId());
                 if(cart!=null){
+                    for (int nrProduct : cartDataStore.getCartProducts(cart).values()) {
+                        noOfProducts+=nrProduct;
+                    }
+                }
+            }else{
+                int order_id = 0;
+                try {
+                    order_id = (int) session.getAttribute("order_id");
+                }catch (NullPointerException exception){
+
+                }
+                cart = cartDataStore.findById(order_id);
+                if(cart!=null){
+                    cart.setId(order_id);
                     for (int nrProduct : cartDataStore.getCartProducts(cart).values()) {
                         noOfProducts+=nrProduct;
                     }

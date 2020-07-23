@@ -32,6 +32,7 @@ public class CheckoutController extends HttpServlet {
 
         String userEmail = (String) session.getAttribute("sessuser");
 
+
         UserDao userDataStore = UserDaoJDBC.getInstance();
         CartDao cartDataStore = CartDaoJDBC.getInstance();
 
@@ -90,8 +91,9 @@ public class CheckoutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
         String userEmail = (String) session.getAttribute("sessuser");
+
+
 
         CartDao cartDataStore= CartDaoJDBC.getInstance();
         UserDao userDataStore = UserDaoJDBC.getInstance();

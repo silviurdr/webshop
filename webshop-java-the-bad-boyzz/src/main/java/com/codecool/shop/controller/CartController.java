@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.Map;
 
 @WebServlet(urlPatterns = {"/cart"})
@@ -66,8 +67,30 @@ public class CartController extends HttpServlet {
                     numOfProducts+=entry.getValue();
                     sum += entry.getKey().getDefaultPrice()* entry.getValue();
                 }
-                if(numOfProducts==0){
-                    cart = cartDataStore.createCart(user);
+
+            }else{
+                int order_id = 0;
+                try {
+                    order_id = (int) session.getAttribute("order_id");
+                }catch (NullPointerException exception){
+
+                }
+                cart = cartDataStore.findById(order_id);
+                cart.setId(order_id);
+                if (howMany != null) {
+                    int howManyInt = Integer.parseInt(howMany);
+                    if (howManyInt==0){
+                    }
+                    int prodIdInt = Integer.parseInt(prodId);
+                    for(Product p: cartDataStore.getCartProducts(cart).keySet()) {
+                        if (p.getId() ==  prodIdInt) {
+                            cartDataStore.updateProductQuantity(p, cart, howManyInt);
+                        }
+                    }
+                }
+                for (Map.Entry<Product, Integer> entry : cartDataStore.getCartProducts(cart).entrySet()) {
+                    numOfProducts+=entry.getValue();
+                    sum += entry.getKey().getDefaultPrice()* entry.getValue();
                 }
 
             }
@@ -110,12 +133,39 @@ public class CartController extends HttpServlet {
         Cart cart = null;
         try {
             User user = userDataStore.find(userEmail);
-            cart = cartDataStore.findByUserID(user.getId());
-            if (cart == null) {
-                cart = cartDataStore.createCart(user);
-            }
-            cartDataStore.add(productDataStore.find(prodId), cart, cartDataStore.getCartProducts(cart.getId()));
+            if(user!=null) {
+                cart = cartDataStore.findByUserID(user.getId());
+                if (cart == null) {
+                    cart = cartDataStore.createCart(user);
+                }
+                cartDataStore.add(productDataStore.find(prodId), cart.getId(), cartDataStore.getCartProducts(cart.getId()));
+            }else{
+                int order_id = 0;
+                try {
+                    order_id = (int) session.getAttribute("order_id");
+                }catch (NullPointerException exception){
 
+                }
+//                while (sessiosAtributes.hasMoreElements()){
+//                    String sessionAtribute =(String) sessiosAtributes.nextElement();
+//                    if (sessionAtribute.equals("order_id")){
+//                        order_id =(int) session.getAttribute(sessionAtribute);
+//                    }
+//                }
+                cart = cartDataStore.findById(order_id);
+                if(cart!=null){
+                    cartDataStore.add(productDataStore.find(prodId), order_id, cartDataStore.getCartProducts(order_id));
+
+                }
+                if (cart == null) {
+                    cart = cartDataStore.createCart(null);
+                    session.setAttribute("order_id", cart.getId());
+                    cartDataStore.add(productDataStore.find(prodId), cart.getId(), cartDataStore.getCartProducts(cart.getId()));
+
+
+                }
+
+            }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();

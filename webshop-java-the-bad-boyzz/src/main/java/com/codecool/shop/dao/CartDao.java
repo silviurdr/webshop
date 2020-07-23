@@ -12,11 +12,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public interface CartDao {
 
-    void add(Product product, Cart cart, int quantity, HashMap<Integer, Integer> cartProducts) throws SQLException;
-    void add(Product product, Cart cart, HashMap<Integer, Integer> cartProducts) throws SQLException;
+    void add(Product product, int id, int quantity, HashMap<Integer, Integer> cartProducts) throws SQLException;
+    void add(Product product, int id, HashMap<Integer, Integer> cartProducts) throws SQLException;
     HashMap getCartProducts(int order_id) throws SQLException ;
     void updateProductQuantity(Product product, Cart cart, int quantity) throws SQLException;
     void updateCustomerInfo(Cart cart) throws SQLException;
+    void connectUserToCart(int order_id, int user_id) throws SQLException;
     Cart findById(int id) throws SQLException;
     Cart findByUserID(int id) throws SQLException;
     void remove(Product product, Cart cart) throws SQLException;

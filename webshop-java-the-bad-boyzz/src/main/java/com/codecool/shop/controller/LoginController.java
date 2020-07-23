@@ -1,8 +1,11 @@
 package com.codecool.shop.controller;
 
 import com.codecool.shop.config.TemplateEngineUtil;
+import com.codecool.shop.dao.CartDao;
 import com.codecool.shop.dao.UserDao;
+import com.codecool.shop.dao.implementation.CartDaoJDBC;
 import com.codecool.shop.dao.implementation.UserDaoJDBC;
+import com.codecool.shop.model.User;
 import com.codecool.shop.utils.SaltedHashPassword;
 import org.junit.Test;
 import org.thymeleaf.TemplateEngine;
@@ -55,6 +58,13 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("userSession", "Yes");
                 System.out.println(session.getAttribute("userSession"));
 
+                UserDao userDataStore = UserDaoJDBC.getInstance();
+                CartDao cartDataStore = CartDaoJDBC.getInstance();
+                int order_id = (int) session.getAttribute("order_id");
+                String userEmail = (String) session.getAttribute("sessuser");
+                User user = userDataStore.find(userEmail);
+                cartDataStore.connectUserToCart(order_id,user.getId());
+
             }
 
             else {
@@ -64,6 +74,8 @@ public class LoginController extends HttpServlet {
             e.printStackTrace();
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
 
         resp.sendRedirect("/");
