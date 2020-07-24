@@ -56,8 +56,9 @@ public class PaymentController extends HttpServlet {
             Cart cart = cartDataStore.findByUserID(user.getId());
             int numOfProducts = 0;
 
-            for (Product p : cartDataStore.getCartProducts(cart).keySet()) {
-                numOfProducts ++;
+            int noOfProducts = 0;
+            for (int nrProduct : cartDataStore.getCartProducts(cart).values()) {
+                noOfProducts+=nrProduct;
             }
             context.setVariable("order", cart );
             context.setVariable("noOfProducts", numOfProducts);
