@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" />
-    <meta name="author" content="Codecool" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="author" content="Codecool"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <title>Codecool Shop</title>
 
@@ -14,11 +14,13 @@
 
     <!--Latest compiled and minified Popper -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+            integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+            crossorigin="anonymous"></script>
 
     <!-- Latest compiled and minified CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet"
@@ -26,78 +28,303 @@
     <!-- End of Bootstrap components -->
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="/static/css/custom.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@700&family=Rubik+Mono+One&display=swap"
+          rel="stylesheet">
 </head>
 
 <body>
 
-<div >
-    <nav class="navbar navbar-expand-md navbar-light bg-dark">
-        <a href="#" class="navbar-brand">
-            <img src="/static/img/codecool3.png" height="70" alt="CoolBrand">
-        </a>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <div class="navbar-nav">
-                <a href="/" class="nav-item nav-link active text-white">Home</a>
-                <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
-                <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
-                <a href="/cart" class="nav-item nav-link text-white"> <i class="fas fa-shopping-cart"></i> Cart</a>
-                <span class='badge' id='lblCartCount' th:text="${noOfProducts}" > 5 </span>
+<div>
+    <div class="navbar-container">
+        <nav class="navbar navbar-light">
+            <div class="logo">
+                <div class="logo-image text-center">
+                    <a href="/" class="navbar-brand">
+                        <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                    </a>
+                </div>
             </div>
-            <!--            <div class="navbar-nav ml-auto">-->
-            <!--                <a href="#" class="nav-item nav-link text-white">Login</a>-->
-            <!--            </div>-->
-        </div>
-    </nav>
-</div>
-<br>
-<br>
-<div class="container all-content">
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <form action="/" method="get">
-        <div  class="inner">
-        <select class="filters-drop-down" name="category">
-            <option selected value=0>Product Category</option>
-            <div th:each="category, iterStat : ${category}" >
-                <option th:value="${category.getId()}" th:text="${category.getName()}" >Value</option>
+            <div class="search-bar-container">
+                <input id ="search-bar" class="search-bar" type="text">
+                <div class="icon-search"><a><i class="fas fa-search"></i></a></div>
             </div>
-        </select>
-        </div>
-        <div class="inner">
-        <select class="filters-drop-down" name="suppliers">
-            <option selected value=0>Supplier</option>
-            <div th:each="supplier, iterStat : ${supplier}" >
-                <option th:selected="${supplier} == ${supplier.getName()}" th:value="${supplier.getId()}" th:text="${supplier.getName()} ">Value</option>
+            <div id="navbarCollapse">
+                <div class="right-nav">
+                    <!--                <a href="#" class="nav-item nav-link text-white">My Profile</a>-->
+                    <!--                <a href="#" class="nav-item nav-link text-white">Order Status</a>-->
+                    <a href="/cart" class="text-black"> <i class="fas fa-shopping-cart"></i></a>
+                    <p class="lblCartCount" th:text="${noOfProducts}"> 5 </p>
+                    <select class="currency">
+                        <option id="usd" class="currency-option" name="usd" value="usd">Ron</option>
+                        <option id="eur" class="currency-option" name="eur" value="eur">Eur</option>
+                    </select>
+                    <div style="display: inline-block" th:if="${userSession} == 'No'">
+                        <button type="submit" class="register-button" data-toggle="modal" data-target="#myModalSignIn">
+                            <span class="signin-text">Sign In</span></button>
+                    </div>
+                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                        <button type="submit" class="register-button">
+                            <span class="signin-text">your account</span></button>
+                    </div>
+                    <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+                        <form action="/logout">
+                            <button type="submit" class="register-button">
+                                <span class="signin-text">Log Out</span></button>
+                        </form>
+                    </div>
+
+                    <!--   REGISTER MODAL -->
+
+                    <div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        x
+                                    </button>
+                                    <div class="logo-modal">
+                                        <div class="logo-image-modal text-center">
+                                            <a href="#" class="navbar-brand">
+                                                <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="modal-title text-center" id="myModalLabel">
+                                        <span class="modal-title-text">Register</span></h4>
+                                    <p class="email-error" id="emailValidation" name="emailValidation"
+                                       th:text="${emailValidation}">Nothing</p>
+                                    <div class="row registration-form">
+                                        <div class="col-md-12 form-inputs">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="Registration">
+                                                    <form role="form" action="/register" method="post"
+                                                          class="form-horizontal">
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="text" class="form-control" id="fullName"
+                                                                       th:value="${registerName}" th:name="fullname"
+                                                                       placeholder="Full Name" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div id="email-Error"><p name="email-error"
+                                                                                 th:text="${emailError}"></p></div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="email" class="form-control" id="email"
+                                                                       th:name="email" placeholder="Email" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="tel" class="form-control" id="mobile"
+                                                                       pattern="[0-9]{10}" th:value="${registerMobile}"
+                                                                       th:name="mobile"
+                                                                       placeholder="Mobile number (10 digits)"
+                                                                       required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="password" class="form-control"
+                                                                       id="password" th:name="password" minlength="8"
+                                                                       maxlength="14" placeholder="Password" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <button type="submit" id="#registerButton"
+                                                                        class="register-button-form">
+                                                                    Register
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--   SIGN IN MODAL -->
+
+                    <div class="modal fade" id="myModalSignIn" tabindex="-1" role="dialog"
+                         aria-labelledby="myLargeModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        x
+                                    </button>
+                                    <div class="logo-modal">
+                                        <div class="logo-image-modal text-center">
+                                            <a href="#" class="navbar-brand">
+                                                <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <h4 class="modal-title text-center" id="myModalLabelSignIn">
+                                        <span class="modal-title-text">Sign In</span></h4>
+                                    <div class="row registration-form">
+                                        <div class="col-md-12 form-inputs">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="Signin">
+                                                    <form role="form" action="/login" method="post"
+                                                          class="form-horizontal">
+
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="email" class="form-control"
+                                                                       id="login-email" th:name="login-email"
+                                                                       placeholder="Email" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div class="col-sm-12">
+                                                                <input type="password" class="form-control"
+                                                                       id="login-password" th:name="login-password"
+                                                                       placeholder="Password" required/>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-2">
+                                                            </div>
+                                                            <div class="col-sm-12">
+                                                                <button type="submit" class="register-button-form">
+                                                                    Sign In
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="register-link-container">
+                                                            <a class="register-link" data-toggle="modal"
+                                                               data-target="#myModalRegister">
+                                                                <span class="close register-text" data-dismiss="modal"
+                                                                      aria-hidden="true">not a member yet?</span></a>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </select>
-        </div>
-        <input class="btn-succes filter-button" type="submit" value="Find my products!" >
-    </form>
-</div>
-    <div class="filter-show-hide">
-    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Filter Products</span>
+        </nav>
     </div>
-    <div id="products" class="row">
-        <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
-            <div class="card">
-                <img class="productImg" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />
-                <div class="card-header">
-                    <h4 class="card-title" th:text="${prod.name}">Product name</h4>
-                    <p class="card-text" th:text="${prod.description}">Product description... </p>
+</div>
+<br>
+<br>
+<div class="navigation-links">
+    <a class="navigation-link" href="#">Mobile Phones</a>
+    <a class="navigation-link" href="#">Tablets</a>
+    <a class="navigation-link" href="#">Notebooks</a>
+    <a class="navigation-link" href="#">Books</a>
+    <a class="navigation-link" href="#">Toys</a>
+    <a class="navigation-link" href="#">Lots of Things</a>
+    <a class="navigation-link" href="#">Something Secret</a>
+    <a class="navigation-link" href="#">Don't Go Here</a>
+    <a class="navigation-link" href="#">Is The Page Full Yet</a>
+</div>
+<div class="row container-fluid all-content">
+    <div id="mySidenav" class="col-2 sidenav">
+        <form action="/" method="get">
+            <div class="inner">
+                <div class="filter-type-container">
+                    <span class="filter-type">Category</span>
+                    <span>
+                        <i class="fas fa-plus plus-filter categoryp"></i>
+                    </span>
                 </div>
-                <div class="card-body">
-                    <div class="card-text">
-                        <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                <div id="categories">
+                    <div  th:each="category, iterstat: ${category}">
+                        <input  class="filter-checkbox" th:type="checkbox" th:name="category" th:id=${category.getName()} th:value="${category.getId()}">
+                        <label class="filter-label" th:for="${category.getName()}"
+                               th:text="${category.getName()}">Product</label></br>
                     </div>
-                    <div class="card-text">
-                        <a class="btn btn-success addcart" th:href="${prod.idForClass()}">Add to cart</a>
+                </div>
+
+                <div class="filter-type-container"><span class="filter-type">Supplier</span>
+                    <span >
+                     <i class="fas fa-plus plus-filter supplierp"></i>
+                    </span>
+                </div>
+
+                <div id="suppliers">
+                    <div  th:each="supplier, iterstat: ${supplier}">
+                        <input  class="filter-checkbox" th:type="checkbox" name="suppliers" th:id=${supplier.getName()} th:value="${supplier.getId()}">
+                        <label class="filter-label" th:for="${supplier.getName()}"
+                               th:text="${supplier.getName()}">Supplier</label></br>
                     </div>
                 </div>
             </div>
-        </div>
+            <input class="btn-succes filter-button" type="submit" value="Find my products!">
+        </form>
     </div>
 
+    <div class="col-10 right-side-container">
+
+        <div class="show-by">
+            <form>
+                <select>
+                    <option class="show-by-criteria" selected value="cheapest">Cheapest first</option>
+                    <option value="popular">Most popular</option>
+                    <option value="newest">Newest</option>
+                    <option value="expensive">Most expensive</option>
+                </select>
+            </form>
+        </div>
+        <div id="products" class="row">
+            <div class="col col-sm-12 col-md-6 col-lg-4" th:each="prod,iterStat : ${products}">
+                <div  class="card">
+                    <div class="card-info">
+                        <img class="productImg" src="http://placehold.it/400x250/000/fff"
+                             th:attr="src='/static/img/' + ${prod.getImage()}" alt=""/>
+                        <div class="card-header">
+                            <h4 class="card-title" th:text="${prod.name}">Product name</h4>
+                            <p class="card-text" th:text="${prod.description}">Product description... </p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-text">
+                            <p class="lead" th:text="${prod.getPrice()}">100 USD</p>
+                        </div>
+                        <div class="card-text">
+                            <form id="add-to-cart-form" method="post" action="/cart">
+                                <div class="add-to-cart-container">
+                                    <div class="quantity-modifier">
+                                        <span class="icon icon-minus quantity-modifier-icon">-</span>
+                                        <input class="quantity-to-add-to-cart" type="text" name="cart-quantity"
+                                               value="1" min="1">
+                                        <span class="icon icon-plus quantity-modifier-icon">+</span>
+                                    </div>
+                                    <button th:value="${prod.getId()}" th:name="id" type="submit" class="btn btn-success addcart" th:href="${prod.idForClass()}">Add to cart</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
 <div th:replace="footer.html :: copy"></div>

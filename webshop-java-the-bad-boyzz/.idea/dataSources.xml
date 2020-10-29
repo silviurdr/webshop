@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="books@localhost" uuid="f8b106cc-3bc0-4303-a747-82da1027448f">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/books</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="codecoolshop@localhost" uuid="e9686150-5e62-49c6-905e-d7cff37a9b7c">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/codecoolshop</jdbc-url>
+    </data-source>
+  </component>
+</project>

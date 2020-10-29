@@ -33,20 +33,22 @@
 <div th:replace="nav.html :: copy"></div>
 <br>
 <br>
-<div class="row checkout">
+<div class="row checkout all-content">
     <div class="col-md-4 order-md-2 mb-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-muted">Your cart</span>
-            <span class="badge badge-secondary badge-pill" th:text="${noOfProducts}">3</span>
+            <span class="badge badge-secondary badge-pill" th:text="${noOfProducts}">0</span>
         </h4>
         <div >
         <ul class="list-group mb-3" >
-            <li class="list-group-item d-flex justify-content-between lh-condensed" th:each="prod : ${productsSet}">
+            <li class="list-group-item d-flex justify-content-between lh-condensed" th:each="prod : ${products1}">
                 <div >
                     <h6 class="my-0" th:text="${prod.key.name}" >Product name</h6>
                     <small class="text-muted" th:text="${prod.key.getDescription()}" >Brief description</small>
                 </div>
-                <span class="text-muted" th:text="${prod.key.getPrice()}"></span>
+                <span class="text-muted" th:text=" ${prod.value}"></span>
+                &nbsp<span class="text-muted">  x </span>&nbsp
+                <span class="text-muted" th:text=" ${prod.key.getPrice()}"></span>
             </li>
             <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success">
@@ -151,6 +153,7 @@
         </form>
     </div>
 </div>
+<div th:replace="footer.html :: copy"></div>
 <script src="/static/js/js.js"></script>
 </body>
 </html>

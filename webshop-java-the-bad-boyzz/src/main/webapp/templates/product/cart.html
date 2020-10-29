@@ -29,21 +29,168 @@
     <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="/static/css/custom.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Roboto+Condensed:wght@700&family=Rubik+Mono+One&display=swap" rel="stylesheet">
 </head>
 
 <body>
+<!--   REGISTER MODAL -->
+
+<div class="modal fade" id="myModalRegister" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+                <div class="logo-modal">
+                    <div class="logo-image-modal text-center">
+                        <a href="#" class="navbar-brand">
+                            <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                        </a>
+                    </div>
+                </div>
+                <h4 class="modal-title text-center" id="myModalLabel">
+                    <span class="modal-title-text">Register</span></h4>
+                <p class="email-error" id="emailValidation" name="emailValidation"
+                   th:text="${emailValidation}">Nothing</p>
+                <div class="row registration-form">
+                    <div class="col-md-12 form-inputs">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Registration">
+                                <form role="form" action="/register" method="post"
+                                      class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control" id="fullName"
+                                                   th:value="${registerName}" th:name="fullname"
+                                                   placeholder="Full Name" required/>
+                                        </div>
+                                    </div>
+                                    <div id="email-Error"><p name="email-error"
+                                                             th:text="${emailError}"></p></div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="email" class="form-control" id="email"
+                                                   th:name="email" placeholder="Email" required/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="tel" class="form-control" id="mobile"
+                                                   pattern="[0-9]{10}" th:value="${registerMobile}"
+                                                   th:name="mobile"
+                                                   placeholder="Mobile number (10 digits)"
+                                                   required/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control"
+                                                   id="password" th:name="password" minlength="8"
+                                                   maxlength="14" placeholder="Password" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button type="submit" id="#registerButton"
+                                                    class="register-button-form">
+                                                Register
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--   SIGN IN MODAL -->
+
+<div class="modal fade" id="myModalSignIn" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    x
+                </button>
+                <div class="logo-modal">
+                    <div class="logo-image-modal text-center">
+                        <a href="#" class="navbar-brand">
+                            <img src="/static/img/logo6.png" height="130" alt="CoolBrand">
+                        </a>
+                    </div>
+                </div>
+                <h4 class="modal-title text-center" id="myModalLabelSignIn">
+                    <span class="modal-title-text">Sign In</span></h4>
+                <div class="row registration-form">
+                    <div class="col-md-12 form-inputs">
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="Signin">
+                                <form role="form" action="/login" method="post"
+                                      class="form-horizontal">
+
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="email" class="form-control"
+                                                   id="login-email" th:name="login-email"
+                                                   placeholder="Email" required/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-12">
+                                            <input type="password" class="form-control"
+                                                   id="login-password" th:name="login-password"
+                                                   placeholder="Password" required/>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="register-button-form">
+                                                Sign In
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="register-link-container">
+                                        <a class="register-link" data-toggle="modal"
+                                           data-target="#myModalRegister">
+                                                                <span class="close register-text" data-dismiss="modal"
+                                                                      aria-hidden="true">not a member yet?</span></a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</div>
+</nav>
+</div>
+</div>
+<br>
+<br>
 <div th:replace="nav.html :: copy"></div>
-
-<br>
-<br>
-<br>
-
 <div class="row container cart-container all-content">
     <div class="col-7">
         <h1 class="cart-header">Your Cart</h1>
-        <div class="cart-total-header">
-            <p th:text="|Total: (${numOfProducts} items) ___ ${sum} USD|">Products in cart</p>
-        </div>
 
         <div id="products">
             <div class="cart-item" th:each="prod : ${productsSet}">
@@ -54,10 +201,6 @@
                 <div class="col-7 cart-item-description">
                     <p>
                     <span class="cart-product-name" th:text="${prod.key.name}"></span>
-                    <span class="cart-product-price"
-
-                          th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></span>
-                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}" ></span>
                     </p>
                     <form action="/cart" class="edit-cart-form" method="get">
                     <select name="howMany" th:attr="prodName=${prod.key.getName()}" class="cart-product-count">
@@ -68,12 +211,25 @@
                         <input type="hidden" th:name="prodId" th:value="${prod.key.getId()}">
                         <input class="btn btn-success edit-cart-button" type="submit" th:value="Change">
                     </form>
+                    <span class="cart-product-price"
+                          th:text="${#numbers.formatDecimal(prod.key.getPriceNum() * prod.value , 0, 'COMMA', 2, 'POINT')}"></span>
+                    <span class="cart-product-currency" th:text="${prod.key.getDefaultCurrency()}" ></span>
                 </div>
 
             </div>
         </div>
-        <a href="/checkout"><button class="checkout-button"><span class="float-left" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
 
+
+
+
+
+        <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+            <a href="/checkout"><button class="checkout-button"><span class="float-left" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
+        </div>
+        <div style="display: inline-block" th:if="${userSession} == 'No'">
+            <button type="submit" class="checkout-button" data-toggle="modal" data-target="#myModalSignIn"><span class="float-left" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button>
+
+        </div>
         <!--            <table >-->
         <!--                <img class="" src="http://placehold.it/400x250/000/fff" th:attr="src='/static/img/product_' + ${prod.id} + '.jpg'" alt="" />-->
         <!--                <div class="card-header">-->
@@ -91,7 +247,14 @@
         <!--            </table>-->
     </div>
     <div class="col-4 order-summary-container">
-        <a href="/checkout"><button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
+        <div style="display: inline-block" th:if="${userSession} == 'Yes'">
+            <a href="/checkout"><button class="checkout-button-right"><span class="float-left">Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button></a>
+        </div>
+        <div style="display: inline-block" th:if="${userSession} == 'No'">
+            <button type="submit" class="checkout-button-right" data-toggle="modal" data-target="#myModalSignIn"><span class="float-right" >Checkout</span> <span class="checkout-arrow float-right">&#8594;</span></button>
+
+        </div>
+
         <div class="order-summary-content">
         <h1 class="order-summary-header">Order Summary</h1>
         <div class="order-summary-info">
